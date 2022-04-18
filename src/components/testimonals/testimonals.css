@@ -1,0 +1,48 @@
+.testimonals-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 3;
+    margin-top: 5rem;
+    margin-bottom: 15rem;
+    padding: 0 14.5rem;
+}
+
+.slick-dots {
+    position: absolute;
+    bottom: -60px;
+    display: block;
+    width: 100%;
+    padding: 10;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    color: white;
+}
+
+.slick-dots li button:before {
+    font-size: 15px;
+    color: #5B9BF3;
+    opacity: 0.3;
+}
+
+.slick-dots li.slick-active button:before {
+    font-size: 15px;
+    color: #5B9BF3;
+}
+
+.arrow {
+    top: 47.5rem;
+    z-index: 100;
+    filter: invert(58%) sepia(25%) saturate(1052%) hue-rotate(176deg) brightness(95%) contrast(101%);
+
+
+}
+
+.prevArrow {
+    left: 45rem;
+}
+
+.nextArrow {
+    right: 45rem;
+}

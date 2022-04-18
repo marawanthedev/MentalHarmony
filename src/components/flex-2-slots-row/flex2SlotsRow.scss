@@ -1,0 +1,52 @@
+@import "../../sass/abstract/mixins";
+
+.flex-2-slots-row {
+  width: 85%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__reverse {
+    flex-direction: row-reverse;
+  }
+  &__side {
+    width: 50%;
+    height: 100%;
+  }
+  &__illustration {
+    width: 60rem;
+    height: 60rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__content-side {
+    padding-top: 7rem;
+    margin-left: 4rem;
+    &__header {
+      position: relative;
+      font-size: 3.6rem;
+      line-height: 5.6rem;
+      font-weight: 700;
+      margin-bottom: 6rem;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 5.6rem;
+        height: 0.25rem;
+        background-color: black;
+        bottom: -2rem;
+        left: 0;
+      }
+    }
+    &__paragraph {
+      @include secondary-text(1.8rem, 3rem);
+      height: 12rem;
+      margin-bottom: 3.8rem;
+    }
+  }
+  &__reverse &__content-side {
+    margin-left: 0;
+  }
+}

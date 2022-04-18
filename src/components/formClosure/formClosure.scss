@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap");
+
+.form-closure {
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #2c73eb;
+  position: absolute;
+  color: white;
+  animation-duration: 1.5s;
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__logo {
+    font-size: 3rem;
+    margin-top: 5.5rem;
+    margin-bottom: 8rem;
+    margin-left: 10rem;
+  }
+  &__image {
+    width: 45rem;
+    height: 45rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+  }
+  &__message {
+    font-size: 2rem;
+  }
+  &__cta {
+    width: 35rem;
+    font-weight: 400;
+    &__btn {
+    }
+  }
+}

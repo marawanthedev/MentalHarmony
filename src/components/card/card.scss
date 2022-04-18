@@ -1,0 +1,34 @@
+@import "../../sass/abstract/mixins";
+.card {
+  width: 35rem;
+  height: 35.4rem;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding-bottom: 4rem;
+  font-family: "Mulish", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 3rem;
+  background-color: white;
+
+  &__header {
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 5rem;
+    margin-bottom: 2rem;
+    margin-top: 3.6rem;
+  }
+  &__paragraph {
+    text-align: start;
+    @include secondary-text(1.6rem, 2.4rem);
+  }
+  &__icon {
+    width: 10rem;
+    height: 10rem;
+    margin-top: 3.8rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

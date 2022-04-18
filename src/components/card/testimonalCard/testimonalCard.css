@@ -1,0 +1,32 @@
+.testimonal-card {
+    width: 100%;
+    height: 35rem;
+    background-color: #F6C6D2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10rem 0;
+}
+
+.testimonal-card__author {
+    font-size: 2.2rem;
+    line-height: 3.3rem;
+}
+
+.testimonal-card__text {
+    font-size: 3.4rem;
+    width: 70%;
+    text-align-last: center;
+}
+
+@media (max-width:550px) {
+    .testimonal-card__text {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width:420px) {
+    .testimonal-card {
+        padding: 7.5rem 0;
+    }
+}

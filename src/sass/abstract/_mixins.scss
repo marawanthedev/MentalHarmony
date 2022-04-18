@@ -1,0 +1,8 @@
+@mixin secondary-text($font-size, $line-height) {
+  color: #7d7987;
+  font-weight: 300;
+  font-size: $font-size;
+  line-height: $line-height;
+  font-style: normal;
+  width: 70%;
+}

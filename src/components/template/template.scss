@@ -1,0 +1,12 @@
+.mobile-navbar-container {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .mobile-navbar-container {
+    display: block;
+  }
+  .desktop-navbar-container {
+    display: none;
+  }
+}
