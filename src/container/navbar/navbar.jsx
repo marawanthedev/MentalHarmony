@@ -16,7 +16,7 @@ const Navbar = () => {
     },
     {
       text: "Browse Service Providers",
-      to: "/",
+      to: "/browseServiceProvider",
     },
     {
       text: "About us",

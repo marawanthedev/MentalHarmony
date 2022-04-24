@@ -1,0 +1,16 @@
+@import "../../sass/abstract/mixins";
+.sp-request-popup {
+  //popup usage guide
+  //  height,width,top position,align-items position
+  @include popup(46rem, 43rem, 40%, center);
+
+  &__avatar {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin: 2rem 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

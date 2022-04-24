@@ -6,3 +6,22 @@
   font-style: normal;
   width: 70%;
 }
+
+@mixin popup($width, $height, $top-position, $align-items) {
+  font-family: "Mulish";
+  width: $width;
+  height: $height;
+  position: fixed;
+  top: $top-position;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: $align-items;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 15px;
+}

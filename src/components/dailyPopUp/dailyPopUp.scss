@@ -1,0 +1,51 @@
+@import "../../sass/abstract/mixins";
+.daily-popup {
+  animation-delay: 0.25s;
+  padding: 0 3rem;
+
+  //popup usage guide
+  //  height,width,top position,align-items position
+  @include popup(48rem, 43rem, 50%, flex-start);
+
+  &__hide {
+    display: none;
+  }
+
+  &__feelings-row {
+    width: 100%;
+    height: 15rem;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__feeling {
+    width: 22%;
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 1rem 0;
+    transition: 0.25s ease-in-out forwards;
+    &__icon {
+      width: 6rem;
+      height: 6.5rem;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 1rem;
+    }
+    &__text {
+      color: black;
+      font-weight: 500;
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+    }
+    &__selected {
+      background-color: rgba(#3751ff, 0.3);
+    }
+  }
+}

@@ -5,7 +5,7 @@ import Footer from "../../container/footer/footer";
 import "./template.scss";
 export default function Template(props) {
   return (
-    <>
+    <div className="template">
       <header>
         <div className="desktop-navbar-container">
           <Navbar />
@@ -18,6 +18,6 @@ export default function Template(props) {
       <main>{props.children}</main>
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,0 +1,16 @@
+@import "../../sass/abstract/mixins";
+
+.popup__status {
+  //popup usage guide
+  //  height,width,top position,align-items position
+  @include popup(46rem, 35rem, 50%, center);
+
+  &__icon {
+    width: 15rem;
+    height: 15rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -6rem;
+  }
+}

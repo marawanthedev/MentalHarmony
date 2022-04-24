@@ -20,6 +20,7 @@ const CustomButton = ({
   animationDelay,
   padding,
   border,
+  fontWeight,
 }) => {
   const style = {
     backgroundColor: backGroundColor,
@@ -33,6 +34,7 @@ const CustomButton = ({
     animationDelay,
     padding,
     border,
+    fontWeight,
   };
   const value1 = "translateX(1.6rem)";
   const value2 = null;

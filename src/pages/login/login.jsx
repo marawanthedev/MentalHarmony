@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Form
- from "../../container/form/form";
+import Form from "../../container/form/form";
 export default function Login() {
   let history = useHistory();
 
@@ -19,6 +18,7 @@ export default function Login() {
       displayType: "block",
       customLabel: "Password*",
       className: "password form__right-side__innerForm__input-group",
+      minLength: 8,
     },
   ];
   const formButtons = [

@@ -12,46 +12,33 @@ import bookAppointmentIlustration from "../../assets/images/appointmetnIllustrat
 import mentalHealthIllustration from "../../assets/images/uniIllustration.png";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "../../components/testimonals/testimonals";
+import DailyPopUp from "../../components/dailyPopUp/dailyPopUp";
 
 export default function Home() {
   const ServiceCards = [
     {
-      topSection: (
-        <div
-          className="card__icon"
-          style={{ backgroundImage: `url(${magnifyingIcon})` }}
-        />
-      ),
+      cardIcon: magnifyingIcon,
       header: "Search doctor",
       paragraph:
         "Choose your doctor from thousands of specialist, general, and trusted hospitals",
     },
     {
-      topSection: (
-        <div
-          className="card__icon"
-          style={{ backgroundImage: `url(${appointmentIcon})` }}
-        />
-      ),
+      cardIcon: appointmentIcon,
       header: "Book an appointment",
       paragraph:
         "Buy  your medicines with our mobile application with a simple delivery system",
     },
     {
-      topSection: (
-        <div
-          className="card__icon"
-          style={{ backgroundImage: `url(${consultationIcon})` }}
-        />
-      ),
+      cardIcon: consultationIcon,
       header: "Consultation",
       paragraph:
         "Free consultation with our trusted doctors and get the best recomendations",
     },
   ];
+
   return (
     <Template>
-      <div className="homepage-container">
+      <div className="custom-container">
         <FlexTwoSlotsRow
           customClass="mb-10"
           header={"Virtual Mental healthcare for you"}
@@ -75,22 +62,27 @@ export default function Home() {
         ></FlexTwoSlotsRow>
 
         <div className="home-page-services">
-          <h1 className="home-page-services__header">Our services</h1>
-          <p className="home-page-services__paragraph">
+          <h1 className="h1-w-lower-border text-center">Our services</h1>
+          <p className="light-paragraph">
             We provide to you the best choices for you. Adjust it to your health
             needs and make sure your undergo treatment with our highly qualified
             doctors you can consult with us which type of service is suitable
             for your health
           </p>
 
-          <div className="home-page-services__cards">
+          <div className="cards-container">
             {ServiceCards.map((serviceCard, index) => (
               <Card
                 key={index}
                 topSection={serviceCard.topSection}
                 header={serviceCard.header}
                 paragraph={serviceCard.paragraph}
-              />
+              >
+                <div
+                  className="card__icon"
+                  style={{ backgroundImage: `url(${serviceCard.cardIcon})` }}
+                />
+              </Card>
             ))}
           </div>
 
@@ -160,6 +152,7 @@ export default function Home() {
           }
         />
         <Testimonals></Testimonals>
+        <DailyPopUp />
       </div>
     </Template>
   );

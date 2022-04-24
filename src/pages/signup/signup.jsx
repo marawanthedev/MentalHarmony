@@ -1,17 +1,40 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import Form from "../../container/form/form";
+
 export default function Signup() {
   let history = useHistory();
 
-  const formInputs = [
+  const alternatingInputs = {
+    serviceProviderSpecialKeyInput: {
+      type: "text",
+      placeHolder: "Enter Special Key",
+      displayType: "block",
+      customLabel: "Special Key*",
+      className: "specialKey form__right-side__innerForm__input-group",
+      minLength: 4,
+      toggler: "isServiceProvider",
+    },
+    facultyNameInput: {
+      type: "text",
+      placeHolder: "Enter Faculty Name",
+      displayType: "block",
+      customLabel: "Faculty Name*",
+      className: "facultyName form__right-side__innerForm__input-group",
+      minLength: 4,
+      toggler: "isServiceProvider",
+    },
+  };
+
+  const [formInputs, setFormInputs] = useState([
     {
       type: "text",
       placeHolder: "Enter Full Name",
       displayType: "block",
       customLabel: "FullName*",
       className: "fullName form__right-side__innerForm__input-group",
+      minLength: 5,
     },
     {
       type: "email",
@@ -19,6 +42,7 @@ export default function Signup() {
       displayType: "block",
       customLabel: "Email Address*",
       className: "email form__right-side__innerForm__input-group",
+      minLength: null,
     },
     {
       type: "password",
@@ -26,14 +50,9 @@ export default function Signup() {
       displayType: "block",
       customLabel: "Password*",
       className: "password form__right-side__innerForm__input-group",
+      minLength: 8,
     },
-    {
-      type: "text",
-      placeHolder: "Enter Faculty Name",
-      displayType: "block",
-      customLabel: "Faculty Name*",
-      className: "facultyName form__right-side__innerForm__input-group",
-    },
+    alternatingInputs.facultyNameInput,
     {
       type: "checkbox",
       placeHolder: null,
@@ -41,15 +60,8 @@ export default function Signup() {
       customLabel: "Is service provider",
       className: "isServiceProvider form__right-side__innerForm__input-group",
     },
-  ];
+  ]);
 
-  const serviceProviderSpecialKeyInput = {
-    type: "text",
-    placeHolder: "Enter SpecialKey",
-    displayType: "block",
-    customLabel: "Special Key*",
-    className: "specialKey form__right-side__innerForm__input-group",
-  };
   const formButtons = [
     {
       type: "button",
@@ -63,7 +75,24 @@ export default function Signup() {
       icon: null,
     },
   ];
-  
+
+  const handleCheckBoxClick = (checkboxValue) => {
+    setFormInputs(
+      formInputs.map((formInput) => {
+        if (formInput.toggler === undefined || formInput.toggler === "null") {
+          return formInput;
+        }
+        if (formInput.toggler === "isServiceProvider") {
+          if (checkboxValue === true)
+            return alternatingInputs.serviceProviderSpecialKeyInput;
+          else return alternatingInputs.facultyNameInput;
+        }
+
+        return null;
+      })
+    );
+  };
+  useEffect(() => {}, [formInputs]);
   return (
     <div>
       <Form
@@ -71,7 +100,7 @@ export default function Signup() {
         formInputs={formInputs}
         formButtons={formButtons}
         goBackCallBack={() => history.goBack()}
-        serviceProviderSpecialKeyInput={serviceProviderSpecialKeyInput}
+        handleCheckBoxClick={handleCheckBoxClick}
         SubmitFormCallback={() => {}}
       ></Form>
     </div>

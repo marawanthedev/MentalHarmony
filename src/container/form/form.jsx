@@ -49,16 +49,21 @@ class Form extends React.Component {
       toggleFormClosure: false,
       formSubmissionSuccessStatus: false,
       userInfo: {},
+      formInputs: [],
     });
     //reset ui values
-    document.querySelectorAll("input").forEach((input) => (input.value = null));
+    document.querySelectorAll("input").forEach((input) => {
+      input.value = null;
+      input.classList.remove("error-alert");
+    });
   };
 
   //**** to be modified */
   handleFormSubmission = (formInputs, SubmitFormCallback) => {
-    const { userInfo, toggleFormClosure } = this.state;
+    const { userInfo } = this.state;
+    console.clear();
 
-    let missingField,
+    let isFormValid = true,
       isEmailValid = false;
 
     formInputs.forEach((formInput) => {
@@ -67,51 +72,52 @@ class Form extends React.Component {
       let targetElement = document.querySelectorAll(`.${elementIdentifer}`)[2];
       targetElement.classList.remove("error-alert");
 
-      if (userInfo[elementIdentifer] && userInfo[elementIdentifer] !== "") {
-        if (elementIdentifer === "email") {
-          isEmailValid = this.validateEmailFormat(userInfo[elementIdentifer]);
-          //format error alert
-          if (!isEmailValid) {
-            targetElement.classList.add("error-alert");
-          }
+      if (elementIdentifer === "email") {
+        isEmailValid = this.validateEmailFormat(userInfo[elementIdentifer]);
+        //format error alert
+        if (!isEmailValid) {
+          targetElement.classList.add("error-alert");
+          isFormValid = false;
         }
       } else {
-        if (
-          formInput.type !== "checkbox" &&
-          formInput.preRequiste === undefined
-        ) {
-          missingField = true;
-          //input entry error alert
-          targetElement.classList.add("error-alert");
-        } else {
-          if (userInfo[formInput.preRequiste]) {
-            missingField = true;
-          } else {
-            missingField = false;
+        //length validating for non email inputs
+
+        if (formInput.length !== null) {
+          if (
+            userInfo[elementIdentifer] === undefined ||
+            userInfo[elementIdentifer].length < formInput.minLength
+          ) {
+            targetElement.classList.add("error-alert");
+            isFormValid = false;
           }
         }
       }
     });
 
     // **** to be further completed for validation
-
-    this.setState({ toggleFormClosure: true });
-    // !missingField
-    //   ? isEmailValid
-    //     ? SubmitFormCallback(userInfo)
-    //     : alert("please fill a valid email")
-    //   : alert("please fill in all input field");
+    if (isFormValid) {
+      //reseting input fields
+      this.resetForm();
+      //toggling form closure needs to be done within a function
+      this.setState({ toggleFormClosure: true });
+    }
   };
-  handleInputChange = (formInput, value, userInfo, formInputIdentfier) => {
+  handleInputChange = (
+    formInput,
+    value,
+    userInfo,
+    formInputIdentfier,
+    handleCheckBoxClick
+  ) => {
     //nested object set state way
     if (formInput.type !== "checkbox") {
       userInfo[formInputIdentfier] = value;
     } else {
       userInfo[formInputIdentfier] = !userInfo[formInputIdentfier];
-      this.setState({});
+      handleCheckBoxClick(userInfo[formInputIdentfier]);
     }
   };
-  renderInputFields = (formInput, index) => {
+  renderInputFields = (formInput, index, handleCheckBoxClick) => {
     const { userInfo } = this.state;
 
     // dynamically adding state attributes instead of typing it statically
@@ -124,40 +130,36 @@ class Form extends React.Component {
       }
     }
 
-    if (
-      formInput.preRequiste === undefined ||
-      (formInput.preRequiste && userInfo.isServiceProvider === true)
-    ) {
-      return (
-        <div
-          className={`animate__animated animate__zoomInDown`}
-          style={{
-            width: formInput.width,
-            animationDelay: `${formInput.preRequiste ? 0.25 : index * 0.5}s`,
-          }}
-        >
-          {
-            // @ts-ignore
-            <FormInputGroup
-              key={index}
-              type={formInput.type}
-              placeHolder={formInput.placeHolder}
-              className={formInput.className}
-              customLabel={formInput.customLabel}
-              displayType={formInput.displayType}
-              onChange={(value) =>
-                this.handleInputChange(
-                  formInput,
-                  value,
-                  userInfo,
-                  formInputIdentfier
-                )
-              }
-            />
-          }
-        </div>
-      );
-    }
+    return (
+      <div
+        className={`animate__animated animate__zoomInDown`}
+        style={{
+          width: formInput.width,
+          animationDelay: `${index * 0.5}s`,
+        }}
+      >
+        {
+          // @ts-ignore
+          <FormInputGroup
+            key={index}
+            type={formInput.type}
+            placeHolder={formInput.placeHolder}
+            className={formInput.className}
+            customLabel={formInput.customLabel}
+            displayType={formInput.displayType}
+            onChange={(value) =>
+              this.handleInputChange(
+                formInput,
+                value,
+                userInfo,
+                formInputIdentfier,
+                handleCheckBoxClick
+              )
+            }
+          />
+        }
+      </div>
+    );
   };
 
   render() {
@@ -167,14 +169,12 @@ class Form extends React.Component {
       type,
       SubmitFormCallback,
       goBackCallBack,
-      serviceProviderSpecialKeyInput,
+      handleCheckBoxClick,
     } = this.props;
     const style = {
       height: "100vh",
     };
 
-    console.log("rendering");
-    console.log(serviceProviderSpecialKeyInput);
     return (
       <>
         <div className="form">
@@ -219,7 +219,7 @@ class Form extends React.Component {
               <hr className="style-two" />
 
               {formInputs.map((formInput, index) =>
-                this.renderInputFields(formInput, index)
+                this.renderInputFields(formInput, index, handleCheckBoxClick)
               )}
 
               {formButtons.map((formButton, index) => {
