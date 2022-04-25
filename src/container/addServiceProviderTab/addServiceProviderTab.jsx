@@ -1,5 +1,5 @@
 import React from "react";
-import "./addServiceProviderForm.scss";
+import "./addServiceProviderTab.scss";
 import FormInputGroup from "../../components/formInput/formInput";
 import { useState } from "react";
 import CustomButton from "../../components/button/button";
