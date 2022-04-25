@@ -1,0 +1,21 @@
+.add-service-provider-form {
+  width: 40rem;
+  height: 50rem;
+  font-family: "Inter";
+  &__header {
+    font-size: 3rem;
+    line-height: 3.6rem;
+    margin: 1rem 0;
+  }
+
+  &__paragraph {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 2.8rem;
+    color: #8692a6;
+  }
+  &__request-popup {
+    left: 60% !important;
+    margin-left: 10rem;
+  }
+}

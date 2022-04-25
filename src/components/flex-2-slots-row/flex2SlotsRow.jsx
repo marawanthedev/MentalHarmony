@@ -16,7 +16,7 @@ export default function FlexTwoSlotsRow({
     >
       <div className="flex-2-slots-row__side">
         <div
-          className="flex-2-slots-row__illustration"
+          className="flex-2-slots-row__illustration background-image-util"
           style={{ backgroundImage: `url(${illustrationUrl})` }}
         ></div>
       </div>

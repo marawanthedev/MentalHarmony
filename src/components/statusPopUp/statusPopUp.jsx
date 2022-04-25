@@ -1,22 +1,31 @@
 import React from "react";
-import checkedImg from "../../assets/images/checked.png";
+import successImg from "../../assets/images/checked.png";
+import failedImg from "../../assets/images/cancel.png";
 import CloseBtn from "../closeBtn/closeBtn";
 import CustomButton from "../button/button";
 import "./statusPopUp.scss";
 
-export default function StatusPopUp({ closeBtnOnClick, ctaBtnOnClick }) {
+export default function StatusPopUp({
+  closeBtnOnClick,
+  ctaBtnOnClick,
+  success,
+}) {
   return (
     <div className={`popup__status `}>
       <div
-        className="popup__status__icon"
-        style={{ backgroundImage: `url(${checkedImg})` }}
+        className="popup__status__icon background-image-util"
+        style={{
+          backgroundImage: `url(${success ? successImg : failedImg})`,
+        }}
       />
 
       <CloseBtn onClick={closeBtnOnClick}></CloseBtn>
 
-      <div className="popup-header mt-4">Success</div>
+      <div className="popup-header mt-4">{success ? "success" : "failed"}</div>
       <div className="popup-paragraph mt-2">
-        Your request has been sent!
+        {success
+          ? "Your request has been sent!"
+          : "Your request was not sent successfully, try again later"}
       </div>
       <CustomButton
         type={"button"}

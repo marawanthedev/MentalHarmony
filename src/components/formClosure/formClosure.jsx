@@ -62,7 +62,7 @@ export default function FormClosure({
       <div className="form-closure__logo">Mental Harmony</div>
       <div className="form-closure__content">
         <div
-          className="form-closure__image"
+          className="form-closure__image background-image-util"
           style={{ backgroundImage: `url(${getFigure(formType)})` }}
         ></div>
         {getFormContent(formSubmissionSuccessStatus)}

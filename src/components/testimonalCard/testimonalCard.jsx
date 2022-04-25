@@ -9,7 +9,7 @@ const testimonalCard = ({ testimonial }) => {
       <div className="testimonal-card__main">
         <div className="testimonal-card__author">
           <div
-            className="testimonal-card__author__img"
+            className="testimonal-card__author__img background-image-util"
             style={{ backgroundImage: `url(${avatar})` }}
           />
           <div className="testimonal-card__author__details">

@@ -77,8 +77,8 @@ export default class Testimonals extends Component {
     return (
       <div className="testimonals-container">
         <Slider {...settings}>
-          {testimonialData.map((testimonial) => (
-            <TestimonalCard testimonial={testimonial} />
+          {testimonialData.map((testimonial, index) => (
+            <TestimonalCard key={index} testimonial={testimonial} />
           ))}
         </Slider>
       </div>

@@ -4,7 +4,7 @@ import Home from "./pages/home/home.jsx";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import BrowseServiceProvider from "./pages/browseServiceProvider/browseServiceProvider";
-
+import Admin from "./pages/admin/admin";
 import "./sass/main.scss";
 function App() {
   return (
@@ -14,7 +14,11 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/browseServiceProvider" component={BrowseServiceProvider} />
+          <Route
+            path="/browseServiceProvider"
+            component={BrowseServiceProvider}
+          />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </div>
     </Router>

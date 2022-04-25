@@ -33,7 +33,7 @@ class Form extends React.Component {
             </Link>
           </div>
           <div
-            className="form__left-side__main-content__img"
+            className="form__left-side__main-content__img background-image-util"
             style={{
               backgroundImage: `url(${
                 type === "login" ? loginFigure : signupFigure

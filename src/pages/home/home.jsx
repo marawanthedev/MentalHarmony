@@ -100,7 +100,7 @@ export default function Home() {
             border={"1px solid #458FF6"}
           ></CustomButton>
           <div
-            className="home-page-services__vector"
+            className="home-page-services__vector background-image-util"
             style={{ backgroundImage: `url(${servicesVector})` }}
           />
         </div>

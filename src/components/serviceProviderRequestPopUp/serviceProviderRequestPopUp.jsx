@@ -32,7 +32,7 @@ export default function ServiceProviderRequestPopUp({
 
         <div className="popup-header mt-4">{selectedCard.spName}</div>
         <div
-          className="sp-request-popup__avatar"
+          className="sp-request-popup__avatar background-image-util"
           style={{ backgroundImage: `url(${selectedCard.spAvatar})` }}
         ></div>
         <div className="popup-header">{selectedCard.spHeader}</div>
@@ -59,6 +59,7 @@ export default function ServiceProviderRequestPopUp({
   const showSubmissionRequestStatusPopUp = () => {
     return (
       <StatusPopUp
+        success={true}
         closeBtnOnClick={() => {
           setVisiblity(false);
           setShowSubmissionStatus(false);
