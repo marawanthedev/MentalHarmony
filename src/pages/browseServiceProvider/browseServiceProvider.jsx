@@ -6,7 +6,7 @@ import landingUpperIllustration from "../../assets/images/landingupper.png";
 import "./browseServiceProvider.scss";
 import Card from "../../components/card/card";
 import serviceProviderAvatar from "../../assets/images/serviceProviderAvatar.png";
-import ServiceProviderRequestPopUp from "../../components/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
+import ServiceProviderRequestPopUp from "../../container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
 
 export default function BrowseServiceProvider() {

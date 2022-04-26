@@ -1,11 +1,10 @@
 import React from "react";
 import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
 import { useState } from "react";
-import ArticleAttachmentPopUp from "../../components/articleAttachmentPopUp/articleAttachmentPopUp";
+import ArticleAttachmentPopUp from "../articleAttachmentPopUp/articleAttachmentPopUp";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 export default function AttachUsefulArticles() {
-  const history = useHistory();
   const [formVisiblity, setFormVisiblity] = useState(true);
   const [showArticleAttachmentForm, setshowArticleAttachmentForm] =
     useState(false);
@@ -21,9 +20,6 @@ export default function AttachUsefulArticles() {
             setFormVisiblity(true);
             setshowArticleAttachmentForm(false);
             setFormSubmissionStatus(false);
-          }}
-          ctaBtnOnClick={() => {
-            history.push("/");
           }}
         />
       );

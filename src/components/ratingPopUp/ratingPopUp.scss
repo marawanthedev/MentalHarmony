@@ -1,0 +1,29 @@
+.rating-popup {
+  width: 47rem;
+  height: 67.5rem;
+  background: linear-gradient(167.2deg, #ebf3fb 4.47%, #ffffff 67.79%);
+  /* Dropshadow */
+  box-shadow: 2px 2px 3px rgba(209, 209, 233, 0.3);
+  border-radius: 16px;
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5%;
+
+  &__icon {
+    width: 30rem;
+    height: 30rem;
+  }
+
+  &__text {
+    color: #0e172c;
+    font-size: 2.5rem;
+    line-height: 3.4rem;
+    font-weight: 600;
+    font-family: "Nunito";
+    margin-top: 1.5rem;
+    margin-bottom: 5rem;
+  }
+}

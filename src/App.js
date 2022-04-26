@@ -5,6 +5,8 @@ import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import BrowseServiceProvider from "./pages/browseServiceProvider/browseServiceProvider";
 import Admin from "./pages/admin/admin";
+import Student from "./pages/student/student";
+
 import "./sass/main.scss";
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             component={BrowseServiceProvider}
           />
           <Route path="/admin" component={Admin} />
+          <Route path="/student" component={Student} />
         </Switch>
       </div>
     </Router>

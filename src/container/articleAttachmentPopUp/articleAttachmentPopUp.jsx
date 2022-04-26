@@ -1,8 +1,8 @@
 import React from "react";
 import "./articleAttachmentPopUp.scss";
-import FormInputGroup from "../formInput/formInput";
-import CustomButton from "../button/button";
-import CloseBtn from "../closeBtn/closeBtn";
+import FormInputGroup from "../../components/formInput/formInput";
+import CustomButton from "../../components/button/button";
+import CloseBtn from "../../components/closeBtn/closeBtn";
 
 import { useState } from "react";
 export default function ArticleAttachmentPopUp({
@@ -29,7 +29,7 @@ export default function ArticleAttachmentPopUp({
           onChange={(value) => setArticleUrl(value)}
         />
       </span>
-      <span className="custom-button-container">
+      <span className="align-center">
         <CustomButton
           type={"button"}
           backGroundColor="#4F4F4F"

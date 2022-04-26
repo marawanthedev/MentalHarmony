@@ -4,12 +4,11 @@ import failedImg from "../../assets/images/cancel.png";
 import CloseBtn from "../closeBtn/closeBtn";
 import CustomButton from "../button/button";
 import "./statusPopUp.scss";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function StatusPopUp({
-  closeBtnOnClick,
-  ctaBtnOnClick,
-  success,
-}) {
+export default function StatusPopUp({ closeBtnOnClick, success }) {
+  const history = useHistory();
+
   return (
     <div className={`popup__status `}>
       <div
@@ -37,7 +36,7 @@ export default function StatusPopUp({
         height="4rem"
         margin="2.5rem 0"
         fontWeight="600"
-        onClick={ctaBtnOnClick}
+        onClick={() => history.push("/")}
       />
     </div>
   );

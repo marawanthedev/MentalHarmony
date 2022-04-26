@@ -1,11 +1,10 @@
 import React from "react";
 import "./dailyPopUp.scss";
-import StatusPopUp from "../statusPopUp/statusPopUp";
+import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import FeelingPopUp from "../feelingPopUp/feelingPopUp";
+import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
+
 export default function DailyPopUp() {
-  const history = useHistory();
   const [selectedFeeling, setSelectedFeeling] = useState(null);
 
   const [formVisiblity, setFormVisiblity] = useState(true);
@@ -43,10 +42,6 @@ export default function DailyPopUp() {
           closeBtnOnClick={() => {
             setFormVisiblity(false);
             setShowSubmissionStatusVisiblity(false);
-          }}
-          ctaBtnOnClick={() => {
-            setShowSubmissionStatusVisiblity(false);
-            history.push("/");
           }}
         />
       );

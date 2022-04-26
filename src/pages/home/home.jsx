@@ -12,7 +12,7 @@ import bookAppointmentIlustration from "../../assets/images/appointmetnIllustrat
 import mentalHealthIllustration from "../../assets/images/uniIllustration.png";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "../../components/testimonals/testimonals";
-import DailyPopUp from "../../components/dailyPopUp/dailyPopUp";
+import DailyPopUp from "../../container/dailyPopUp/dailyPopUp";
 
 export default function Home() {
   const ServiceCards = [

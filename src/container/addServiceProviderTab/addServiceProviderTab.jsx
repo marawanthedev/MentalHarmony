@@ -4,11 +4,8 @@ import FormInputGroup from "../../components/formInput/formInput";
 import { useState } from "react";
 import CustomButton from "../../components/button/button";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-import { useHistory } from "react-router-dom";
 
 export default function AddServiceProviderForm() {
-  const history = useHistory();
-
   const [specialKey, setSpecialKeyValue] = useState();
   const [showStatusPopUp, setShowStatusPopUp] = useState(false);
   const [formVisiblity, setFormVisiblity] = useState(true);
@@ -65,11 +62,11 @@ export default function AddServiceProviderForm() {
       {showStatusPopUp && !formVisiblity ? (
         <StatusPopUp
           success={true}
-          ctaBtnOnClick={() => history.push("/")}
           closeBtnOnClick={() => {
             setShowStatusPopUp(false);
             setFormVisiblity(true);
           }}
+          submitCallBack={showStatusPopUp(false)}
         />
       ) : null}
     </>

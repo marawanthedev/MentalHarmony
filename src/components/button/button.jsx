@@ -21,6 +21,8 @@ const CustomButton = ({
   padding,
   border,
   fontWeight,
+  fontSize,
+  alignSelf,
 }) => {
   const style = {
     backgroundColor: backGroundColor,
@@ -35,6 +37,8 @@ const CustomButton = ({
     padding,
     border,
     fontWeight,
+    fontSize,
+    alignSelf,
   };
   const value1 = "translateX(1.6rem)";
   const value2 = null;

@@ -1,0 +1,16 @@
+@import "../../sass/abstract/mixins";
+
+.view-meeting-details-popup {
+  padding: 4rem 3.6rem;
+  @include popup(50rem, 30rem, 50%, flex-start);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  &__paragraph {
+    font-size: 1.8rem;
+    color: rgba(84, 89, 94, 0.6);
+    font-weight: 400;
+    font-family: "Inter";
+  }
+}

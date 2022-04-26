@@ -1,15 +1,14 @@
 import "./serviceProviderRequestPopUp.scss";
 import React from "react";
-import CustomButton from "../button/button";
+import CustomButton from "../../components/button/button";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import CloseBtn from "../closeBtn/closeBtn";
-import StatusPopUp from "../statusPopUp/statusPopUp";
+import CloseBtn from "../../components/closeBtn/closeBtn";
+import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+
 export default function ServiceProviderRequestPopUp({
   selectedCard,
   closePopUpCallBack,
 }) {
-  const history = useHistory();
   const [visible, setVisiblity] = useState(true);
   const [showRequestSubmissionStatus, setShowSubmissionStatus] =
     useState(false);
@@ -64,10 +63,6 @@ export default function ServiceProviderRequestPopUp({
           setVisiblity(false);
           setShowSubmissionStatus(false);
           closePopUpCallBack();
-        }}
-        ctaBtnOnClick={() => {
-          setShowSubmissionStatus(false);
-          history.push("/");
         }}
       />
     );

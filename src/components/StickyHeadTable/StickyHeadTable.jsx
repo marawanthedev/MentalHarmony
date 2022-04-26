@@ -36,7 +36,9 @@ const useStyles = makeStyles({
     fontWeight: "700",
     backgroundColor: "white",
   },
-
+  blur: {
+    filter: "blur(3px)",
+  },
   cell: {
     color: "#252733",
     fontSize: "1.4rem",
@@ -50,7 +52,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyHeadTable({ tableTitle, rows, cols }) {
+export default function StickyHeadTable({ tableTitle, rows, cols, blur }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -67,7 +69,11 @@ export default function StickyHeadTable({ tableTitle, rows, cols }) {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table
+          className={blur ? classes.blur : null}
+          stickyHeader
+          aria-label="sticky table"
+        >
           <TableHead>
             <TableRow className={classes.head}>
               {cols.map((column) => (

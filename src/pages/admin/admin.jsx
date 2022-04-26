@@ -9,6 +9,7 @@ import attach from "../../assets/svg/File_Add.svg";
 import AddServiceProviderForm from "../../container/addServiceProviderTab/addServiceProviderTab";
 import AttachUsefulArticles from "../../container/attachUsefulArticles/attachUsefulArticles";
 import ViewUniStudentsTab from "../../container/viewUniStudentsTab/viewUniStudentsTab";
+import RemoveServiceProvider from "../../container/removeServiceProvider/removeServiceProvider";
 export default function Admin() {
   const tabs = [
     {
@@ -19,6 +20,7 @@ export default function Admin() {
     {
       text: "Remove service provider",
       icon: Minus,
+      tabComponent: RemoveServiceProvider,
     },
     {
       text: "View University students",
