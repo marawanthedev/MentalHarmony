@@ -6,6 +6,7 @@ import ratingPopUpIcon from "../../assets/images/ratingPopUp.png";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomButton from "../button/button";
 import CloseBtn from "../closeBtn/closeBtn";
+
 const useStyles = makeStyles({
   star: {
     fontSize: "5rem",
@@ -13,7 +14,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RatingPopUp({ closePopUpCallback, submitCallBack }) {
+export default function RatingPopUp({
+  closePopUpCallback,
+  submitCallBack,
+  title,
+  readOnly,
+  readOnlyValue,
+}) {
   const classes = useStyles();
 
   const [value, setValue] = React.useState(2);
@@ -24,11 +31,11 @@ export default function RatingPopUp({ closePopUpCallback, submitCallBack }) {
         style={{ backgroundImage: `url(${ratingPopUpIcon})` }}
         className="rating-popup__icon background-image-util"
       />
-      <div className="rating-popup__text">Rate your appointment</div>
+      <div className="rating-popup__text">{title}</div>
 
       <Rating
         name="half-rating"
-        value={value}
+        value={readOnlyValue ? readOnlyValue : value}
         defaultValue={2}
         precision={1}
         className={classes.star}
@@ -36,29 +43,32 @@ export default function RatingPopUp({ closePopUpCallback, submitCallBack }) {
         emptyIcon={
           <StarBorderIcon fontSize="inherit" className={classes.star} />
         }
+        readOnly={readOnly ? true : false}
       />
-      <CustomButton
-        type={"button"}
-        backGroundColor="#2B4BF2"
-        innerText="Submit"
-        color={"white"}
-        displayType={"block"}
-        width="25rem"
-        height="5rem"
-        fontWeight="600"
-        fontSize="1.4rem"
-        borderRadius="8px"
-        margin="3.5rem 0"
-        onClick={() => {
-          // send rating value
-          if (value !== null) {
-            submitCallBack(value);
-          } else {
-            // no value saved so its 0
-            submitCallBack(0);
-          }
-        }}
-      />
+      {!readOnly ? (
+        <CustomButton
+          type={"button"}
+          backGroundColor="#2B4BF2"
+          innerText="Submit"
+          color={"white"}
+          displayType={"block"}
+          width="25rem"
+          height="5rem"
+          fontWeight="600"
+          fontSize="1.4rem"
+          borderRadius="8px"
+          margin="3.5rem 0"
+          onClick={() => {
+            // send rating value
+            if (value !== null) {
+              submitCallBack(value);
+            } else {
+              // no value saved so its 0
+              submitCallBack(0);
+            }
+          }}
+        />
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import "./student.scss";
 import Templatev2 from "../../components/templatev2/templatev2";
 import BookingIcon from "../../assets/images/booking.png";
 import ViewBookingRequest from "../../container/viewBookingRequest/viewBookingRequest";

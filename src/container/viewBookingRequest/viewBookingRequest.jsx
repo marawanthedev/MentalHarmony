@@ -4,7 +4,6 @@ import AvatarText from "../../components/avatarText/avatarText";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "../../components/button/button";
 import { useState } from "react";
-import RatingPopUp from "../../components/ratingPopUp/ratingPopUp";
 
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 
@@ -12,6 +11,7 @@ import ViewMeetingDetailsPopUp from "../../components/viewMeetingDetailsPopUp/vi
 
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import ViewBookingHistoryRatingPopUp from "../../components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
 
 const columns = [
   { id: "details", label: "Student Details", minWidth: 100 },
@@ -212,7 +212,7 @@ export default function ViewBookingRequest() {
   return (
     <>
       {showRatingPopUp ? (
-        <RatingPopUp
+        <ViewBookingHistoryRatingPopUp
           closePopUpCallback={() => {
             setShowRatingPopUp(false);
             setBlurTable(false);
