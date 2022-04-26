@@ -1,15 +1,19 @@
 import React from "react";
-import "./articleAttachmentPopUp.scss";
-import FormInputGroup from "../../components/formInput/formInput";
-import CustomButton from "../../components/button/button";
-import CloseBtn from "../../components/closeBtn/closeBtn";
+import "./formPopUp.scss";
+import FormInputGroup from "../formInput/formInput";
+import CustomButton from "../button/button";
+import CloseBtn from "../closeBtn/closeBtn";
 
 import { useState } from "react";
-export default function ArticleAttachmentPopUp({
+export default function FormPopUp({
   submitCallback,
   closeBtnCallback,
+  formTitle,
+  inputPlaceHolder,
+  inputLabel,
+  initialValue,
 }) {
-  const [articleUrl, setArticleUrl] = useState(null);
+  const [formInput, setFormInput] = useState(null);
 
   if (document.querySelector("input")) {
     document.querySelector("input").classList.remove("error-alert");
@@ -18,15 +22,16 @@ export default function ArticleAttachmentPopUp({
     <div className="article-attachment-popup">
       <CloseBtn onClick={closeBtnCallback} />
 
-      <div className="popup-header">Article Attachment</div>
+      <div className="popup-header">{formTitle}</div>
       <span className="article-attachment-popup__form-input">
         <FormInputGroup
           type="text"
-          placeHolder="Article URL"
-          customLabel="Write Article URL"
+          placeHolder={inputPlaceHolder}
+          customLabel={inputLabel}
           displayType="block"
+          initialValue={initialValue ? initialValue : undefined}
           className={`articleUrl form__right-side__innerForm__input-group`}
-          onChange={(value) => setArticleUrl(value)}
+          onChange={(value) => setFormInput(value)}
         />
       </span>
       <span className="align-center">
@@ -41,11 +46,11 @@ export default function ArticleAttachmentPopUp({
           fontWeight="600"
           onClick={() => {
             if (
-              articleUrl !== null &&
-              articleUrl !== undefined &&
-              articleUrl !== ""
+              formInput !== null &&
+              formInput !== undefined &&
+              formInput !== ""
             ) {
-              submitCallback();
+              submitCallback(formInput);
             } else {
               document.querySelector("input").classList.add("error-alert");
             }

@@ -1,5 +1,4 @@
 import React from "react";
-import "./viewBookingRequest.scss";
 import AvatarText from "../../components/avatarText/avatarText";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "../../components/button/button";
@@ -149,13 +148,13 @@ const getStars = (value) => {
   );
 };
 
-export default function ViewBookingRequest() {
+export default function ViewBookingHistory() {
   const [showRatingPopUp, setShowRatingPopUp] = useState(false);
   const [showStatusPopup, setShowStatusPopUp] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [showViewMeetingDetails, setShowMeetingDetails] = useState(false);
 
-  const getActionButton = (mobileNumber, requestStatus) => {
+  const getActionButton = (callBackParam, requestStatus) => {
     const actionButtonTypes = {
       completed: {
         text: "Rate appointment",

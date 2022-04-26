@@ -1,7 +1,7 @@
 import React from "react";
 import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
 import { useState } from "react";
-import ArticleAttachmentPopUp from "../articleAttachmentPopUp/articleAttachmentPopUp";
+import FormPopUp from "../../components/formPopUp/formPopUp";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 
 export default function AttachUsefulArticles() {
@@ -10,7 +10,7 @@ export default function AttachUsefulArticles() {
     useState(false);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
   const [formSubmissionStatus, setFormSubmissionStatus] = useState(false);
-
+  const [articleUrl, setArticleUrl] = useState(null);
   const handleRendering = () => {
     if (formSubmissionStatus) {
       return (
@@ -40,9 +40,13 @@ export default function AttachUsefulArticles() {
     }
     if (!formVisiblity && showArticleAttachmentForm) {
       return (
-        <ArticleAttachmentPopUp
-          submitCallback={() => {
+        <FormPopUp
+          formTitle="Article attachment"
+          inputLabel="Write Article URL"
+          inputPlaceHolder="Article URL"
+          submitCallback={(formInput) => {
             setFormSubmissionStatus(true);
+            setArticleUrl(formInput);
           }}
           closeBtnCallback={() => {
             setFormVisiblity(true);

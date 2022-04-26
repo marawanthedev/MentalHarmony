@@ -59,12 +59,14 @@ export default function RatingPopUp({
           borderRadius="8px"
           margin="3.5rem 0"
           onClick={() => {
-            // send rating value
-            if (value !== null) {
-              submitCallBack(value);
-            } else {
-              // no value saved so its 0
-              submitCallBack(0);
+            if (submitCallBack) {
+              // send rating value
+              if (value !== null) {
+                submitCallBack(value);
+              } else {
+                // no value saved so its 0
+                submitCallBack(0);
+              }
             }
           }}
         />

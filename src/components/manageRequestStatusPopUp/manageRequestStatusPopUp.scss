@@ -1,0 +1,32 @@
+@import "../../sass/abstract/mixins";
+
+.manage-request-popup {
+  @include popup(46.5rem, 20rem, 50%, center);
+  &__content {
+    padding: 1rem 0;
+  }
+
+  &__header,
+  &__paragraph {
+    font-family: "Inter";
+    text-align: center;
+  }
+  &__header {
+    font-size: 2rem;
+    line-height: 2.6rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    color: #54595e;
+  }
+  &__paragraph {
+    font-size: 1.4rem;
+    line-height: 1.9rem;
+    font-weight: 400;
+    color: rgba(84, 89, 94, 0.6);
+  }
+  &__buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

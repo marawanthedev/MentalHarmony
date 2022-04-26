@@ -6,7 +6,7 @@ import Signup from "./pages/signup/signup";
 import BrowseServiceProvider from "./pages/browseServiceProvider/browseServiceProvider";
 import Admin from "./pages/admin/admin";
 import Student from "./pages/student/student";
-
+import ServiceProvider from "./pages/serviceProvider/serviceProvider";
 import "./sass/main.scss";
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           />
           <Route path="/admin" component={Admin} />
           <Route path="/student" component={Student} />
+          <Route path="/serviceprovider" component={ServiceProvider} />
         </Switch>
       </div>
     </Router>
