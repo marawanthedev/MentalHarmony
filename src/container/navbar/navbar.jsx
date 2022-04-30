@@ -11,16 +11,16 @@ const Navbar = () => {
       selected: true,
     },
     {
-      text: "View Dashboard",
-      to: "/",
+      text: "Student Side",
+      to: "/student",
     },
     {
-      text: "Browse Service Providers",
-      to: "/browseServiceProvider",
+      text: "Admin Side",
+      to: "/admin",
     },
     {
-      text: "About us",
-      to: "/",
+      text: "SP Side",
+      to: "/serviceprovider",
     },
     {
       text: "Signup",

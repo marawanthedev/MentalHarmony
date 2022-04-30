@@ -4,20 +4,29 @@ import FormInputGroup from "../../components/formInput/formInput";
 import { useState } from "react";
 import CustomButton from "../../components/button/button";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-
 export default function AddServiceProviderForm() {
   const [specialKey, setSpecialKeyValue] = useState();
   const [showStatusPopUp, setShowStatusPopUp] = useState(false);
   const [formVisiblity, setFormVisiblity] = useState(true);
-
   //   reset-ing error alert
   if (document.querySelector("input")) {
     document.querySelector("input").classList.remove("error-alert");
   }
 
-  return (
-    <>
-      {!showStatusPopUp && formVisiblity ? (
+  const handleRendering = () => {
+    if (showStatusPopUp && !formVisiblity) {
+      return (
+        <StatusPopUp
+          success={true}
+          closeBtnOnClick={() => {
+            setShowStatusPopUp(false);
+            setFormVisiblity(true);
+          }}
+        />
+      );
+    }
+    if (!showStatusPopUp && formVisiblity) {
+      return (
         <div className="add-service-provider-form">
           <h1 className="add-service-provider-form__header">Add Special Key</h1>
           <p className="add-service-provider-form__paragraph">
@@ -57,18 +66,9 @@ export default function AddServiceProviderForm() {
             }}
           />
         </div>
-      ) : null}
+      );
+    }
+  };
 
-      {showStatusPopUp && !formVisiblity ? (
-        <StatusPopUp
-          success={true}
-          closeBtnOnClick={() => {
-            setShowStatusPopUp(false);
-            setFormVisiblity(true);
-          }}
-          submitCallBack={showStatusPopUp(false)}
-        />
-      ) : null}
-    </>
-  );
+  return <>{handleRendering()}</>;
 }

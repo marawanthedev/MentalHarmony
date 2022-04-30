@@ -46,9 +46,12 @@ export default function FormPopUp({
           fontWeight="600"
           onClick={() => {
             if (
-              formInput !== null &&
-              formInput !== undefined &&
-              formInput !== ""
+              (formInput !== null &&
+                formInput !== undefined &&
+                formInput !== "") ||
+              (initialValue !== null &&
+                initialValue !== undefined &&
+                initialValue !== "")
             ) {
               submitCallback(formInput);
             } else {

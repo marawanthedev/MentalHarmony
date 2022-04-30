@@ -1,11 +1,12 @@
 .rating-popup {
   width: 47rem;
-  height: 67.5rem;
+  height: 60rem;
   background: linear-gradient(167.2deg, #ebf3fb 4.47%, #ffffff 67.79%);
   /* Dropshadow */
   box-shadow: 2px 2px 3px rgba(209, 209, 233, 0.3);
   border-radius: 16px;
   position: absolute;
+  top: 10% ;
   z-index: 6;
   display: flex;
   flex-direction: column;

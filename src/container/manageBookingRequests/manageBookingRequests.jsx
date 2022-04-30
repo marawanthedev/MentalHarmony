@@ -7,6 +7,7 @@ import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import ManageRequestsRatingPopUp from "../../components/manageRequestRatingPopup/manageRequestRatingPopup";
 import FormPopUp from "../../components/formPopUp/formPopUp";
 import ManageRequestStatusPopUp from "../../components/manageRequestStatusPopUp/manageRequestStatusPopUp";
+
 const columns = [
   { id: "details", label: "Student Details", minWidth: 100 },
 
@@ -187,7 +188,13 @@ export default function ManageBookingRequests() {
   return (
     <>
       {showRatingPopUp ? (
-        <ManageRequestsRatingPopUp ratingValue={selectedRequestRating} />
+        <ManageRequestsRatingPopUp
+          closePopUpCallback={() => {
+            setShowRatingPopUp(false);
+            setBlurTable(false);
+          }}
+          ratingValue={selectedRequestRating}
+        />
       ) : null}
       {showStatusPopup ? (
         <StatusPopUp

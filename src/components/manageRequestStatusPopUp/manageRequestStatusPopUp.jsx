@@ -51,5 +51,4 @@ export default function ManageRequestStatusPopUp({
       </div>
     </div>
   );
-  debugger;
 }
