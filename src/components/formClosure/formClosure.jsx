@@ -27,7 +27,7 @@ export default function FormClosure({
     return setTimeout(() => history.push("/"), 2000);
   };
   const getFormContent = (formSubmissionSuccessStatus) => {
-    if (formSubmissionSuccessStatus) {
+    if (formSubmissionSuccessStatus === "success") {
       redirectToHomePage();
       return <div className="form-closure__message">Success</div>;
     } else {

@@ -13,7 +13,6 @@ import mentalHealthIllustration from "../../assets/images/uniIllustration.png";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "../../components/testimonals/testimonals";
 import DailyPopUp from "../../container/dailyPopUp/dailyPopUp";
-
 export default function Home() {
   const ServiceCards = [
     {
@@ -35,6 +34,21 @@ export default function Home() {
         "Free consultation with our trusted doctors and get the best recomendations",
     },
   ];
+  // i can set the user value within the context here
+  // const [user, setUser] = useContext(UserContext);
+
+  // const { data, error, loading } = UseApi("http://localhost:5000/api/goals");
+
+  // if (loading) {
+  //   console.log("loading");
+  // }
+  // if (error) {
+  //   console.log("error");
+  // }
+  // if (data) {
+  //   console.log(data);
+  // }
+  // useApi();
 
   return (
     <Template>

@@ -3,10 +3,10 @@ import "./form.scss";
 import FormInputGroup from "../../components/formInput/formInput";
 import CustomButton from "../../components/button/button";
 import leftArrow from "../../assets/svg/left-arrow.svg";
-import FormClosure from "../../components/formClosure/formClosure";
 import loginFigure from "../../assets/images/loginFigure.png";
 import signupFigure from "../../assets/images/signupFigure.jpg";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class Form extends React.Component {
   constructor(props) {
@@ -61,12 +61,12 @@ class Form extends React.Component {
   //**** to be modified */
   handleFormSubmission = (formInputs, SubmitFormCallback) => {
     const { userInfo } = this.state;
-    console.clear();
 
     let isFormValid = true,
       isEmailValid = false;
 
     formInputs.forEach((formInput) => {
+
       let elementIdentifer = formInput.className.split(" ")[0];
       //targeting the actual input field not its group
       let targetElement = document.querySelectorAll(`.${elementIdentifer}`)[2];
@@ -76,7 +76,8 @@ class Form extends React.Component {
         isEmailValid = this.validateEmailFormat(userInfo[elementIdentifer]);
         //format error alert
         if (!isEmailValid) {
-          targetElement.classList.add("error-alert");
+          // targetElement.classList.add("error-alert");
+          toast.error(formInput.errorAlert);
           isFormValid = false;
         }
       } else {
@@ -87,7 +88,8 @@ class Form extends React.Component {
             userInfo[elementIdentifer] === undefined ||
             userInfo[elementIdentifer].length < formInput.minLength
           ) {
-            targetElement.classList.add("error-alert");
+            // targetElement.classList.add("error-alert");
+            toast.error(formInput.errorAlert);
             isFormValid = false;
           }
         }
@@ -96,10 +98,7 @@ class Form extends React.Component {
 
     // **** to be further completed for validation
     if (isFormValid) {
-      //reseting input fields
-      this.resetForm();
-      //toggling form closure needs to be done within a function
-      this.setState({ toggleFormClosure: true });
+      SubmitFormCallback(userInfo);
     }
   };
   handleInputChange = (
@@ -114,6 +113,7 @@ class Form extends React.Component {
       userInfo[formInputIdentfier] = value;
     } else {
       userInfo[formInputIdentfier] = !userInfo[formInputIdentfier];
+      userInfo["faculty_name"] = null;
       handleCheckBoxClick(userInfo[formInputIdentfier]);
     }
   };
@@ -249,16 +249,6 @@ class Form extends React.Component {
               })}
             </form>
           </div>
-          {/* form closure */}
-          {this.state.toggleFormClosure ? (
-            <FormClosure
-              formType={type}
-              formSubmissionSuccessStatus={
-                this.state.formSubmissionSuccessStatus
-              }
-              resetFormCallBack={this.resetForm}
-            />
-          ) : null}
         </div>
       </>
     );

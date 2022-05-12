@@ -1,9 +1,18 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Form from "../../container/form/form";
+import { useSelector, useDispatch } from "react-redux";
+import { login, reset } from "../../redux/features/auth/authSlice";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Spinner from "../../components/spinner/spinner";
+
 export default function Login() {
   let history = useHistory();
-
+  const { user, isLoading, isError, isSuccess } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
   const formInputs = [
     {
       type: "text",
@@ -34,6 +43,28 @@ export default function Login() {
       icon: null,
     },
   ];
+
+  const handleSubmit = (userInfo) => {
+    console.log(userInfo);
+    dispatch(login(userInfo));
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Login succeeded");
+      setTimeout(() => {
+        history.push("/");
+      }, 3500);
+    }
+    if (isError) {
+      toast.error("Invalid Credentials!");
+    }
+    if (isLoading) {
+      return <Spinner />;
+    }
+    //reseting submission status
+    dispatch(reset());
+  }, [user, isError, isSuccess, isLoading, dispatch, history]);
+
   return (
     <>
       <div className="login-container">
@@ -42,7 +73,7 @@ export default function Login() {
           formInputs={formInputs}
           formButtons={formButtons}
           goBackCallBack={() => history.goBack()}
-          SubmitFormCallback={() => {}}
+          SubmitFormCallback={(userInfo) => handleSubmit(userInfo)}
         ></Form>
       </div>
     </>
