@@ -145,6 +145,8 @@ export default function Signup() {
     //reseting submission status
     dispatch(reset());
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
+
+  
   return (
     <div>
       <Form

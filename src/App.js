@@ -24,9 +24,12 @@ function App() {
               path="/browseServiceProvider"
               component={BrowseServiceProvider}
             />
-            <Route path="/admin" component={Admin} />
-            <Route path="/student" component={Student} />
-            <Route path="/serviceprovider" component={ServiceProvider} />
+            <Route path="/admin/dashboard" component={Admin} />
+            <Route path="/student/dashboard" component={Student} />
+            <Route
+              path="/serviceprovider/dashboard"
+              component={ServiceProvider}
+            />
           </Switch>
         </div>
       </Router>
