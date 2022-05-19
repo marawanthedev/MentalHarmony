@@ -207,7 +207,6 @@ export default function ViewBookingHistory() {
     return rows;
   };
 
-  console.log(showViewMeetingDetails);
   return (
     <>
       {showRatingPopUp ? (
@@ -219,7 +218,6 @@ export default function ViewBookingHistory() {
           submitCallBack={(value) => {
             setShowRatingPopUp(false);
             setShowStatusPopUp(true);
-            console.log(`rating was set to ${value}`);
           }}
         />
       ) : null}

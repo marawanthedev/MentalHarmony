@@ -155,7 +155,6 @@ export default function RemoveServiceProvider() {
             fontSize="1.1rem"
             borderRadius="2.5rem"
             onClick={() => {
-              console.log(dataRows[index].mobileNumber);
               setShowDialog(true);
               setBlurTable(true);
             }}

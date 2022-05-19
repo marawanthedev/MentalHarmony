@@ -8,7 +8,6 @@ const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
   const navOptions = {
     student: [
       {
@@ -23,10 +22,6 @@ const Navbar = () => {
       {
         text: "Browse Service Providers",
         to: "/browseServiceProvider",
-      },
-      {
-        text: "About us",
-        to: "/",
       },
     ],
     serviceprovider: [
@@ -81,12 +76,17 @@ const Navbar = () => {
         hideIfAuthed: true,
       },
       {
+        text: "Profile",
+        to: `/profile?type=${user ? user.type : null}`,
+        basedOnAuth: true,
+        hideIfAuthed: false,
+      },
+      {
         text: "Logout",
         to: "/",
         basedOnAuth: true,
         hideIfAuthed: false,
         onClickCallBack: () => {
-          console.log("call");
           dispatch(logout());
           dispatch(reset());
         },
@@ -96,17 +96,16 @@ const Navbar = () => {
 
   const manageLinkRendering = () => {
     const options = [];
-    console.log(user);
     if (user) {
       const userType = user.type;
 
       navOptions[userType].forEach((option, index) =>
-        options.push(getLink(option, index))
+        options.push(getLink(option, `${userType} ${index}`))
       );
     } else {
       //default options are set to student
       navOptions.student.forEach((option, index) =>
-        options.push(getLink(option, index))
+        options.push(getLink(option, `student ${index}`))
       );
     }
     //general options
@@ -125,10 +124,10 @@ const Navbar = () => {
     }
     return options;
   };
-  const getLink = (option, index) => {
+  const getLink = (option, key) => {
     return (
       <Link
-        key={index}
+        key={key}
         className="option"
         to={option.to}
         onClick={() => {

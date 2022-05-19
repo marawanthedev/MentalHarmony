@@ -34,21 +34,7 @@ export default function Home() {
         "Free consultation with our trusted doctors and get the best recomendations",
     },
   ];
-  // i can set the user value within the context here
-  // const [user, setUser] = useContext(UserContext);
-
-  // const { data, error, loading } = UseApi("http://localhost:5000/api/goals");
-
-  // if (loading) {
-  //   console.log("loading");
-  // }
-  // if (error) {
-  //   console.log("error");
-  // }
-  // if (data) {
-  //   console.log(data);
-  // }
-  // useApi();
+  
 
   return (
     <Template>

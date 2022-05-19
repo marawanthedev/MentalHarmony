@@ -66,7 +66,6 @@ class Form extends React.Component {
       isEmailValid = false;
 
     formInputs.forEach((formInput) => {
-
       let elementIdentifer = formInput.className.split(" ")[0];
       //targeting the actual input field not its group
       let targetElement = document.querySelectorAll(`.${elementIdentifer}`)[2];
@@ -119,9 +118,8 @@ class Form extends React.Component {
   };
   renderInputFields = (formInput, index, handleCheckBoxClick) => {
     const { userInfo } = this.state;
-
     // dynamically adding state attributes instead of typing it statically
-    // state attribtues will be customized to each form type
+    // state attrib tues will be customized to each form type
 
     var formInputIdentfier = formInput.className.split(" ")[0];
     if (formInput.type === "checkbox") {
@@ -177,10 +175,10 @@ class Form extends React.Component {
 
     return (
       <>
-        <div className="form">
+        <div className={`form ${type === "signup" ? "form__extended" : null}`}>
           {this.getLeftSide(style, type)}
 
-          <div className="form__right-side ">
+          <div className="form__right-side">
             <div
               className="form__right-side__back-btn"
               onClick={() => goBackCallBack()}

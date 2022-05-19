@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Template from "../../components/template/template";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import CustomButton from "../../components/button/button";
@@ -8,54 +8,78 @@ import Card from "../../components/card/card";
 import serviceProviderAvatar from "../../assets/images/serviceProviderAvatar.png";
 import ServiceProviderRequestPopUp from "../../container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersByType } from "../../redux/features/user/userSlice";
+import { toast } from "react-toastify";
+import Spinner from "../../components/spinner/spinner";
 
 export default function BrowseServiceProvider() {
-  const ServiceProviderCards = [
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-    {
-      spAvatar: serviceProviderAvatar,
-      spName: "Dr.Suhaila",
-      spHeader: "UTM Counsellor ",
-      spParagraph: "Specialized in stress managment assistance",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
+    (state) => state.user
+  );
 
   const [selectedCard, setSelectedCard] = useState(null);
   const [blurCardsContainer, setBlurCardsContainer] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
-  const handlePopClose = () => {};
+  //** avatar needs to be retrived from backend */
+  //* desc and speciality needs to not be pre-written in backedn */
+
+  /*eslint-disable */
+  useEffect(() => dispatch(getUsersByType("serviceprovider")), []);
+  /*eslint-enable */
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Retrieval succeeded");
+      setTimeout(() => {}, 3500);
+      setShowSpinner(false);
+    }
+    if (isError) {
+      setShowSpinner(false);
+      toast.error("Retrieval Failure!");
+    }
+    if (isLoading) {
+      setShowSpinner(true);
+    }
+  }, [filteredUsers, isError, isSuccess, isLoading, dispatch]);
+
+  const manageSpCardRendering = () => {
+    if (filteredUsers) {
+      return filteredUsers.map((filteredUser, index) => {
+        return (
+          <Card
+            key={index}
+            header={filteredUser.speciality}
+            paragraph={filteredUser.description}
+            customClass={"browseServices__card"}
+            onClick={() => {
+              setBlurCardsContainer(true);
+              setSelectedCard(filteredUser);
+            }}
+          >
+            <div className="browseServices__card__upper">
+              <div
+                className="browseServices__card__upper__avatar"
+                style={{
+                  backgroundImage: `url(${serviceProviderAvatar})`,
+                }}
+              ></div>
+              <div className="browseServices__card__upper__name">
+                {filteredUser.name}
+              </div>
+            </div>
+          </Card>
+        );
+      });
+    }
+  };
+
+  // const handlePopClose = () => {};
   return (
     <Template>
+      {showSpinner ? <Spinner /> : null}
       <div className="custom-container">
         <FlexTwoSlotsRow
           customClass="mb-10"
@@ -105,32 +129,7 @@ export default function BrowseServiceProvider() {
         <div
           className={`cards-container ${blurCardsContainer ? "blur" : null}`}
         >
-          {ServiceProviderCards.map((serviceProviderCard, index) => {
-            return (
-              <Card
-                key={index}
-                header={serviceProviderCard.spHeader}
-                paragraph={serviceProviderCard.spParagraph}
-                customClass={"browseServices__card"}
-                onClick={() => {
-                  setBlurCardsContainer(true);
-                  setSelectedCard(serviceProviderCard);
-                }}
-              >
-                <div className="browseServices__card__upper">
-                  <div
-                    className="browseServices__card__upper__avatar"
-                    style={{
-                      backgroundImage: `url(${serviceProviderCard.spAvatar})`,
-                    }}
-                  ></div>
-                  <div className="browseServices__card__upper__name">
-                    {serviceProviderCard.spName}
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
+          {manageSpCardRendering()}
         </div>
       </div>
     </Template>

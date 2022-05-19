@@ -7,6 +7,7 @@ import BrowseServiceProvider from "./pages/browseServiceProvider/browseServicePr
 import Admin from "./pages/admin/admin";
 import Student from "./pages/student/student";
 import ServiceProvider from "./pages/serviceProvider/serviceProvider";
+import Profile from "./pages/profile/profile";
 import "./sass/main.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,6 +25,7 @@ function App() {
               path="/browseServiceProvider"
               component={BrowseServiceProvider}
             />
+            <Route path="/profile" component={Profile} />
             <Route path="/admin/dashboard" component={Admin} />
             <Route path="/student/dashboard" component={Student} />
             <Route

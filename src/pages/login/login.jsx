@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "../../container/form/form";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ export default function Login() {
   const { user, isLoading, isError, isSuccess } = useSelector(
     (state) => state.auth
   );
+  const [showSpinner, setShowSpinner] = useState(false);
   const dispatch = useDispatch();
   const formInputs = [
     {
@@ -45,7 +46,6 @@ export default function Login() {
   ];
 
   const handleSubmit = (userInfo) => {
-    console.log(userInfo);
     dispatch(login(userInfo));
   };
   useEffect(() => {
@@ -54,12 +54,14 @@ export default function Login() {
       setTimeout(() => {
         history.push("/");
       }, 3500);
+      setShowSpinner(false);
     }
     if (isError) {
+      setShowSpinner(false);
       toast.error("Invalid Credentials!");
     }
     if (isLoading) {
-      return <Spinner />;
+      setShowSpinner(true);
     }
     //reseting submission status
     dispatch(reset());
@@ -67,6 +69,7 @@ export default function Login() {
 
   return (
     <>
+      {showSpinner ? <Spinner /> : null}
       <div className="login-container">
         <Form
           type="login"

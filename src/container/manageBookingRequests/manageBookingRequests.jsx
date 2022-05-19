@@ -181,10 +181,6 @@ export default function ManageBookingRequests() {
     return rows;
   };
 
-  //   it gets updated
-  //   useEffect(() => {
-  //     console.log(selectedRequestMeetingLink);
-  //   }, [selectedRequestMeetingLink]);
   return (
     <>
       {showRatingPopUp ? (

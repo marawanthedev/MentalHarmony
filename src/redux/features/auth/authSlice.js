@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+
+//*Smart try catch  guide, (callback,callbackparams,errorObject)
+import smartTryCatch from "../../../util/smartTryCatch";
+
 // get user from local storage if it exists
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -15,32 +19,14 @@ const initState = {
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
-    try {
-      return await authService.register(user);
-    } catch (error) {
-      const message =
-        (error.response && error.res.data && error.res.data.message) ||
-        error.message ||
-        error.toString();
-
-      return thunkAPI.rejectWithValue(message);
-    }
+    return await smartTryCatch(authService.register, user, thunkAPI);
   }
 );
 
 // login User
 //async thunk takes route, then async function with params passed by func user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  try {
-    return await authService.login(user);
-  } catch (error) {
-    const message =
-      (error.response && error.res.data && error.res.data.message) ||
-      error.message ||
-      error.toString();
-
-    return thunkAPI.rejectWithValue(message);
-  }
+  return await smartTryCatch(authService.login, user, thunkAPI);
 });
 
 export const logout = createAsyncThunk("auth/logout", async () => {

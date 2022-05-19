@@ -1,19 +1,19 @@
-import axios from "axios";
+//*Assert guide, (assertionFactor,DataToBeReturned,errorMessage,res object)
+import assert from "../../../util/assertion";
+
+import { http } from "../../../util/restAPI";
 
 const BASE_URL = "api/users/";
 
 // Register User
 const register = async (userData) => {
-  const res = await axios.post(`${BASE_URL}auth/register`, userData);
+  const res = http.post(`${BASE_URL}auth/register`, userData);
 
-  if (res.data) {
-    localStorage.setItem("user", JSON.stringify(res.data));
-  }
-  return res.data;
+  return assert(res, res.data, "Registration has failed", res);
 };
 
 const login = async (userData) => {
-  const res = await axios.post(`${BASE_URL}auth/login`, userData);
+  const res = await http.post(`${BASE_URL}auth/login`, userData);
 
   if (res.data) {
     localStorage.setItem("user", JSON.stringify(res.data));

@@ -14,32 +14,60 @@ export default function Signup() {
   const { user, isLoading, isError, isSuccess } = useSelector(
     (state) => state.auth
   );
-
+  const [showSpinner, setShowSpinner] = useState(false);
   const [userType, setUserType] = useState("student");
-  const alternatingInputs = {
-    serviceProviderSpecialKeyInput: {
-      type: "text",
-      placeHolder: "Enter Special Key",
-      displayType: "block",
-      customLabel: "Special Key*",
-      className: "specialKey form__right-side__innerForm__input-group",
-      errorAlert: "Full name should have a min length of 4",
-      minLength: 4,
-      toggler: "isServiceProvider",
-    },
-    facultyNameInput: {
-      type: "text",
-      placeHolder: "Enter Faculty Name",
-      displayType: "block",
-      customLabel: "Faculty Name*",
-      className: "faculty_name form__right-side__innerForm__input-group",
-      errorAlert: "Full name should have a min length of 4",
-      minLength: 4,
-      toggler: "isServiceProvider",
-    },
-  };
+  let checkBoxValue = false;
 
-  const [formInputs, setFormInputs] = useState([
+  const alternatingInputs = {
+    serviceprovider: [
+      {
+        type: "text",
+        placeHolder: "Enter Special Key",
+        displayType: "block",
+        customLabel: "Special Key*",
+        className: "specialKey form__right-side__innerForm__input-group",
+        errorAlert: "Full name should have a min length of 4",
+        minLength: 4,
+        toggler: "isServiceProvider",
+      },
+      {
+        type: "text",
+        placeHolder: "Enter Speciality",
+        displayType: "block",
+        customLabel: "Speciality *",
+        className: "speciality form__right-side__innerForm__input-group",
+        errorAlert: "Speciality should have a min length of 4",
+        minLength: 4,
+        toggler: "isServiceProvider",
+      },
+      {
+        type: "text",
+        placeHolder: "Enter Description",
+        displayType: "block",
+        customLabel: "Description *",
+        className: "description form__right-side__innerForm__input-group",
+        errorAlert: "Description should have a min length of 12",
+        minLength: 12,
+        toggler: "isServiceProvider",
+      },
+    ],
+    student: [
+      {
+        type: "text",
+        placeHolder: "Enter Faculty Name",
+        displayType: "block",
+        customLabel: "Faculty Name*",
+        className: "faculty_name form__right-side__innerForm__input-group",
+        errorAlert: "Full name should have a min length of 4",
+        minLength: 4,
+        toggler: "isServiceProvider",
+      },
+    ],
+  };
+  const getInnerInput = () => {
+    return alternatingInputs[userType][0];
+  };
+  const formInputs = [
     {
       type: "text",
       placeHolder: "Enter Full Name",
@@ -67,7 +95,7 @@ export default function Signup() {
       errorAlert: "Password should have a min length of 8",
       minLength: 8,
     },
-    alternatingInputs.facultyNameInput,
+    getInnerInput(),
     {
       type: "checkbox",
       placeHolder: null,
@@ -75,7 +103,8 @@ export default function Signup() {
       customLabel: "Is service provider",
       className: "isServiceProvider form__right-side__innerForm__input-group",
     },
-  ]);
+    // ...alternatingInputs[userType],
+  ];
 
   const formButtons = [
     {
@@ -92,27 +121,14 @@ export default function Signup() {
   ];
 
   const handleCheckBoxClick = (checkboxValue) => {
-    setFormInputs(
-      formInputs.map((formInput) => {
-        if (formInput.toggler === undefined || formInput.toggler === "null") {
-          return formInput;
-        }
-        if (formInput.toggler === "isServiceProvider") {
-          if (checkboxValue === true) {
-            //** */ setting user type
-            setUserType("serviceprovider");
-
-            return alternatingInputs.serviceProviderSpecialKeyInput;
-          } else {
-            //** */ setting user type
-            setUserType("student");
-            return alternatingInputs.facultyNameInput;
-          }
-        }
-
-        return null;
-      })
-    );
+    checkBoxValue = !checkBoxValue;
+    if (checkboxValue === true) {
+      //** */ setting user type
+      setUserType("serviceprovider");
+    } else {
+      //** */ setting user type
+      setUserType("student");
+    }
   };
 
   const handleSubmit = async (userInfo) => {
@@ -128,31 +144,39 @@ export default function Signup() {
       })
     );
   };
-  useEffect(() => {}, [formInputs]);
+
+  useEffect(() => {}, [userType]);
+
   useEffect(() => {
     if (isSuccess) {
       toast.success("Signup succeeded");
       setTimeout(() => {
         history.push("/");
       }, 3500);
+      setShowSpinner(false);
     }
     if (isError) {
+      setShowSpinner(false);
       toast.error("Email Address is already in use!");
     }
     if (isLoading) {
-      return <Spinner />;
+      setShowSpinner(true);
     }
-    //reseting submission status
-    dispatch(reset());
+
+    setTimeout(() => {
+      dispatch(reset());
+    }, 2000);
+    //reset-ing submission status
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 
-  
   return (
     <div>
+      {showSpinner ? <Spinner /> : null}
       <Form
         type="signup"
         formInputs={formInputs}
         formButtons={formButtons}
+        checkBoxValue={checkBoxValue}
         goBackCallBack={() => history.goBack()}
         handleCheckBoxClick={handleCheckBoxClick}
         SubmitFormCallback={(userInfo) => handleSubmit(userInfo)}
