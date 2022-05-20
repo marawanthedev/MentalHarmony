@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Spinner from "../../components/spinner/spinner";
 import Template from "../../components/template/template";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 
 export default function Profile() {
   const history = useHistory();
@@ -63,6 +64,12 @@ export default function Profile() {
     }
   };
 
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+  });
+
   useEffect(() => {
     if (user) {
       const keys = Object.keys(user);
@@ -80,20 +87,11 @@ export default function Profile() {
       });
       setFormInputs(toBeFormedInputs);
     }
-
-    if (isSuccess) {
-      toast.success("Getting succeeded");
-    }
-    if (isError) {
-      toast.error("failure");
-    }
-    if (isLoading) {
-      return <Spinner />;
-    }
   }, [user, isError, isSuccess, isLoading]);
 
   return (
     <>
+      {showSpinner ? <Spinner /> : null}
       {formInputs ? (
         <Template>
           <ProfileForm

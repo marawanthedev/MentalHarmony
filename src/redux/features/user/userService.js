@@ -1,9 +1,7 @@
 import { http } from "../../../util/restAPI";
-
-//*Assert guide, (assertionFactor,return Value/Callback,errorMessage,res object)
 import assert from "../../../util/assertion";
 
-const BASE_URL = "api/users";
+const BASE_URL = "http://localhost:3000/api/users";
 
 const getUsersByType = async (type) => {
   const res = await http.get(`${BASE_URL}/filter?type=${type}`);

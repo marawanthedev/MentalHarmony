@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import Form from "../../container/form/form";
 import { useSelector, useDispatch } from "react-redux";
 import { register, reset } from "../../redux/features/auth/authSlice";
-import { toast } from "react-toastify";
 import Spinner from "../../components/spinner/spinner";
-
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 export default function Signup() {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ export default function Signup() {
   const { user, isLoading, isError, isSuccess } = useSelector(
     (state) => state.auth
   );
-  const [showSpinner, setShowSpinner] = useState(false);
   const [userType, setUserType] = useState("student");
   let checkBoxValue = false;
 
@@ -147,26 +145,20 @@ export default function Signup() {
 
   useEffect(() => {}, [userType]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Signup succeeded");
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+    successCallBack: () =>
       setTimeout(() => {
         history.push("/");
-      }, 3500);
-      setShowSpinner(false);
-    }
-    if (isError) {
-      setShowSpinner(false);
-      toast.error("Email Address is already in use!");
-    }
-    if (isLoading) {
-      setShowSpinner(true);
-    }
-
+      }, 3500),
+  });
+  useEffect(() => {
+    //reset-ing submission status
     setTimeout(() => {
       dispatch(reset());
     }, 2000);
-    //reset-ing submission status
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 
   return (

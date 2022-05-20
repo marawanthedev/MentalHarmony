@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
-
-//*Smart try catch  guide, (callback,callbackparams:optional,errorObject)
 import smartTryCatch from "../../../util/smartTryCatch.js";
 
 const initState = {

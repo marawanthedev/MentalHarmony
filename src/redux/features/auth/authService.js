@@ -1,9 +1,8 @@
-//*Assert guide, (assertionFactor,DataToBeReturned,errorMessage,res object)
 import assert from "../../../util/assertion";
 
 import { http } from "../../../util/restAPI";
 
-const BASE_URL = "api/users/";
+const BASE_URL = "http://localhost:3000/api/users/";
 
 // Register User
 const register = async (userData) => {

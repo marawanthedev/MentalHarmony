@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-
-//*Smart try catch  guide, (callback,callbackparams,errorObject)
 import smartTryCatch from "../../../util/smartTryCatch";
 
 // get user from local storage if it exists

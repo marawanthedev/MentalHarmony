@@ -109,7 +109,11 @@ export default function StickyHeadTable({ tableTitle, rows, cols, blur }) {
                         >
                           {column.format && typeof value === "number"
                             ? column.format(value)
-                            : value}
+                            : value !== null &&
+                              value !== undefined &&
+                              value !== ""
+                            ? value
+                            : "-"}
                         </TableCell>
                       );
                     })}

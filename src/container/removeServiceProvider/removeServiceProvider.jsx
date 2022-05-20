@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-import AvatarText from "../../components/avatarText/avatarText";
+// import AvatarText from "../../components/avatarText/avatarText";
 import CustomButton from "../../components/button/button";
 import DialogPopUp from "../../components/dialogPopUp/dialogPopUp";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersByType } from "../../redux/features/user/userSlice";
+import Spinner from "../../components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 
 const columns = [
-  { id: "details", label: "Details", minWidth: 100 },
+  { id: "name", label: "Details", minWidth: 100 },
   {
     id: "speciality",
     label: "Speciality",
@@ -16,7 +20,7 @@ const columns = [
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "mobileNumber",
+    id: "phone_number",
     label: " Mobile number",
     minWidth: 120,
     align: "right",
@@ -38,108 +42,32 @@ const columns = [
   },
 ];
 
-const dataRows = [
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-];
-
 export default function RemoveServiceProvider() {
   const [showDialog, setShowDialog] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [showConfirmPopUp, setShowConfirmPopUp] = useState(false);
+  const dispatch = useDispatch();
+  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
+    (state) => state.user
+  );
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(getUsersByType("serviceprovider"));
+    }
+  }, []);
 
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+  });
+  useEffect(() => {
+    // ApiCallStatusNotificationHandler({ isSuccess, isLoading, isError });
+  }, [filteredUsers, isSuccess, isError, isLoading]);
   const generateRows = () => {
     let rows = [];
 
-    dataRows.forEach((row, index) => {
+    filteredUsers.forEach((row, index) => {
       rows[index] = {
         ...row,
         action: (
@@ -157,6 +85,7 @@ export default function RemoveServiceProvider() {
             onClick={() => {
               setShowDialog(true);
               setBlurTable(true);
+              // dispatch(removeServiceProvider(row._id));
             }}
           />
         ),
@@ -167,6 +96,8 @@ export default function RemoveServiceProvider() {
 
   return (
     <>
+      {showSpinner ? <Spinner /> : null}
+
       {showDialog ? (
         <DialogPopUp
           cancelCallBack={() => {

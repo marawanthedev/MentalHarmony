@@ -1,3 +1,5 @@
+//*smartTryCatch guide, (callback,callbackParams,rejectionObject)
+
 export default async function smartTryCatch(
   callback,
   callbackParams,

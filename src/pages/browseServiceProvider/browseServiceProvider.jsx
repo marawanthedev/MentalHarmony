@@ -10,40 +10,33 @@ import ServiceProviderRequestPopUp from "../../container/serviceProviderRequestP
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsersByType } from "../../redux/features/user/userSlice";
-import { toast } from "react-toastify";
 import Spinner from "../../components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 
 export default function BrowseServiceProvider() {
   const dispatch = useDispatch();
   const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
     (state) => state.user
   );
-
   const [selectedCard, setSelectedCard] = useState(null);
   const [blurCardsContainer, setBlurCardsContainer] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
 
   //** avatar needs to be retrived from backend */
   //* desc and speciality needs to not be pre-written in backedn */
 
   /*eslint-disable */
-  useEffect(() => dispatch(getUsersByType("serviceprovider")), []);
-  /*eslint-enable */
-
   useEffect(() => {
-    if (isSuccess) {
-      toast.success("Retrieval succeeded");
-      setTimeout(() => {}, 3500);
-      setShowSpinner(false);
+    if (isLoading !== true) {
+      dispatch(getUsersByType("serviceprovider"));
     }
-    if (isError) {
-      setShowSpinner(false);
-      toast.error("Retrieval Failure!");
-    }
-    if (isLoading) {
-      setShowSpinner(true);
-    }
-  }, [filteredUsers, isError, isSuccess, isLoading, dispatch]);
+  }, []);
+  /*eslint-enable */
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+  });
+  useEffect(() => {}, [filteredUsers, isError, isSuccess, isLoading, dispatch]);
 
   const manageSpCardRendering = () => {
     if (filteredUsers) {

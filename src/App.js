@@ -9,7 +9,7 @@ import Student from "./pages/student/student";
 import ServiceProvider from "./pages/serviceProvider/serviceProvider";
 import Profile from "./pages/profile/profile";
 import "./sass/main.scss";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -35,7 +35,12 @@ function App() {
           </Switch>
         </div>
       </Router>
-      <ToastContainer />
+      <ToastContainer
+        draggable={false}
+        transition={Zoom}
+        autoClose={4000}
+        limit={2}
+      />
     </>
   );
 }

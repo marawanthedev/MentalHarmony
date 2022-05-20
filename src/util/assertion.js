@@ -2,6 +2,7 @@
 //@Assure that there are valid data
 //@access Public
 
+//*Assert guide, (assertionFactor,DataToBeReturned,errorMessage,res object)
 function assert(assertionFactor, dataToBeReturned, errorMessage, res) {
   if (
     assertionFactor !== undefined &&
@@ -10,8 +11,6 @@ function assert(assertionFactor, dataToBeReturned, errorMessage, res) {
     assertionFactor !== [] &&
     assertionFactor !== {}
   ) {
-    console.log("passed");
-    console.log(dataToBeReturned);
     return dataToBeReturned;
   } else {
     res.status(400);

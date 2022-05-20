@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-import AvatarText from "../../components/avatarText/avatarText";
+// import AvatarText from "../../components/avatarText/avatarText";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersByType } from "../../redux/features/user/userSlice";
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
+import Spinner from "../../components/spinner/spinner";
 
 const columns = [
-  { id: "details", label: "Details", minWidth: 170 },
+  { id: "name", label: "Name", minWidth: 170 },
   {
-    id: "speciality",
-    label: "Speciality",
+    id: "faculty_name",
+    label: "Faculty name",
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "mobileNumber",
+    id: "phone_number",
     label: " Mobile number",
     minWidth: 170,
     align: "right",
@@ -27,107 +31,31 @@ const columns = [
   },
 ];
 
-// function createData(details, speciality, mobileNumber, location) {
-//   return { details, speciality, mobileNumber, location };
-// }
-
-const rows = [
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-  {
-    details: <AvatarText text="Tom Cruise" />,
-    speciality: "Depression",
-    mobileNumber: "01559178830",
-    location: "Skuadi",
-  },
-];
+//**  sample of using avatar
+// details: <AvatarText text="Tom Cruise" />,
 
 export default function ViewUniStudentsTab() {
+  const dispatch = useDispatch();
+  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
+    (state) => state.user
+  );
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+  });
+
+  useEffect(() => {
+    if (isLoading !== true) {
+      dispatch(getUsersByType("student"));
+    }
+  }, []);
+  useEffect(() => [filteredUsers, isSuccess, isLoading, isError]);
+
   return (
     <>
-      <StickyHeadTable rows={rows} cols={columns} />
+      {showSpinner ? <Spinner /> : null}
+      <StickyHeadTable rows={filteredUsers} cols={columns} />
     </>
   );
 }

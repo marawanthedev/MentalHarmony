@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import Form from "../../container/form/form";
 import { useSelector, useDispatch } from "react-redux";
 import { login, reset } from "../../redux/features/auth/authSlice";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 import Spinner from "../../components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 
 export default function Login() {
   let history = useHistory();
   const { user, isLoading, isError, isSuccess } = useSelector(
     (state) => state.auth
   );
-  const [showSpinner, setShowSpinner] = useState(false);
   const dispatch = useDispatch();
   const formInputs = [
     {
@@ -48,21 +47,18 @@ export default function Login() {
   const handleSubmit = (userInfo) => {
     dispatch(login(userInfo));
   };
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Login succeeded");
+
+  const { showSpinner } = useApiCallStatusNotificationHandler({
+    isSuccess,
+    isLoading,
+    isError,
+    successCallBack: () =>
       setTimeout(() => {
         history.push("/");
-      }, 3500);
-      setShowSpinner(false);
-    }
-    if (isError) {
-      setShowSpinner(false);
-      toast.error("Invalid Credentials!");
-    }
-    if (isLoading) {
-      setShowSpinner(true);
-    }
+      }, 3500),
+  });
+
+  useEffect(() => {
     //reseting submission status
     dispatch(reset());
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
