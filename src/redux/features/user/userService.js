@@ -18,10 +18,15 @@ const updateUser = async (data) => {
   return assert(res, res.data, "User update has failed", res);
 };
 
+const deleteUser = async (id) => {
+  const res = await http.delete(`${BASE_URL}/deleteUser?id=${id}`);
+  return assert(res, res.data, "Removal failed", res);
+};
 const userService = {
   getUsersByType,
   getUser,
   updateUser,
+  deleteUser,
 };
 
 export default userService;

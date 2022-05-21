@@ -27,7 +27,12 @@ export const updateUser = createAsyncThunk(
     return await smartTryCatch(userService.updateUser, data, thunkAPI);
   }
 );
-
+export const deleteUser = createAsyncThunk(
+  "deleteUser:id",
+  async (data, thunkAPI) => {
+    return await smartTryCatch(userService.deleteUser, data, thunkAPI);
+  }
+);
 export const userSlice = createSlice({
   name: "user",
   initialState: initState,
@@ -68,6 +73,17 @@ export const userSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(updateUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(deleteUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });

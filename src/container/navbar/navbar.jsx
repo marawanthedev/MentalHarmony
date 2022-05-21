@@ -68,18 +68,21 @@ const Navbar = () => {
         to: "/signup",
         basedOnAuth: true,
         hideIfAuthed: true,
+        hideForAdmin: false,
       },
       {
         text: "Login",
         to: "/login",
         basedOnAuth: true,
         hideIfAuthed: true,
+        hideForAdmin: true,
       },
       {
         text: "Profile",
         to: `/profile?type=${user ? user.type : null}`,
         basedOnAuth: true,
         hideIfAuthed: false,
+        hideForAdmin: false,
       },
       {
         text: "Logout",
@@ -108,15 +111,15 @@ const Navbar = () => {
         options.push(getLink(option, `student ${index}`))
       );
     }
-    //general options
-    if (!user || (user && user.type !== "admin")) {
+    //general options 
+    if (!user || user) {
       navOptions["general"].forEach((option, index) => {
         if (!option.basedOnAuth) {
           options.push(getLink(option, index));
         }
         if (
           (option.basedOnAuth && !option.hideIfAuthed && user) ||
-          (option.basedOnAuth && option.hideIfAuthed && !user)
+          (option.basedOnAuth && option.hideIfAuthed && !user) 
         ) {
           options.push(getLink(option, index));
         }

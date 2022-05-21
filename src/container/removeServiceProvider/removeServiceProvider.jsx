@@ -6,7 +6,10 @@ import DialogPopUp from "../../components/dialogPopUp/dialogPopUp";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsersByType } from "../../redux/features/user/userSlice";
+import {
+  getUsersByType,
+  deleteUser,
+} from "../../redux/features/user/userSlice";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 
@@ -83,9 +86,9 @@ export default function RemoveServiceProvider() {
             fontSize="1.1rem"
             borderRadius="2.5rem"
             onClick={() => {
-              setShowDialog(true);
-              setBlurTable(true);
-              // dispatch(removeServiceProvider(row._id));
+              // setShowDialog(true);
+              // setBlurTable(true);
+              dispatch(deleteUser(row._id));
             }}
           />
         ),

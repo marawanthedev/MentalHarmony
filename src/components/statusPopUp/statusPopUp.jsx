@@ -22,9 +22,7 @@ export default function StatusPopUp({ closeBtnOnClick, success }) {
 
       <div className="popup-header mt-4">{success ? "success" : "failed"}</div>
       <div className="popup-paragraph mt-2">
-        {success
-          ? "Your request has been sent!"
-          : "Your request was not sent successfully, try again later"}
+        {success ? "Process was successful!" : "Process has failed"}
       </div>
       <CustomButton
         type={"button"}
