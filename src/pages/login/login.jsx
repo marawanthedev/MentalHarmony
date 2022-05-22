@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Form from "../../container/form/form";
 import { useSelector, useDispatch } from "react-redux";
-import { login, reset } from "../../redux/features/auth/authSlice";
+import { login, resetAuth } from "../../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
@@ -60,7 +60,7 @@ export default function Login() {
 
   useEffect(() => {
     //reseting submission status
-    dispatch(reset());
+    dispatch(resetAuth());
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 
   return (

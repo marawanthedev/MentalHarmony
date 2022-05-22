@@ -2,7 +2,7 @@ import assert from "../../../util/assertion";
 
 import { http } from "../../../util/restAPI";
 
-const BASE_URL = "http://localhost:3000/api/users/";
+const BASE_URL = "http://localhost:5000/api/users/";
 
 // Register User
 const register = async (userData) => {

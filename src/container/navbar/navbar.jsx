@@ -2,8 +2,8 @@ import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../../redux/features/auth/authSlice";
-
+import { logout, resetAuth } from "../../redux/features/auth/authSlice";
+import { reset } from "../../redux/features/user/userSlice";
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
@@ -91,6 +91,7 @@ const Navbar = () => {
         hideIfAuthed: false,
         onClickCallBack: () => {
           dispatch(logout());
+          dispatch(resetAuth());
           dispatch(reset());
         },
       },
@@ -111,7 +112,7 @@ const Navbar = () => {
         options.push(getLink(option, `student ${index}`))
       );
     }
-    //general options 
+    //general options
     if (!user || user) {
       navOptions["general"].forEach((option, index) => {
         if (!option.basedOnAuth) {
@@ -119,7 +120,7 @@ const Navbar = () => {
         }
         if (
           (option.basedOnAuth && !option.hideIfAuthed && user) ||
-          (option.basedOnAuth && option.hideIfAuthed && !user) 
+          (option.basedOnAuth && option.hideIfAuthed && !user)
         ) {
           options.push(getLink(option, index));
         }

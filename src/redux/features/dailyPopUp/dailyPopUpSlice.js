@@ -28,6 +28,16 @@ export const getArticles = createAsyncThunk(
     return await smartTryCatch(dailyPopUpService.getArticles, thunkAPI);
   }
 );
+export const submitFeeling = createAsyncThunk(
+  "submitFeeling",
+  async (feeling, thunkAPI) => {
+    return await smartTryCatch(
+      dailyPopUpService.submitFeeling,
+      feeling,
+      thunkAPI
+    );
+  }
+);
 export const dailyPopUpSlice = createSlice({
   name: "dailyPopUp",
   initialState: initState,
@@ -57,6 +67,17 @@ export const dailyPopUpSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.articleAttachments = [];
+      })
+      .addCase(submitFeeling.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(submitFeeling.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(submitFeeling.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
       });
   },
 });

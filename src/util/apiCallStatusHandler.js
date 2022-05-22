@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 
 const successNotification = () => {
-  toast.success("Loaded!", {
+  toast.success("Success!", {
     toastId: "success-notification",
   });
 };
 const errorNotification = () => {
-  toast.error("Failed to load !", { toastId: "error-notification" });
+  toast.error("Failure !", { toastId: "error-notification" });
 };
 
 const warnNotification = () => {

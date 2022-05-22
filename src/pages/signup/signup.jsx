@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Form from "../../container/form/form";
 import { useSelector, useDispatch } from "react-redux";
-import { register, reset } from "../../redux/features/auth/authSlice";
+import { register, resetAuth } from "../../redux/features/auth/authSlice";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 export default function Signup() {
@@ -157,7 +157,7 @@ export default function Signup() {
   useEffect(() => {
     //reset-ing submission status
     setTimeout(() => {
-      dispatch(reset());
+      dispatch(resetAuth());
     }, 2000);
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 

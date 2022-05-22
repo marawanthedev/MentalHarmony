@@ -18,10 +18,11 @@ export default function Profile() {
     (state) => state.user
   );
   const [formInputs, setFormInputs] = useState([]);
+
   /*eslint-disable */
   useEffect(() => {
     if (storedUser) {
-      dispatch(getUser(storedUser._id));
+      dispatch(getUser());
     }
   }, []);
   /*eslint-enable */
@@ -71,23 +72,25 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    if (user) {
-      const keys = Object.keys(user);
-      const toBeFormedInputs = [];
-      keys.forEach((key) => {
-        if (key !== "_id" && key !== "type") {
-          toBeFormedInputs.push({
-            label: handleLabelExtraction(key),
-            type: "text",
-            name: key,
-            id: key,
-            value: user[key] ? user[key] : null,
-          });
-        }
-      });
-      setFormInputs(toBeFormedInputs);
+    if (isSuccess) {
+      if (user) {
+        const keys = Object.keys(user);
+        const toBeFormedInputs = [];
+        keys.forEach((key) => {
+          if (key !== "_id" && key !== "type") {
+            toBeFormedInputs.push({
+              label: handleLabelExtraction(key),
+              type: "text",
+              name: key,
+              id: key,
+              value: user[key] ? user[key] : null,
+            });
+          }
+        });
+        setFormInputs(toBeFormedInputs);
+      }
     }
-  }, [user, isError, isSuccess, isLoading]);
+  }, [user, isError, isSuccess, isLoading, dispatch]);
 
   return (
     <>

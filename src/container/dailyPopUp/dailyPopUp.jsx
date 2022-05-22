@@ -4,7 +4,10 @@ import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { getArticles } from "../../redux/features/dailyPopUp/dailyPopUpSlice";
+import {
+  getArticles,
+  submitFeeling,
+} from "../../redux/features/dailyPopUp/dailyPopUpSlice";
 import { useEffect } from "react";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 import Spinner from "../../components/spinner/spinner";
@@ -37,6 +40,11 @@ export default function DailyPopUp() {
     const targetAttachment = articleAttachments.find(
       (article) => article.article_feeling_relation === selectedFeeling.text
     );
+
+    //submit feeling to backend
+    //** bugged and will be fixed later
+    // dispatch(submitFeeling(selectedFeeling.text));
+
     setFormVisibility(false);
     setShowSubmissionStatusVisibility(true);
 
