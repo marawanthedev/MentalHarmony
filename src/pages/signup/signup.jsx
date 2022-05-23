@@ -17,53 +17,29 @@ export default function Signup() {
   let checkBoxValue = false;
 
   const alternatingInputs = {
-    serviceprovider: [
-      {
-        type: "text",
-        placeHolder: "Enter Special Key",
-        displayType: "block",
-        customLabel: "Special Key*",
-        className: "specialKey form__right-side__innerForm__input-group",
-        errorAlert: "Full name should have a min length of 4",
-        minLength: 4,
-        toggler: "isServiceProvider",
-      },
-      {
-        type: "text",
-        placeHolder: "Enter Speciality",
-        displayType: "block",
-        customLabel: "Speciality *",
-        className: "speciality form__right-side__innerForm__input-group",
-        errorAlert: "Speciality should have a min length of 4",
-        minLength: 4,
-        toggler: "isServiceProvider",
-      },
-      {
-        type: "text",
-        placeHolder: "Enter Description",
-        displayType: "block",
-        customLabel: "Description *",
-        className: "description form__right-side__innerForm__input-group",
-        errorAlert: "Description should have a min length of 12",
-        minLength: 12,
-        toggler: "isServiceProvider",
-      },
-    ],
-    student: [
-      {
-        type: "text",
-        placeHolder: "Enter Faculty Name",
-        displayType: "block",
-        customLabel: "Faculty Name*",
-        className: "faculty_name form__right-side__innerForm__input-group",
-        errorAlert: "Full name should have a min length of 4",
-        minLength: 4,
-        toggler: "isServiceProvider",
-      },
-    ],
+    serviceprovider: {
+      type: "text",
+      placeHolder: "Enter Speciality",
+      displayType: "block",
+      customLabel: "Speciality *",
+      className: "speciality form__right-side__innerForm__input-group",
+      errorAlert: "Speciality should have a min length of 4",
+      minLength: 4,
+      toggler: "isServiceProvider",
+    },
+    student: {
+      type: "text",
+      placeHolder: "Enter Faculty Name",
+      displayType: "block",
+      customLabel: "Faculty Name*",
+      className: "faculty_name form__right-side__innerForm__input-group",
+      errorAlert: "Full name should have a min length of 4",
+      minLength: 4,
+      toggler: "isServiceProvider",
+    },
   };
   const getInnerInput = () => {
-    return alternatingInputs[userType][0];
+    return alternatingInputs[userType];
   };
   const formInputs = [
     {
@@ -137,7 +113,7 @@ export default function Signup() {
         password: userInfo.password,
         faculty_name: userInfo.faculty_name,
         email: userInfo.email,
-        specialKey: userInfo.specialKey,
+        speciality: userInfo.speciality,
         type: userType,
       })
     );

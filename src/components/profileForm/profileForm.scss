@@ -30,11 +30,18 @@ $max-height: 40rem;
 $gutters: 2.4rem;
 
 .profile-form {
-  background: linear-gradient(
+  // background: linear-gradient(
+  //   45deg,
+  //   rgba(66, 183, 245, 0.8) 0%,
+  //   rgba(66, 245, 189, 0.4) 100%
+  // );
+    background: linear-gradient(
     45deg,
-    rgba(66, 183, 245, 0.8) 0%,
-    rgba(66, 245, 189, 0.4) 100%
+    rgba(184, 197, 205, 0.8) 0%,
+    rgba(201, 213, 209, 0.4) 100%
   );
+  // background-color: white;
+  // border: 1px solid black;
   color: $gray;
   font-family: $base-font-family;
   font-size: $base-font-size;
