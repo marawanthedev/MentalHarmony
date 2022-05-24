@@ -3,7 +3,8 @@
 // library for making http requests
 // @version 2.0.0
 // @author Marwan Mostafa
-// using es6 ,fecthing and arrow fucntions
+// using es6 , fetching and arrow functions
+
 import axios from "axios";
 
 class EasyAxios {

@@ -8,6 +8,7 @@ import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 export default function ServiceProviderRequestPopUp({
   selectedCard,
   closePopUpCallBack,
+  submitCallBack,
 }) {
   const [visible, setVisiblity] = useState(true);
   const [showRequestSubmissionStatus, setShowSubmissionStatus] =
@@ -49,7 +50,10 @@ export default function ServiceProviderRequestPopUp({
           height="4rem"
           margin="2.5rem 0"
           fontWeight="500"
-          onClick={() => setShowSubmissionStatus(true)}
+          onClick={() => {
+            submitCallBack();
+            // setShowSubmissionStatus(true);
+          }}
         />
       </div>
     );

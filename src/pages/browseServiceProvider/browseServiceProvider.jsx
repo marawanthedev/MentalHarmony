@@ -9,15 +9,28 @@ import serviceProviderAvatar from "../../assets/images/serviceProviderAvatar.png
 import ServiceProviderRequestPopUp from "../../container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addBooking } from "../../redux/features/booking/bookingSlice";
 import { getUsersByType } from "../../redux/features/user/userSlice";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-
+import { toast } from "react-toastify";
 export default function BrowseServiceProvider() {
+  const userInAuth = JSON.parse(localStorage.getItem("user"));
+
   const dispatch = useDispatch();
+  //cards rendering related
   const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
     (state) => state.user
   );
+
+  // const {
+  //   isBookingProcessSuccess,
+  //   isBookingProcessError,
+  //   isBookingProcessLoading,
+  // } = useSelector((state) => state.bookings);
+  //booking requests related
+  const { isBookingProcessLoading } = useSelector((state) => state.bookings);
+
   const [selectedCard, setSelectedCard] = useState(null);
   const [blurCardsContainer, setBlurCardsContainer] = useState(false);
 
@@ -40,16 +53,22 @@ export default function BrowseServiceProvider() {
 
   const manageSpCardRendering = () => {
     if (filteredUsers) {
-      return filteredUsers.map((filteredUser, index) => {
+      return filteredUsers.map((serviceProvider, index) => {
         return (
           <Card
             key={index}
-            header={filteredUser.speciality}
-            paragraph={filteredUser.description}
+            header={serviceProvider.speciality}
+            paragraph={serviceProvider.description}
             customClass={"browseServices__card"}
             onClick={() => {
-              setBlurCardsContainer(true);
-              setSelectedCard(filteredUser);
+              if (userInAuth && userInAuth.type === "student") {
+                setBlurCardsContainer(true);
+                setSelectedCard(serviceProvider);
+              } else {
+                toast.info(
+                  "You need to be logged in as student to book an appointment"
+                );
+              }
             }}
           >
             <div className="browseServices__card__upper">
@@ -60,7 +79,7 @@ export default function BrowseServiceProvider() {
                 }}
               ></div>
               <div className="browseServices__card__upper__name">
-                {filteredUser.name}
+                {serviceProvider.name}
               </div>
             </div>
           </Card>
@@ -72,7 +91,7 @@ export default function BrowseServiceProvider() {
   // const handlePopClose = () => {};
   return (
     <Template>
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner || isBookingProcessLoading ? <Spinner /> : null}
       <div className="custom-container">
         <FlexTwoSlotsRow
           customClass="mb-10"
@@ -116,6 +135,9 @@ export default function BrowseServiceProvider() {
             closePopUpCallBack={() => {
               setSelectedCard(null);
               setBlurCardsContainer(false);
+            }}
+            submitCallBack={() => {
+              dispatch(addBooking(selectedCard._id));
             }}
           />
         ) : null}

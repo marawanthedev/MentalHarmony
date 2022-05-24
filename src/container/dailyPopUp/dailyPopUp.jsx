@@ -43,7 +43,7 @@ export default function DailyPopUp() {
 
     //submit feeling to backend
     //** bugged and will be fixed later
-    // dispatch(submitFeeling(selectedFeeling.text));
+    dispatch(submitFeeling(selectedFeeling.text));
 
     setFormVisibility(false);
     setShowSubmissionStatusVisibility(true);
@@ -52,9 +52,9 @@ export default function DailyPopUp() {
       setShowSubmissionStatusVisibility(false);
     }, 1750);
     if (targetAttachment) {
-      setTimeout(() => {
-        window.open(targetAttachment.article_url);
-      }, 2000);
+      // setTimeout(() => {
+      //   window.open(targetAttachment.article_url);
+      // }, 2000);
     } else {
       toast.info("Submitted feeling does not have an associated article Yet!");
     }
