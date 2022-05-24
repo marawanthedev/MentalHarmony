@@ -6,9 +6,11 @@ import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 import Spinner from "../../components/spinner/spinner";
+
 import {
   addArticleAttachment,
   getArticles,
+  reset,
 } from "../../redux/features/dailyPopUp/dailyPopUpSlice";
 
 export default function AttachUsefulArticles() {
@@ -37,6 +39,7 @@ export default function AttachUsefulArticles() {
   /*eslint-disable */
   useEffect(() => {
     dispatch(getArticles());
+    dispatch(reset());
   }, []);
   /*eslint-enable */
 

@@ -41,7 +41,15 @@ export const submitFeeling = createAsyncThunk(
 export const dailyPopUpSlice = createSlice({
   name: "dailyPopUp",
   initialState: initState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.isFormError = false;
+      state.isFormSuccess = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addArticleAttachment.pending, (state) => {
@@ -81,5 +89,7 @@ export const dailyPopUpSlice = createSlice({
       });
   },
 });
+
+export const { reset } = dailyPopUpSlice.actions;
 
 export default dailyPopUpSlice.reducer;
