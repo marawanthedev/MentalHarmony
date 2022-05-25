@@ -137,7 +137,7 @@ export default function BrowseServiceProvider() {
               setBlurCardsContainer(false);
             }}
             submitCallBack={() => {
-              dispatch(addBooking(selectedCard._id));
+              dispatch(addBooking({ serviceProvider: selectedCard._id }));
             }}
           />
         ) : null}

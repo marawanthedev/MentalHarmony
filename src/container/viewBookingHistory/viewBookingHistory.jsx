@@ -2,20 +2,19 @@ import React from "react";
 import AvatarText from "../../components/avatarText/avatarText";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "../../components/button/button";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-
 import ViewMeetingDetailsPopUp from "../../components/viewMeetingDetailsPopUp/viewMeetingDetailsPopUp";
-
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ViewBookingHistoryRatingPopUp from "../../components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooking } from "../../redux/features/booking/bookingSlice";
 
 const columns = [
-  { id: "details", label: "Student Details", minWidth: 100 },
+  { id: "name", label: "Student Details", minWidth: 100 },
   {
-    id: "faculty",
+    id: "faculty_name",
     label: "Faculty",
     minWidth: 120,
     align: "center",
@@ -149,10 +148,29 @@ const getStars = (value) => {
 };
 
 export default function ViewBookingHistory() {
+  const dispatch = useDispatch();
   const [showRatingPopUp, setShowRatingPopUp] = useState(false);
   const [showStatusPopup, setShowStatusPopUp] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [showViewMeetingDetails, setShowMeetingDetails] = useState(false);
+  const [selectedBookingIndex, setSelectedBookingIndex] = useState(0);
+  const {
+    bookings,
+    isBookingProcessError,
+    isBookingProcessSuccess,
+    isBookingProcessLoading,
+  } = useSelector((state) => state.bookings);
+
+  useEffect(() => {
+    dispatch(getBooking());
+  }, []);
+
+  useEffect(() => {}, [
+    bookings,
+    isBookingProcessError,
+    isBookingProcessSuccess,
+    isBookingProcessLoading,
+  ]);
 
   const getActionButton = (callBackParam, requestStatus) => {
     const actionButtonTypes = {
@@ -193,10 +211,13 @@ export default function ViewBookingHistory() {
 
   const generateRows = () => {
     let rows = [];
-
-    dataRows.forEach((row, index) => {
+    console.log(bookings);
+    bookings.forEach((row, index) => {
       rows[index] = {
         ...row,
+        _id: row._id,
+        name: row.student.name,
+        faculty_name: row.student.faculty_name,
         rate: getStars(row.rate),
         action: getActionButton(
           dataRows[index].faculty,
@@ -215,6 +236,7 @@ export default function ViewBookingHistory() {
             setShowRatingPopUp(false);
             setBlurTable(false);
           }}
+          rate={bookings[selectedBookingIndex].rate}
           submitCallBack={(value) => {
             setShowRatingPopUp(false);
             setShowStatusPopUp(true);
@@ -233,7 +255,7 @@ export default function ViewBookingHistory() {
 
       {showViewMeetingDetails ? (
         <ViewMeetingDetailsPopUp
-          meetingLink="https://meet.google.com/ytj-qved-cds"
+          meetingLink={bookings[selectedBookingIndex].meeting_link}
           closeCallBack={() => {
             setShowMeetingDetails(false);
             setBlurTable(false);
@@ -243,6 +265,9 @@ export default function ViewBookingHistory() {
       <StickyHeadTable
         blur={blurTable ? true : false}
         rows={generateRows()}
+        actionButtonCallback={(selectedIndex) =>
+          setSelectedBookingIndex(selectedIndex)
+        }
         cols={columns}
       />
     </>

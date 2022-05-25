@@ -14,6 +14,12 @@ export const addBooking = createAsyncThunk(
     return await smartTryCatch(bookingService.addBooking, data, thunkAPI);
   }
 );
+export const getBooking = createAsyncThunk(
+  "getBooking",
+  async (data, thunkAPI) => {
+    return await smartTryCatch(bookingService.getBooking, thunkAPI);
+  }
+);
 
 export const bookingSlice = createSlice({
   name: "dailyPopUp",
@@ -31,6 +37,18 @@ export const bookingSlice = createSlice({
       .addCase(addBooking.rejected, (state) => {
         state.isBookingProcessLoading = false;
         state.isBookingProcessError = true;
+      })
+      .addCase(getBooking.pending, (state) => {
+        state.isBookingProcessLoading = true;
+      })
+      .addCase(getBooking.rejected, (state) => {
+        state.isBookingProcessLoading = false;
+        state.isBookingProcessError = true;
+      })
+      .addCase(getBooking.fulfilled, (state, action) => {
+        state.isBookingProcessLoading = false;
+        state.isBookingProcessError = true;
+        state.bookings = action.payload;
       });
   },
 });

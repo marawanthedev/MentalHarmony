@@ -52,7 +52,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyHeadTable({ tableTitle, rows, cols, blur }) {
+export default function StickyHeadTable({
+  tableTitle,
+  rows,
+  cols,
+  blur,
+  actionButtonCallback,
+}) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -91,7 +97,7 @@ export default function StickyHeadTable({ tableTitle, rows, cols, blur }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, index) => {
                 return (
                   <TableRow
                     className={classes.row}
@@ -106,6 +112,7 @@ export default function StickyHeadTable({ tableTitle, rows, cols, blur }) {
                           className={classes.cell}
                           key={column.id}
                           align={column.align}
+                          onClick={() => actionButtonCallback(index)}
                         >
                           {column.format && typeof value === "number"
                             ? column.format(value)
