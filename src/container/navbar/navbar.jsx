@@ -102,7 +102,6 @@ const Navbar = () => {
     const options = [];
     if (user) {
       const userType = user.type;
-
       navOptions[userType].forEach((option, index) =>
         options.push(getLink(option, `${userType} ${index}`))
       );

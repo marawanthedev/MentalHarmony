@@ -78,6 +78,7 @@ export default function ManageServiceProviderApprovalRequests() {
             borderRadius="2.5rem"
             onClick={() => {
               dispatch(acceptApprovalRequest(row._id));
+              setTimeout(() => window.location.reload(), 1500);
             }}
           />
         ),

@@ -1,14 +1,21 @@
-import assert from "../../../util/assertion";
-
 import { http } from "../../../util/restAPI";
 
 const BASE_URL = "http://localhost:5000/api/users/";
 
 // Register User
 const register = async (userData) => {
-  const res = http.post(`${BASE_URL}auth/register`, userData);
+  const res = await http.post(`${BASE_URL}auth/register`, userData);
 
-  return assert(res, res.data, "Registration has failed", res);
+  if (res.data) {
+    if (
+      res.data.type !== "serviceprovider" ||
+      (res.data.type === "serviceprovider" && res.data.approval_status)
+    ) {
+      localStorage.setItem("user", JSON.stringify(res.data));
+      return { user: res.data };
+    }
+    return { message: "Your signup is under review" };
+  }
 };
 
 const login = async (userData) => {

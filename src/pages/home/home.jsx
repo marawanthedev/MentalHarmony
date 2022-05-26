@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../../components/button/button";
 import Template from "../../components/template/template";
 import "./home.scss";
@@ -13,6 +13,8 @@ import mentalHealthIllustration from "../../assets/images/uniIllustration.png";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "../../components/testimonals/testimonals";
 import DailyPopUp from "../../container/dailyPopUp/dailyPopUp";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 export default function Home() {
   const ServiceCards = [
     {
@@ -34,8 +36,12 @@ export default function Home() {
         "Free consultation with our trusted doctors and get the best recomendations",
     },
   ];
-  
+  const { successAlternativeMessage } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    if (successAlternativeMessage) toast.info(successAlternativeMessage);
+  }, [successAlternativeMessage]);
+  
   return (
     <Template>
       <div className="custom-container">
