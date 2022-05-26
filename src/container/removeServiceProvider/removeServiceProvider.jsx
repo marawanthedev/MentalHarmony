@@ -71,28 +71,29 @@ export default function RemoveServiceProvider() {
     let rows = [];
 
     filteredUsers.forEach((row, index) => {
-      rows[index] = {
-        ...row,
-        action: (
-          <CustomButton
-            type={"button"}
-            backGroundColor="#FB4B4B"
-            innerText="REMOVE"
-            color={"white"}
-            displayType={"block"}
-            width="100%"
-            height="4rem"
-            fontWeight="600"
-            fontSize="1.1rem"
-            borderRadius="2.5rem"
-            onClick={() => {
-              // setShowDialog(true);
-              // setBlurTable(true);
-              dispatch(deleteUser(row._id));
-            }}
-          />
-        ),
-      };
+      if (row.approval_status) {
+        rows[index] = {
+          ...row,
+          action: (
+            <CustomButton
+              type={"button"}
+              backGroundColor="#FB4B4B"
+              innerText="REMOVE"
+              color={"white"}
+              displayType={"block"}
+              width="100%"
+              height="4rem"
+              fontWeight="600"
+              fontSize="1.1rem"
+              borderRadius="2.5rem"
+              onClick={() => {
+                dispatch(deleteUser(row._id));
+                setTimeout(() => window.location.reload(), 1200);
+              }}
+            />
+          ),
+        };
+      }
     });
     return rows;
   };

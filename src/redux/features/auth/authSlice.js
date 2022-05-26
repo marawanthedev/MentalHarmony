@@ -42,6 +42,9 @@ export const authSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
     },
+    resetSuccessAlternativeMessage: (state) => {
+      state.successAlternativeMessage = null;
+    },
   },
   //extra reducers can be async
   extraReducers: (builder) => {
@@ -81,6 +84,6 @@ export const authSlice = createSlice({
 });
 
 // exporting a singular function
-export const { resetAuth } = authSlice.actions;
+export const { resetAuth, resetSuccessAlternativeMessage } = authSlice.actions;
 
 export default authSlice.reducer;

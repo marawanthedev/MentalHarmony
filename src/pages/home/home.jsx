@@ -13,8 +13,10 @@ import mentalHealthIllustration from "../../assets/images/uniIllustration.png";
 import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "../../components/testimonals/testimonals";
 import DailyPopUp from "../../container/dailyPopUp/dailyPopUp";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { resetSuccessAlternativeMessage } from "../../redux/features/auth/authSlice";
+
 export default function Home() {
   const ServiceCards = [
     {
@@ -36,12 +38,17 @@ export default function Home() {
         "Free consultation with our trusted doctors and get the best recomendations",
     },
   ];
+  const dispatch = useDispatch();
   const { successAlternativeMessage } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (successAlternativeMessage) toast.info(successAlternativeMessage);
+    if (successAlternativeMessage) {
+      toast.info(successAlternativeMessage);
+
+      setTimeout(() => dispatch(resetSuccessAlternativeMessage()), 3000);
+    }
   }, [successAlternativeMessage]);
-  
+
   return (
     <Template>
       <div className="custom-container">

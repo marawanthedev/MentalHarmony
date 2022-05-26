@@ -59,31 +59,34 @@ export default function ManageServiceProviderApprovalRequests() {
   }, [approvalRequests, isSuccess, isError, isLoading]);
   const generateRows = () => {
     let rows = [];
-    approvalRequests.forEach((row, index) => {
-      rows[index] = {
-        location: row.requester.location,
-        name: row.requester.name,
-        phone_number: row.requester.phone_number,
-        action: (
-          <CustomButton
-            type={"button"}
-            backGroundColor="#13C39C"
-            innerText="Approve"
-            color={"white"}
-            displayType={"block"}
-            width="100%"
-            height="4rem"
-            fontWeight="600"
-            fontSize="1.1rem"
-            borderRadius="2.5rem"
-            onClick={() => {
-              dispatch(acceptApprovalRequest(row._id));
-              setTimeout(() => window.location.reload(), 1500);
-            }}
-          />
-        ),
-      };
-    });
+    if (approvalRequests) {
+      console.log(approvalRequests);
+      approvalRequests.forEach((row, index) => {
+        rows[index] = {
+          location: row.requester ? row.requester.location : null,
+          name: row.requester ? row.requester.name : null,
+          phone_number: row.requester ? row.requester.phone_number : null,
+          action: (
+            <CustomButton
+              type={"button"}
+              backGroundColor="#13C39C"
+              innerText="Approve"
+              color={"white"}
+              displayType={"block"}
+              width="100%"
+              height="4rem"
+              fontWeight="600"
+              fontSize="1.1rem"
+              borderRadius="2.5rem"
+              onClick={() => {
+                dispatch(acceptApprovalRequest(row._id));
+                setTimeout(() => window.location.reload(), 1200);
+              }}
+            />
+          ),
+        };
+      });
+    }
 
     return rows;
   };
