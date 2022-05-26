@@ -19,6 +19,7 @@ const acceptBooking = async (bookingId) => {
 };
 
 const attachMeetingLink = async ({ bookingId, meeting_link }) => {
+  console.log(bookingId);
   const res = await http.post(`${BASE_URL}/attachLink`, {
     bookingId,
     meeting_link,

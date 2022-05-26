@@ -262,20 +262,12 @@ export default function ManageBookingRequests() {
   const meetingURLSubmission = (meeting_link) => {
     setShowRequestDetails(false);
     setShowStatusPopUp(true);
-
     // dispatch to api
-    dispatch(attachMeetingLink({ selectedBookingId, meeting_link }));
+    dispatch(attachMeetingLink({ bookingId: selectedBookingId, meeting_link }));
 
     //could be improved later on
     setTimeout(() => window.location.reload(), 1500);
   };
-
-  // const getMeetingLink = () => {
-  //   const targetedBooking = bookings.find(
-  //     (booking) => booking._id === selectedBookingId
-  //   );
-  //   return targetedBooking.meeting_link;
-  // };
 
   const getBooking = () => {
     const targetedBooking = bookings.find(

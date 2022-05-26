@@ -32,23 +32,19 @@ export default function RatingPopUp({
         className="rating-popup__icon background-image-util"
       />
       <div className="rating-popup__text">{title}</div>
-
-      {readOnlyValue !== undefined ? (
-        <Rating
-          name="half-rating"
-          value={readOnlyValue ? readOnlyValue : value}
-          defaultValue={2}
-          precision={1}
-          className={classes.star}
-          onChange={(event, newValue) => setValue(newValue)}
-          emptyIcon={
-            <StarBorderIcon fontSize="inherit" className={classes.star} />
-          }
-          readOnly={readOnly ? true : false}
-        />
-      ) : (
-        <div className="rating-popup__text">No Rating was found!</div>
-      )}
+      <Rating
+        name="half-rating"
+        value={readOnlyValue ? readOnlyValue : value}
+        defaultValue={2}
+        precision={1}
+        className={classes.star}
+        onChange={(event, newValue) => setValue(newValue)}
+        emptyIcon={
+          <StarBorderIcon fontSize="inherit" className={classes.star} />
+        }
+        readOnly={readOnly ? true : false}
+      />
+      )
       {!readOnly ? (
         <CustomButton
           type={"button"}

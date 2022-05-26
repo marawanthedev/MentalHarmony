@@ -9,7 +9,10 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ViewBookingHistoryRatingPopUp from "../../components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBooking } from "../../redux/features/booking/bookingSlice";
+import {
+  getUserBooking,
+  rateBooking,
+} from "../../redux/features/booking/bookingSlice";
 
 const columns = [
   { id: "name", label: "Student Details", minWidth: 100 },
@@ -165,12 +168,15 @@ export default function ViewBookingHistory() {
     dispatch(getUserBooking());
   }, []);
 
-  useEffect(() => {}, [
-    bookings,
-    isBookingProcessError,
-    isBookingProcessSuccess,
-    isBookingProcessLoading,
-  ]);
+  useEffect(
+    () => console.log(bookings),
+    [
+      bookings,
+      isBookingProcessError,
+      isBookingProcessSuccess,
+      isBookingProcessLoading,
+    ]
+  );
 
   const getActionButton = (callBackParam, requestStatus) => {
     const actionButtonTypes = {
@@ -191,6 +197,7 @@ export default function ViewBookingHistory() {
     };
 
     if (requestStatus !== "pending") {
+      console.log("here");
       return (
         <CustomButton
           type={"button"}
@@ -226,10 +233,7 @@ export default function ViewBookingHistory() {
           name: row.student.name,
           faculty_name: row.student.faculty_name,
           rate: getStars(row.rate),
-          action: getActionButton(
-            dataRows[index].faculty,
-            dataRows[index].requestStatus
-          ),
+          action: getActionButton(row.student.faculty_name, row.requestStatus),
         };
       });
     }
@@ -248,6 +252,12 @@ export default function ViewBookingHistory() {
           submitCallBack={(value) => {
             setShowRatingPopUp(false);
             setShowStatusPopUp(true);
+            dispatch(
+              rateBooking({ bookingId: selectedBookingId, rate: value })
+            );
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
           }}
         />
       ) : null}
