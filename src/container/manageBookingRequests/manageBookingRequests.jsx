@@ -2,18 +2,25 @@ import React from "react";
 import AvatarText from "../../components/avatarText/avatarText";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "../../components/button/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StatusPopUp from "../../components/statusPopUp/statusPopUp";
 import ManageRequestsRatingPopUp from "../../components/manageRequestRatingPopup/manageRequestRatingPopup";
 import FormPopUp from "../../components/formPopUp/formPopUp";
-import ManageRequestStatusPopUp from "../../components/manageRequestStatusPopUp/manageRequestStatusPopUp";
+import ManageRequestPopUp from "../../components/manageRequestPopUp/manageRequestPopUp";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUserBooking,
+  acceptBooking,
+  attachMeetingLink,
+  completeBooking,
+} from "../../redux/features/booking/bookingSlice";
 
 const columns = [
-  { id: "details", label: "Student Details", minWidth: 100 },
+  { id: "name", label: "Student Details", minWidth: 100 },
 
   {
-    id: "sessionTopic",
-    label: "Session Topic",
+    id: "phone_number",
+    label: "Student Phone Number",
     minWidth: 120,
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
@@ -100,15 +107,35 @@ const dataRows = [
 ];
 
 export default function ManageBookingRequests() {
+  const dispatch = useDispatch();
   const [showRatingPopUp, setShowRatingPopUp] = useState(false);
   const [showStatusPopup, setShowStatusPopUp] = useState(false);
   const [showViewRequestDetails, setShowRequestDetails] = useState(false);
   const [showManageRequestPopUp, setShowManageRequestPopUp] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
-  const [selectedRequestId, setSelectedRequestId] = useState(null);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
   const [selectedRequestRating, setSelectedRequestRating] = useState(null);
-  const [selectedRequestMeetingLink, setSelectedRequestMeetingLink] =
-    useState(null);
+  const [bookingRequestStatus, setBookingRequestStatus] = useState(null);
+
+  const {
+    bookings,
+    isBookingProcessError,
+    isBookingProcessSuccess,
+    isBookingProcessLoading,
+  } = useSelector((state) => state.bookings);
+
+  useEffect(() => {
+    dispatch(getUserBooking());
+  }, []);
+
+  useEffect(() => {
+    // console.log(bookings);
+  }, [
+    bookings,
+    isBookingProcessError,
+    isBookingProcessSuccess,
+    isBookingProcessLoading,
+  ]);
 
   const getActionButton = (requestDetails, requestStatus, requestId) => {
     const actionButtonTypes = {
@@ -118,16 +145,16 @@ export default function ManageBookingRequests() {
           setBlurTable(true);
           setShowRatingPopUp(true);
           setSelectedRequestRating(requestDetails.rate);
-          setSelectedRequestId(requestId);
+          setSelectedBookingId(requestId);
         },
       },
       accepted: {
-        text: "View appointment details",
+        text: "Manage Request",
         onClick: () => {
           setBlurTable(true);
-          setShowRequestDetails(true);
-          setSelectedRequestMeetingLink(requestDetails.meetingLink);
-          setSelectedRequestId(requestId);
+          setSelectedBookingId(requestId);
+          setShowManageRequestPopUp(true);
+          setBookingRequestStatus(requestStatus);
         },
       },
       pending: {
@@ -135,7 +162,8 @@ export default function ManageBookingRequests() {
         onClick: () => {
           setBlurTable(true);
           setShowManageRequestPopUp(true);
-          setSelectedRequestId(requestId);
+          setSelectedBookingId(requestId);
+          setBookingRequestStatus(requestStatus);
         },
       },
     };
@@ -157,24 +185,126 @@ export default function ManageBookingRequests() {
     );
   };
 
-  const meetingURLSubmission = (formInput) => {
+  const getManageRequestPopUp = () => {
+    const manageRequestPopUpOptions = {
+      pending: {
+        popupParagraph: "Update request status using the action button",
+        closeBtnCallback: () => {
+          setBlurTable(false);
+          setShowManageRequestPopUp(false);
+        },
+        button_1: {
+          text: "Ignore",
+          color: "#FB4B4B",
+          callback: () => {
+            setBlurTable(false);
+            setShowManageRequestPopUp(false);
+          },
+        },
+        button_2: {
+          text: "Accept",
+          color: "black",
+          callback: () => {
+            setBlurTable(false);
+            setShowManageRequestPopUp(false);
+            //dispatch to api
+            dispatch(acceptBooking(selectedBookingId));
+          },
+        },
+      },
+
+      accepted: {
+        popupParagraph:
+          "Attach meeting link or set request status to completed",
+        button_1: {
+          text: "Attach Link",
+          color: "#2B4BF2",
+          callback: () => {
+            setBlurTable(false);
+            setShowManageRequestPopUp(false);
+            setShowRequestDetails(true);
+          },
+        },
+        button_2: {
+          text: "Set to completed",
+          color: "#2B4BF2",
+          callback: () => {
+            setBlurTable(false);
+            setShowManageRequestPopUp(false);
+            dispatch(completeBooking(selectedBookingId));
+            //could be improved later on
+            setTimeout(() => window.location.reload(), 1500);
+          },
+        },
+      },
+      general: {
+        popupHeader: "Choose a request action to apply",
+        closeBtnCallback: () => {
+          setBlurTable(false);
+          setShowManageRequestPopUp(false);
+        },
+      },
+    };
+
+    return (
+      <ManageRequestPopUp
+        button_1={manageRequestPopUpOptions[bookingRequestStatus].button_1}
+        button_2={manageRequestPopUpOptions[bookingRequestStatus].button_2}
+        popupHeader={manageRequestPopUpOptions["general"].popupHeader}
+        popupParagraph={
+          manageRequestPopUpOptions[bookingRequestStatus].popupParagraph
+        }
+        closeBtnCallback={manageRequestPopUpOptions["general"].closeBtnCallback}
+      />
+    );
+  };
+
+  const meetingURLSubmission = (meeting_link) => {
     setShowRequestDetails(false);
-    setSelectedRequestMeetingLink(formInput);
     setShowStatusPopUp(true);
 
-    //mimic
-    dataRows[selectedRequestId]["requestDetails"]["meetingLink"] = formInput;
+    // dispatch to api
+    dispatch(attachMeetingLink({ selectedBookingId, meeting_link }));
+
+    //could be improved later on
+    setTimeout(() => window.location.reload(), 1500);
   };
+
+  // const getMeetingLink = () => {
+  //   const targetedBooking = bookings.find(
+  //     (booking) => booking._id === selectedBookingId
+  //   );
+  //   return targetedBooking.meeting_link;
+  // };
+
+  const getBooking = () => {
+    const targetedBooking = bookings.find(
+      (booking) => booking._id === selectedBookingId
+    );
+    return targetedBooking;
+  };
+
+  // const getBookingRate = () => {
+  //   const targetedBooking = bookings.find(
+  //     (booking) => booking._id === bookingId
+  //   );
+  //   return targetedBooking.rate;
+  // };
+
   const generateRows = () => {
     let rows = [];
-
-    dataRows.forEach((row, index) => {
+    bookings.forEach((row, index) => {
       rows[index] = {
-        ...row,
+        name: row.student.name,
+        phone_number: row.student.phone_number,
+        requestStatus: row.requestStatus,
         action: getActionButton(
-          dataRows[index].requestDetails,
-          dataRows[index].requestStatus,
-          dataRows[index].id
+          {
+            rate: row.rate,
+            meeting_link: row.meeting_link,
+          },
+          row.requestStatus,
+          row._id
         ),
       };
     });
@@ -189,7 +319,8 @@ export default function ManageBookingRequests() {
             setShowRatingPopUp(false);
             setBlurTable(false);
           }}
-          ratingValue={selectedRequestRating}
+          //could be improved
+          ratingValue={getBooking().rate}
         />
       ) : null}
       {showStatusPopup ? (
@@ -202,25 +333,13 @@ export default function ManageBookingRequests() {
         />
       ) : null}
 
-      {showManageRequestPopUp ? (
-        <ManageRequestStatusPopUp
-          closeBtnCallback={() => {
-            setBlurTable(false);
-            setShowManageRequestPopUp(false);
-          }}
-          confirmCallBack={() => {
-            setBlurTable(false);
-            setShowManageRequestPopUp(false);
-            dataRows[selectedRequestId].requestStatus = "accepted";
-          }}
-        />
-      ) : null}
+      {showManageRequestPopUp ? getManageRequestPopUp() : null}
       {showViewRequestDetails ? (
         <FormPopUp
           formTitle="Request Details"
           inputLabel="Scheduled Meeting URL"
           inputPlaceHolder="Meeting URL"
-          initialValue={selectedRequestMeetingLink}
+          initialValue={getBooking().meeting_link}
           submitCallback={(formInput) => meetingURLSubmission(formInput)}
           closeBtnCallback={() => {
             setShowRequestDetails(false);

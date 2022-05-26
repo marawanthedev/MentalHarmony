@@ -112,7 +112,11 @@ export default function StickyHeadTable({
                           className={classes.cell}
                           key={column.id}
                           align={column.align}
-                          onClick={() => actionButtonCallback(index)}
+                          onClick={() =>
+                            actionButtonCallback
+                              ? actionButtonCallback(row._id)
+                              : null
+                          }
                         >
                           {column.format && typeof value === "number"
                             ? column.format(value)

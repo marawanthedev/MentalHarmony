@@ -21,8 +21,8 @@ export default function RatingPopUp({
   readOnly,
   readOnlyValue,
 }) {
+  console.log(readOnly);
   const classes = useStyles();
-
   const [value, setValue] = React.useState(2);
   return (
     <div className="rating-popup ">
@@ -33,18 +33,22 @@ export default function RatingPopUp({
       />
       <div className="rating-popup__text">{title}</div>
 
-      <Rating
-        name="half-rating"
-        value={readOnlyValue ? readOnlyValue : value}
-        defaultValue={2}
-        precision={1}
-        className={classes.star}
-        onChange={(event, newValue) => setValue(newValue)}
-        emptyIcon={
-          <StarBorderIcon fontSize="inherit" className={classes.star} />
-        }
-        readOnly={readOnly ? true : false}
-      />
+      {readOnlyValue !== undefined ? (
+        <Rating
+          name="half-rating"
+          value={readOnlyValue ? readOnlyValue : value}
+          defaultValue={2}
+          precision={1}
+          className={classes.star}
+          onChange={(event, newValue) => setValue(newValue)}
+          emptyIcon={
+            <StarBorderIcon fontSize="inherit" className={classes.star} />
+          }
+          readOnly={readOnly ? true : false}
+        />
+      ) : (
+        <div className="rating-popup__text">No Rating was found!</div>
+      )}
       {!readOnly ? (
         <CustomButton
           type={"button"}

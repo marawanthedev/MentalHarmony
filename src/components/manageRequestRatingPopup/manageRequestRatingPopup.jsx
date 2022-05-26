@@ -3,13 +3,15 @@ import RatingPopUp from "../ratingPopUp/ratingPopUp";
 export default function ManageRequestsRatingPopUp({
   closePopUpCallback,
   ratingValue,
+  submitCallBack,
 }) {
   return (
     <>
       <RatingPopUp
-        title="rate appointment"
+        title="Booking rating"
         closePopUpCallback={closePopUpCallback}
-        readOnly
+        readOnly={true}
+        submitCallBack={() => submitCallBack()}
         readOnlyValue={ratingValue}
       />
     </>

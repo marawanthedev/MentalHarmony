@@ -9,7 +9,7 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ViewBookingHistoryRatingPopUp from "../../components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooking } from "../../redux/features/booking/bookingSlice";
+import { getUserBooking } from "../../redux/features/booking/bookingSlice";
 
 const columns = [
   { id: "name", label: "Student Details", minWidth: 100 },
@@ -153,7 +153,7 @@ export default function ViewBookingHistory() {
   const [showStatusPopup, setShowStatusPopUp] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [showViewMeetingDetails, setShowMeetingDetails] = useState(false);
-  const [selectedBookingIndex, setSelectedBookingIndex] = useState(0);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
   const {
     bookings,
     isBookingProcessError,
@@ -162,7 +162,7 @@ export default function ViewBookingHistory() {
   } = useSelector((state) => state.bookings);
 
   useEffect(() => {
-    dispatch(getBooking());
+    dispatch(getUserBooking());
   }, []);
 
   useEffect(() => {}, [
@@ -209,25 +209,33 @@ export default function ViewBookingHistory() {
     }
   };
 
-  const generateRows = () => {
-    let rows = [];
-    console.log(bookings);
-    bookings.forEach((row, index) => {
-      rows[index] = {
-        ...row,
-        _id: row._id,
-        name: row.student.name,
-        faculty_name: row.student.faculty_name,
-        rate: getStars(row.rate),
-        action: getActionButton(
-          dataRows[index].faculty,
-          dataRows[index].requestStatus
-        ),
-      };
-    });
-    return rows;
+  const getBooking = () => {
+    const targetedBooking = bookings.find(
+      (booking) => booking._id === selectedBookingId
+    );
+    return targetedBooking;
   };
 
+  const generateRows = () => {
+    let rows = [];
+    if (bookings.length > 0) {
+      bookings.forEach((row, index) => {
+        rows[index] = {
+          ...row,
+          _id: row._id,
+          name: row.student.name,
+          faculty_name: row.student.faculty_name,
+          rate: getStars(row.rate),
+          action: getActionButton(
+            dataRows[index].faculty,
+            dataRows[index].requestStatus
+          ),
+        };
+      });
+    }
+
+    return rows;
+  };
   return (
     <>
       {showRatingPopUp ? (
@@ -236,7 +244,7 @@ export default function ViewBookingHistory() {
             setShowRatingPopUp(false);
             setBlurTable(false);
           }}
-          rate={bookings[selectedBookingIndex].rate}
+          rate={getBooking().rate}
           submitCallBack={(value) => {
             setShowRatingPopUp(false);
             setShowStatusPopUp(true);
@@ -255,7 +263,7 @@ export default function ViewBookingHistory() {
 
       {showViewMeetingDetails ? (
         <ViewMeetingDetailsPopUp
-          meetingLink={bookings[selectedBookingIndex].meeting_link}
+          meetingLink={getBooking().meeting_link}
           closeCallBack={() => {
             setShowMeetingDetails(false);
             setBlurTable(false);
@@ -265,9 +273,7 @@ export default function ViewBookingHistory() {
       <StickyHeadTable
         blur={blurTable ? true : false}
         rows={generateRows()}
-        actionButtonCallback={(selectedIndex) =>
-          setSelectedBookingIndex(selectedIndex)
-        }
+        actionButtonCallback={(bookingId) => setSelectedBookingId(bookingId)}
         cols={columns}
       />
     </>
