@@ -21,7 +21,6 @@ export default function RatingPopUp({
   readOnly,
   readOnlyValue,
 }) {
-  console.log(readOnly);
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
   return (
@@ -44,7 +43,7 @@ export default function RatingPopUp({
         }
         readOnly={readOnly ? true : false}
       />
-      )
+
       {!readOnly ? (
         <CustomButton
           type={"button"}

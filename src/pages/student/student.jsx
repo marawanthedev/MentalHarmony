@@ -2,6 +2,7 @@ import React from "react";
 import Templatev2 from "../../components/templatev2/templatev2";
 import BookingIcon from "../../assets/images/booking.png";
 import ViewBookingHistory from "../../container/viewBookingHistory/viewBookingHistory";
+import Protected from "../../util/protected";
 export default function student() {
   const tabs = [
     {
@@ -13,7 +14,9 @@ export default function student() {
 
   return (
     <>
-      <Templatev2 tabs={tabs} />
+      <Protected userType={"student"}>
+        <Templatev2 tabs={tabs} />
+      </Protected>
     </>
   );
 }

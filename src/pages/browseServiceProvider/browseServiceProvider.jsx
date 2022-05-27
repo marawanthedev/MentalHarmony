@@ -14,6 +14,8 @@ import { getUsersByType } from "../../redux/features/user/userSlice";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 import { toast } from "react-toastify";
+import Protected from "../../util/protected";
+
 export default function BrowseServiceProvider() {
   const userInAuth = JSON.parse(localStorage.getItem("user"));
 
@@ -91,62 +93,64 @@ export default function BrowseServiceProvider() {
   // const handlePopClose = () => {};
   return (
     <Template>
-      {showSpinner || isBookingProcessLoading ? <Spinner /> : null}
-      <div className="custom-container">
-        <FlexTwoSlotsRow
-          customClass="mb-10"
-          header={"Virtual Mental healthcare for you"}
-          paragraph={
-            "Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone"
-          }
-          CtaButton={
-            <CustomButton
-              backGroundColor={"#458FF6"}
-              color={"white"}
-              displayType={"block"}
-              margin={"2.5rem 0"}
-              boxShadow={"none"}
-              borderRadius={"55px"}
-              width={"17.5rem"}
-              height={"5rem"}
-              innerText={"Consult today"}
-            ></CustomButton>
-          }
-          illustrationUrl={landingUpperIllustration}
-        ></FlexTwoSlotsRow>
+      <Protected userType="student">
+        {showSpinner || isBookingProcessLoading ? <Spinner /> : null}
+        <div className="custom-container">
+          <FlexTwoSlotsRow
+            customClass="mb-10"
+            header={"Virtual Mental healthcare for you"}
+            paragraph={
+              "Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone"
+            }
+            CtaButton={
+              <CustomButton
+                backGroundColor={"#458FF6"}
+                color={"white"}
+                displayType={"block"}
+                margin={"2.5rem 0"}
+                boxShadow={"none"}
+                borderRadius={"55px"}
+                width={"17.5rem"}
+                height={"5rem"}
+                innerText={"Consult today"}
+              ></CustomButton>
+            }
+            illustrationUrl={landingUpperIllustration}
+          ></FlexTwoSlotsRow>
 
-        <div className="service-provider">
-          <h1 className="h1-w-lower-border text-center">
-            Our Service Providers
-          </h1>
-          <p className="light-paragraph ">
-            We provide to you the best choiches for you. Adjust it to your
-            health needs and make sure your undergo treatment with our highly
-            qualified doctors you can consult with us which type of service is
-            suitable for your health
-          </p>
-          <div className="service-provider__cards"></div>
+          <div className="service-provider">
+            <h1 className="h1-w-lower-border text-center">
+              Our Service Providers
+            </h1>
+            <p className="light-paragraph ">
+              We provide to you the best choiches for you. Adjust it to your
+              health needs and make sure your undergo treatment with our highly
+              qualified doctors you can consult with us which type of service is
+              suitable for your health
+            </p>
+            <div className="service-provider__cards"></div>
+          </div>
         </div>
-      </div>
-      <div className="browse-service-provider-cards-container">
-        {blurCardsContainer ? (
-          <ServiceProviderRequestPopUp
-            selectedCard={selectedCard}
-            closePopUpCallBack={() => {
-              setSelectedCard(null);
-              setBlurCardsContainer(false);
-            }}
-            submitCallBack={() => {
-              dispatch(addBooking({ serviceProvider: selectedCard._id }));
-            }}
-          />
-        ) : null}
-        <div
-          className={`cards-container ${blurCardsContainer ? "blur" : null}`}
-        >
-          {manageSpCardRendering()}
+        <div className="browse-service-provider-cards-container">
+          {blurCardsContainer ? (
+            <ServiceProviderRequestPopUp
+              selectedCard={{ ...selectedCard, avatar: serviceProviderAvatar }}
+              closePopUpCallBack={() => {
+                setSelectedCard(null);
+                setBlurCardsContainer(false);
+              }}
+              submitCallBack={() => {
+                dispatch(addBooking({ serviceProvider: selectedCard._id }));
+              }}
+            />
+          ) : null}
+          <div
+            className={`cards-container ${blurCardsContainer ? "blur" : null}`}
+          >
+            {manageSpCardRendering()}
+          </div>
         </div>
-      </div>
+      </Protected>
     </Template>
   );
 }

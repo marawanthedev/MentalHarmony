@@ -30,15 +30,15 @@ export default function ServiceProviderRequestPopUp({
           }}
         />
 
-        <div className="popup-header mt-4">{selectedCard.spName}</div>
+        <div className="popup-header mt-4">{selectedCard.name}</div>
+
+        {/* later done using backend if possible */}
         <div
           className="sp-request-popup__avatar background-image-util"
-          style={{ backgroundImage: `url(${selectedCard.spAvatar})` }}
+          style={{ backgroundImage: `url(${selectedCard.avatar})` }}
         ></div>
-        <div className="popup-header">{selectedCard.spHeader}</div>
-        <div className="popup-paragraph mt-2">
-          Specialized in stress managment assistance
-        </div>
+        <div className="popup-header">{selectedCard.speciality}</div>
+        <div className="popup-paragraph mt-2">{selectedCard.description}</div>
         {/* custom button */}
         <CustomButton
           type={"button"}

@@ -15,7 +15,6 @@ export default function FormPopUp({
 }) {
   const [formInput, setFormInput] = useState(null);
 
-  console.log(initialValue);
   if (document.querySelector("input")) {
     document.querySelector("input").classList.remove("error-alert");
   }

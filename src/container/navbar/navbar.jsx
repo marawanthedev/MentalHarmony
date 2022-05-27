@@ -14,14 +14,17 @@ const Navbar = () => {
         text: "Home",
         to: "/",
         selected: true,
+        requiresAuth: false,
       },
       {
         text: "View Dashboard",
         to: "/student/dashboard",
+        requiresAuth: true,
       },
       {
         text: "Browse Service Providers",
         to: "/browseServiceProvider",
+        requiresAuth: false,
       },
     ],
     serviceprovider: [
@@ -66,28 +69,28 @@ const Navbar = () => {
       {
         text: "Signup",
         to: "/signup",
-        basedOnAuth: true,
+        requiresAuth: true,
         hideIfAuthed: true,
         hideForAdmin: false,
       },
       {
         text: "Login",
         to: "/login",
-        basedOnAuth: true,
+        requiresAuth: true,
         hideIfAuthed: true,
         hideForAdmin: true,
       },
       {
         text: "Profile",
         to: `/profile?type=${user ? user.type : null}`,
-        basedOnAuth: true,
+        requiresAuth: true,
         hideIfAuthed: false,
         hideForAdmin: false,
       },
       {
         text: "Logout",
         to: "/",
-        basedOnAuth: true,
+        requiresAuth: true,
         hideIfAuthed: false,
         onClickCallBack: () => {
           dispatch(logout());
@@ -107,19 +110,21 @@ const Navbar = () => {
       );
     } else {
       //default options are set to student
-      navOptions.student.forEach((option, index) =>
-        options.push(getLink(option, `student ${index}`))
-      );
+      navOptions.student.forEach((option, index) => {
+        if (!option.requiresAuth) {
+          options.push(getLink(option, `student ${index}`));
+        }
+      });
     }
     //general options
     if (!user || user) {
       navOptions["general"].forEach((option, index) => {
-        if (!option.basedOnAuth) {
+        if (!option.requiresAuth) {
           options.push(getLink(option, index));
         }
         if (
-          (option.basedOnAuth && !option.hideIfAuthed && user) ||
-          (option.basedOnAuth && option.hideIfAuthed && !user)
+          (option.requiresAuth && !option.hideIfAuthed && user) ||
+          (option.requiresAuth && option.hideIfAuthed && !user)
         ) {
           options.push(getLink(option, index));
         }

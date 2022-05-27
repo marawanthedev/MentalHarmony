@@ -168,15 +168,12 @@ export default function ViewBookingHistory() {
     dispatch(getUserBooking());
   }, []);
 
-  useEffect(
-    () => console.log(bookings),
-    [
-      bookings,
-      isBookingProcessError,
-      isBookingProcessSuccess,
-      isBookingProcessLoading,
-    ]
-  );
+  useEffect(() => {}, [
+    bookings,
+    isBookingProcessError,
+    isBookingProcessSuccess,
+    isBookingProcessLoading,
+  ]);
 
   const getActionButton = (callBackParam, requestStatus) => {
     const actionButtonTypes = {
@@ -197,7 +194,6 @@ export default function ViewBookingHistory() {
     };
 
     if (requestStatus !== "pending") {
-      console.log("here");
       return (
         <CustomButton
           type={"button"}

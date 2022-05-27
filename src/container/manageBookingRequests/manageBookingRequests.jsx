@@ -128,9 +128,7 @@ export default function ManageBookingRequests() {
     dispatch(getUserBooking());
   }, []);
 
-  useEffect(() => {
-    // console.log(bookings);
-  }, [
+  useEffect(() => {}, [
     bookings,
     isBookingProcessError,
     isBookingProcessSuccess,

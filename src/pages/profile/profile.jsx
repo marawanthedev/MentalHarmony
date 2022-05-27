@@ -9,6 +9,7 @@ import Spinner from "../../components/spinner/spinner";
 import Template from "../../components/template/template";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
+import Protected from "../../util/protected";
 
 export default function Profile() {
   const history = useHistory();
@@ -94,18 +95,20 @@ export default function Profile() {
 
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
-      {formInputs ? (
-        <Template>
-          <ProfileForm
-            formInputs={formInputs}
-            formTitle={`${
-              user ? user.type : storedUser.type
-            } profile update form`}
-            formSubmissionCallBack={handleFormSubmission}
-          />
-        </Template>
-      ) : null}
+      <Protected>
+        {showSpinner ? <Spinner /> : null}
+        {formInputs ? (
+          <Template>
+            <ProfileForm
+              formInputs={formInputs}
+              formTitle={`${
+                user ? user.type : storedUser.type
+              } profile update form`}
+              formSubmissionCallBack={handleFormSubmission}
+            />
+          </Template>
+        ) : null}
+      </Protected>
     </>
   );
 }

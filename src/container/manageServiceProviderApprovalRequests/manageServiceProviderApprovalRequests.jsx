@@ -60,7 +60,6 @@ export default function ManageServiceProviderApprovalRequests() {
   const generateRows = () => {
     let rows = [];
     if (approvalRequests) {
-      console.log(approvalRequests);
       approvalRequests.forEach((row, index) => {
         rows[index] = {
           location: row.requester ? row.requester.location : null,

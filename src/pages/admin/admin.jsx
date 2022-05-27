@@ -12,6 +12,7 @@ import ViewUniStudentsTab from "../../container/viewUniStudentsTab/viewUniStuden
 import RemoveServiceProvider from "../../container/removeServiceProvider/removeServiceProvider";
 import ManageServiceProviderApprovalRequests from "../../container/manageServiceProviderApprovalRequests/manageServiceProviderApprovalRequests";
 import ManageApprovalRequestsIcon from "../../assets/images/contract.png";
+import Protected from "../../util/protected";
 
 export default function Admin() {
   const tabs = [
@@ -44,7 +45,9 @@ export default function Admin() {
   ];
   return (
     <>
-      <Templatev2 tabs={tabs} />
+      <Protected userType="admin">
+        <Templatev2 tabs={tabs} />
+      </Protected>
     </>
   );
 }
