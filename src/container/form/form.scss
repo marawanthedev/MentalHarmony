@@ -3,37 +3,36 @@
 }
 .form {
   width: 100vw;
-  height: 68rem;
+  height: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  // align-items: center;
   font-family: "Inter", sans-serif;
   z-index: 1;
   font-size: 1.7rem;
   position: relative;
-  overflow: hidden;
-
-  &__extended {
-    height: 110rem;
-  }
+  // overflow: hidden;
   &__left-side,
   &__right-side {
     width: 50%;
     height: 100%;
+
+    // @media (max-width: 767px) {
+    //   width: 100%;
+    // }
   }
 
   &__left-side {
-    position: fixed;
+    height: 100vmax;
     background-position: center;
     background-size: cover;
     image-rendering: pixelated;
     overflow: hidden;
     background-color: #2c73eb;
-    left: 0;
-    top: 0;
 
     &__main-content {
       width: 100%;
+      height: 100%;
       padding: 0rem 5rem;
       color: white;
       font-size: 2rem;
@@ -45,6 +44,12 @@
       &__img {
         width: 100%;
         height: 45rem;
+        @media (max-width: 767px) {
+          height: 50rem;
+        }
+        @media (max-width: 500px) {
+          display: none;
+        }
       }
     }
 
@@ -61,31 +66,34 @@
       top: -6rem;
       left: 0rem;
     }
+
+    @media (max-width: 500px) {
+      width: 40%;
+    }
   }
 
   &__right-side {
-    position: relative;
     background-color: white;
-    overflow: hidden;
-    left: 26%;
-    top: 4%;
+    // overflow: hidden;
+    padding: 0 4rem;
+    height: 100%;
     &__back-btn {
       color: black;
       font-size: 1.6rem;
       font-weight: 500;
       cursor: pointer;
       vertical-align: middle;
-      margin: 2.5rem 5rem;
+      margin: 2.5rem 0;
     }
 
     &__innerForm {
-      position: absolute;
-      width: 70%;
-      height: 75%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 1.5rem;
+      width: 100%;
+      height: 100%;
+      padding: 0 1.5rem;
+      padding-bottom: 3rem;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: space-around;
 
       &__header {
         padding: 1.5rem 0;
@@ -105,7 +113,23 @@
           line-height: 2.8rem;
         }
       }
+      @media (max-width: 767px) {
+        // justify-content: flex-start;
+        // height: 200rem;
+        // margin-bottom: 2rem;
+      }
     }
+    @media (max-width: 500px) {
+      width: 60%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    // overflow: auto;
+    // height: 100%;
   }
 }
 

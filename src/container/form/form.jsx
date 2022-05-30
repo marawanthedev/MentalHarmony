@@ -23,9 +23,9 @@ class Form extends React.Component {
     return re.test(String(email).toLowerCase());
   };
 
-  getLeftSide = (style, type) => {
+  getLeftSide = (type) => {
     return (
-      <div className="form__left-side " style={style}>
+      <div className="form__left-side ">
         <div className="form__left-side__main-content">
           <div className="form__left-side__main-content__header">
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
@@ -169,14 +169,11 @@ class Form extends React.Component {
       goBackCallBack,
       handleCheckBoxClick,
     } = this.props;
-    const style = {
-      height: "100vh",
-    };
 
     return (
       <>
         <div className={`form ${type === "signup" ? "form__extended" : null}`}>
-          {this.getLeftSide(style, type)}
+          {this.getLeftSide(type)}
 
           <div className="form__right-side">
             <div

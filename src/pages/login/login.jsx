@@ -6,7 +6,7 @@ import { login, resetAuth } from "../../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-
+import "./login.scss";
 export default function Login() {
   let history = useHistory();
   const { user, isLoading, isError, isSuccess } = useSelector(
@@ -64,7 +64,7 @@ export default function Login() {
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 
   return (
-    <>
+    <div className="login-container">
       {showSpinner ? <Spinner /> : null}
       <div className="login-container">
         <Form
@@ -75,6 +75,6 @@ export default function Login() {
           SubmitFormCallback={(userInfo) => handleSubmit(userInfo)}
         ></Form>
       </div>
-    </>
+    </div>
   );
 }

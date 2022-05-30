@@ -1,4 +1,5 @@
 import React from "react";
+import "./signup.scss";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Form from "../../container/form/form";
@@ -138,7 +139,7 @@ export default function Signup() {
   }, [user, isError, isSuccess, isLoading, dispatch, history]);
 
   return (
-    <div>
+    <div className="signup-container">
       {showSpinner ? <Spinner /> : null}
       <Form
         type="signup"
