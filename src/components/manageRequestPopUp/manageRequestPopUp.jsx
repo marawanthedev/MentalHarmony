@@ -1,5 +1,4 @@
 import React from "react";
-import "./manageRequestStatusPopUp.scss";
 import CustomButton from "../button/button";
 import CloseBtn from "../closeBtn/closeBtn";
 import "./manageRequestPopUp.scss";
