@@ -1,6 +1,6 @@
 @import "../../sass/abstract/mixins";
 .card {
-  width: 35rem;
+  width: 30%;
   height: 35.4rem;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -11,21 +11,42 @@
   align-items: flex-start;
   padding-left: 3rem;
   background-color: white;
-
+  margin: 0 1.665%;
   &__header {
     font-weight: 700;
     font-size: 2.4rem;
     line-height: 5rem;
     margin-bottom: 2rem;
     margin-top: 3.6rem;
+    @media (max-width: 1200px) {
+      font-size: 2.2rem;
+    }
+    @media (max-width: 1020px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 885px) {
+      font-size: 1.8rem;
+    }
+    @media (max-width: 767px) {
+      font-size: 2.4rem;
+    }
   }
   &__paragraph {
     text-align: start;
     @include secondary-text(1.6rem, 2.4rem);
+    @media (max-width: 1200px) {
+      @include secondary-text(1.4rem, 2rem);
+    }
+    @media (max-width: 1010px) {
+      @include secondary-text(1.2rem, 2rem);
+    }
+    @media (max-width: 767px) {
+      @include secondary-text(1.6rem, 2.4rem);
+    }
   }
   //** VIP
   // **this needs to be moved to home page, any customizable parts should be dependent on the customizer
-  
+
   &__icon {
     width: 10rem;
     height: 10rem;
@@ -33,5 +54,10 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  @media (max-width: 767px) {
+    width: 50%;
+    margin: 2.5rem 0;
   }
 }

@@ -13,7 +13,6 @@ function assert(assertionFactor, dataToBeReturned, errorMessage, res) {
   ) {
     return dataToBeReturned;
   } else {
-    res.status(400);
     throw new Error(errorMessage);
   }
 }

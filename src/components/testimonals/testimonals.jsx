@@ -4,36 +4,36 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./testimonals.css";
 import TestimonalCard from "../../components/testimonalCard/testimonalCard";
-import PrevArrowIcon from "../../assets/svg/prevArrow.svg";
-import NextArrowIcon from "../../assets/svg/nextArrow.svg";
+// import PrevArrowIcon from "../../assets/svg/prevArrow.svg";
+// import NextArrowIcon from "../../assets/svg/nextArrow.svg";
 
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
+// function PrevArrow(props) {
+//   const { className, style, onClick } = props;
 
-  return (
-    <img
-      src={PrevArrowIcon}
-      alt="prev arrow"
-      className={`arrow prevArrow ${className}`}
-      style={{ ...style, width: "30px", height: "10px" }}
-      onClick={onClick}
-    />
-  );
-}
+//   return (
+//     <img
+//       src={PrevArrowIcon}
+//       alt="prev arrow"
+//       className={`arrow prevArrow ${className}`}
+//       style={{ ...style, width: "30px", height: "10px" }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
-function NextArrow(props) {
-  const { className, style, onClick } = props;
+// function NextArrow(props) {
+//   const { className, style, onClick } = props;
 
-  return (
-    <img
-      src={NextArrowIcon}
-      alt="next arrow"
-      className={` arrow nextArrow ${className}`}
-      style={{ ...style, width: "30px", height: "10px" }}
-      onClick={onClick}
-    />
-  );
-}
+//   return (
+//     <img
+//       src={NextArrowIcon}
+//       alt="next arrow"
+//       className={` arrow nextArrow ${className}`}
+//       style={{ ...style, width: "30px", height: "10px" }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
 export default class Testimonals extends Component {
   render() {
@@ -43,8 +43,8 @@ export default class Testimonals extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      nextArrow: <NextArrow />,
-      prevArrow: <PrevArrow />,
+      nextArrow: <></>,
+      prevArrow: <></>,
       responsive: [
         {
           breakpoint: 770,

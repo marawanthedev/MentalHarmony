@@ -1,5 +1,15 @@
 .template {
   position: relative;
+  width: 85%;
+  align-self: center;
+
+  @media (max-width: 1020px) {
+    width: 90%;
+  }
+
+  @media (min-width: 2000px) {
+    width: 80%;
+  }
 }
 
 .mobile-navbar-container {

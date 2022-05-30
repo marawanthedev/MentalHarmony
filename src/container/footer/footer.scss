@@ -3,10 +3,21 @@
   padding: 4rem 0;
   height: 24.8rem;
   font-family: "Mulish", sans-serif;
-  width: 100%;
   z-index: 100000;
   margin-top: auto;
   scroll-behavior: smooth;
+  position: static;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  transform: translateX(-7.5%);
+
+  @media (max-width: 1030px) {
+    transform: translateX(-5%);
+  }
+  @media (min-width: 2000px) {
+    transform: translateX(-10%);
+  }
 }
 
 .footer-col {

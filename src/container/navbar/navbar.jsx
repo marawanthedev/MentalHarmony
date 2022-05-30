@@ -1,10 +1,11 @@
 import "./navbar.scss";
+import "./mobileNavbar.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, resetAuth } from "../../redux/features/auth/authSlice";
 import { reset } from "../../redux/features/user/userSlice";
-const Navbar = () => {
+const Navbar = ({ isMobile }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -133,34 +134,90 @@ const Navbar = () => {
     return options;
   };
   const getLink = (option, key) => {
+    if (isMobile) {
+      return (
+        <li
+          className="navigation__item"
+          key={key}
+          onClick={() => setSelectedOption(option.text)}
+        >
+          <Link
+            to={option.to}
+            className="navigation__link"
+            style={{
+              fontWeight: `${option.text === selectedOption ? "700" : "400"}`,
+            }}
+            onClick={() => {
+              setSelectedOption(option.text);
+              if (option.onClickCallBack) {
+                option.onClickCallBack();
+              }
+            }}
+          >
+            {option.text}
+          </Link>
+        </li>
+      );
+    }
+    if (!isMobile) {
+      return (
+        <Link
+          key={key}
+          className="option"
+          to={option.to}
+          onClick={() => {
+            setSelectedOption(option.text);
+            if (option.onClickCallBack) {
+              option.onClickCallBack();
+            }
+          }}
+          style={{
+            fontWeight: `${option.text === selectedOption ? "700" : "400"}`,
+          }}
+        >
+          {option.text}
+        </Link>
+      );
+    }
+  };
+
+  const mobileNavBar = () => {
     return (
-      <Link
-        key={key}
-        className="option"
-        to={option.to}
-        onClick={() => {
-          setSelectedOption(option.text);
-          if (option.onClickCallBack) {
-            option.onClickCallBack();
-          }
-        }}
-        style={{
-          fontWeight: `${option.text === selectedOption ? "700" : "400"}`,
-        }}
-      >
-        {option.text}
-      </Link>
+      <div className="navigation">
+        <input
+          type="checkbox"
+          id="navi-toggle"
+          className="navigation__checkbox"
+          placeholder=""
+        />
+        <label htmlFor="navi-toggle" className="navigation__button">
+          <span className="navigation__icon">&nbsp;</span>
+        </label>
+        <div className="navigation__background">&nbsp;</div>
+        <nav className="navigation__nav">
+          <ul className="navigation__list">{manageLinkRendering()}</ul>
+        </nav>
+      </div>
+    );
+  };
+
+  const desktopNavBar = () => {
+    return (
+      <nav className="header">
+        <h1 className="logo">
+          <Link to="/" className="logo-container">
+            <span>M</span>ental Harmony
+          </Link>
+        </h1>
+        <div className="options">{manageLinkRendering()}</div>
+      </nav>
     );
   };
   return (
-    <nav className="header">
-      <h1 className="logo">
-        <Link to="/" className="logo-container">
-          <span>M</span>ental Harmony
-        </Link>
-      </h1>
-      <div className="options">{manageLinkRendering()}</div>
-    </nav>
+    <>
+      {!isMobile ? desktopNavBar() : null}
+      {isMobile ? mobileNavBar() : null}
+    </>
   );
 };
 

@@ -32,13 +32,18 @@
   padding-bottom: 5rem;
   position: relative;
 
+
   &__vector {
     position: absolute;
-    left: -5%;
-    top: 18rem;
+    left: -17.5%;
+    top: 22.5rem;
     z-index: -1;
     height: 60rem;
     width: 90rem;
     background: linear-gradient(175.68deg, #f3f7ff -10.48%, #deeefe 92.66%);
+
+    @media (max-width: 767px) {
+      top: 50rem;
+    }
   }
 }

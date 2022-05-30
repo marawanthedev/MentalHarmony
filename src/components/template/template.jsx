@@ -1,17 +1,16 @@
 import React from "react";
 import Navbar from "../../container/navbar/navbar";
-import MobileNavBar from "../../container/mobileNavBar/mobileNavBar";
-import Footer from "../../container/footer/footer";
 import "./template.scss";
+import Footer from "../../container/footer/footer";
 export default function Template(props) {
   return (
     <div className="template">
       <header>
         <div className="desktop-navbar-container">
-          <Navbar />
+          <Navbar isMobile={false} />
         </div>
         <div className="mobile-navbar-container">
-          <MobileNavBar />
+          <Navbar isMobile={true} />
         </div>
       </header>
 

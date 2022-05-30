@@ -11,7 +11,6 @@ import Profile from "./pages/profile/profile";
 import "./sass/main.scss";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 function App() {
   return (
     <>
@@ -33,6 +32,7 @@ function App() {
               component={ServiceProvider}
             />
           </Switch>
+          {/* <Footer /> */}
         </div>
       </Router>
       <ToastContainer

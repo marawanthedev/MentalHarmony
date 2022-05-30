@@ -47,7 +47,7 @@ export default function Home() {
 
       setTimeout(() => dispatch(resetSuccessAlternativeMessage()), 3000);
     }
-  }, [successAlternativeMessage]);
+  }, [successAlternativeMessage, dispatch]);
 
   return (
     <Template>

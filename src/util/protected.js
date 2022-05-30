@@ -8,7 +8,11 @@ const infoNotification = () => {
 };
 const Protected = ({ children, userType }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  if (!user || (userType && user && userType !== user.type)) {
+  if (
+    user === undefined ||
+    (userType && user && userType !== user.type) ||
+    (userType && user && userType !== user.type)
+  ) {
     infoNotification();
     return <Redirect to="/" />;
   }
