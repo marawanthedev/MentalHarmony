@@ -17,12 +17,14 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: "90%",
+    width: "100%",
     overflowY: "auto",
     backgroundColor: "white",
     fontSize: "1.4rem",
   },
   row: {
     height: "10rem",
+    width: "100%",
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#B9D3EE",
@@ -44,6 +46,7 @@ const useStyles = makeStyles({
     fontSize: "1.4rem",
     fontFamily: "Mulish",
     fontWeight: "600",
+    width: "20%",
   },
   pagination: {
     fontSize: "1.4rem",

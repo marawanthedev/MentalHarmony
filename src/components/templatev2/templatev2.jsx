@@ -1,5 +1,5 @@
 import React from "react";
-import "./template.scss";
+import "./templatev2.scss";
 import SideNav from "../sideNav/sideNav";
 import AppBar from "../appBar/appBar";
 import { useState } from "react";
@@ -9,10 +9,12 @@ export default function Templatev2({ tabs }) {
   const { user } = useSelector((state) => state.auth);
   return (
     <div className="template-v2">
-      <SideNav
-        tabs={tabs}
-        selectionCallBack={(index) => setSelectedTab(tabs[index])}
-      />
+      <div className="template-v2__side-nav-container">
+        <SideNav
+          tabs={tabs}
+          selectionCallBack={(index) => setSelectedTab(tabs[index])}
+        />
+      </div>
 
       <div className="template-v2__vertical">
         <AppBar header={selectedTab.text} name={user.name} />

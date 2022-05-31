@@ -9,15 +9,15 @@
   position: static;
   bottom: 0;
   left: 0;
-  width: 100vw;
-  transform: translateX(-7.5%);
+  width: 100%;
+  transform: translateX(-0%);
 
-  @media (max-width: 1030px) {
-    transform: translateX(-5%);
-  }
-  @media (min-width: 2000px) {
-    transform: translateX(-10%);
-  }
+  // @media (max-width: 1030px) {
+  //   transform: translateX(-5%);
+  // }
+  // @media (min-width: 2000px) {
+  //   transform: translateX(-10%);
+  // }
 }
 
 .footer-col {
