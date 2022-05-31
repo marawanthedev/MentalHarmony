@@ -23,6 +23,26 @@ class Form extends React.Component {
     return re.test(String(email).toLowerCase());
   };
 
+  addKeyListener = () => {
+    document.querySelector(".form").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        this.handleFormSubmission(
+          this.props.formInputs,
+          this.props.SubmitFormCallback
+        );
+      }
+    });
+  };
+  removeKeyListener = () => {
+    document.querySelector(".form").removeEventListener("keydown");
+  };
+  componentDidMount() {
+    this.addKeyListener();
+  }
+  componentDidUnMount() {
+    this.removeKeyListener();
+  }
   getLeftSide = (type) => {
     return (
       <div className="form__left-side ">
