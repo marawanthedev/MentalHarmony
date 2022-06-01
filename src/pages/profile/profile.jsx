@@ -1,4 +1,3 @@
-import "./profile.scss";
 import React, { useState } from "react";
 import ProfileForm from "../../components/profileForm/profileForm";
 import { useEffect } from "react";
@@ -66,6 +65,10 @@ export default function Profile() {
     }
   };
 
+  const getFormInputs = () => {
+    console.log(formInputs);
+    return formInputs;
+  };
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
     isLoading,
@@ -100,7 +103,7 @@ export default function Profile() {
         {formInputs ? (
           <Template>
             <ProfileForm
-              formInputs={formInputs}
+              formInputs={getFormInputs()}
               formTitle={`${
                 user ? user.type : storedUser.type
               } profile update form`}

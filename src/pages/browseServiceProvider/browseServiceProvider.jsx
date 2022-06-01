@@ -54,7 +54,7 @@ export default function BrowseServiceProvider() {
   useEffect(() => {}, [filteredUsers, isError, isSuccess, isLoading, dispatch]);
 
   const manageSpCardRendering = () => {
-    if (filteredUsers) {
+    if (filteredUsers.length > 0) {
       return filteredUsers.map((serviceProvider, index) => {
         return (
           <Card
@@ -90,7 +90,6 @@ export default function BrowseServiceProvider() {
     }
   };
 
-  // const handlePopClose = () => {};
   return (
     <Template>
       <Protected userType="student">

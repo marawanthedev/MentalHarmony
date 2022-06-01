@@ -1,5 +1,4 @@
 import React from "react";
-import AvatarText from "../../components/avatarText/avatarText";
 import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "../../components/button/button";
 import { useState, useEffect } from "react";
@@ -41,71 +40,6 @@ const columns = [
   },
 ];
 
-const dataRows = [
-  {
-    id: 0,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Stress Management",
-    requestStatus: "completed",
-    requestDetails: {
-      meetingLink: "meeting.com",
-      rate: "5",
-    },
-  },
-  {
-    id: 1,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Stress Management",
-    requestStatus: "completed",
-    requestDetails: {
-      meetingLink: "meeting.com",
-      rate: "4",
-    },
-  },
-
-  {
-    id: 2,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Anxiety",
-    requestStatus: "accepted",
-    requestDetails: {
-      meetingLink: "meeting.com",
-      rate: "3",
-    },
-  },
-
-  {
-    id: 3,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Anxiety",
-    requestStatus: "accepted",
-    requestDetails: {
-      meetingLink: "",
-      rate: "3",
-    },
-  },
-  {
-    id: 4,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Anxiety",
-    requestStatus: "pending",
-    requestDetails: {
-      meetingLink: "",
-      rate: "3",
-    },
-  },
-  {
-    id: 5,
-    details: <AvatarText text="Tom Cruise" />,
-    sessionTopic: "Anxiety",
-    requestStatus: "pending",
-    requestDetails: {
-      meetingLink: "",
-      rate: "3",
-    },
-  },
-];
-
 export default function ManageBookingRequests() {
   const dispatch = useDispatch();
   const [showRatingPopUp, setShowRatingPopUp] = useState(false);
@@ -114,7 +48,6 @@ export default function ManageBookingRequests() {
   const [showManageRequestPopUp, setShowManageRequestPopUp] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
-  const [selectedRequestRating, setSelectedRequestRating] = useState(null);
   const [bookingRequestStatus, setBookingRequestStatus] = useState(null);
 
   const {
@@ -124,9 +57,11 @@ export default function ManageBookingRequests() {
     isBookingProcessLoading,
   } = useSelector((state) => state.bookings);
 
+  /*eslint-disable */
   useEffect(() => {
     dispatch(getUserBooking());
   }, []);
+  /*eslint-enable */
 
   useEffect(() => {}, [
     bookings,
@@ -135,14 +70,13 @@ export default function ManageBookingRequests() {
     isBookingProcessLoading,
   ]);
 
-  const getActionButton = (requestDetails, requestStatus, requestId) => {
+  const getActionButton = (requestStatus, requestId) => {
     const actionButtonTypes = {
       completed: {
         text: "View Rating",
         onClick: () => {
           setBlurTable(true);
           setShowRatingPopUp(true);
-          setSelectedRequestRating(requestDetails.rate);
           setSelectedBookingId(requestId);
         },
       },
@@ -207,6 +141,7 @@ export default function ManageBookingRequests() {
             setShowManageRequestPopUp(false);
             //dispatch to api
             dispatch(acceptBooking(selectedBookingId));
+            setTimeout(() => window.location.reload(), 1500);
           },
         },
       },
@@ -288,14 +223,7 @@ export default function ManageBookingRequests() {
         name: row.student.name,
         phone_number: row.student.phone_number,
         requestStatus: row.requestStatus,
-        action: getActionButton(
-          {
-            rate: row.rate,
-            meeting_link: row.meeting_link,
-          },
-          row.requestStatus,
-          row._id
-        ),
+        action: getActionButton(row.requestStatus, row._id),
       };
     });
     return rows;

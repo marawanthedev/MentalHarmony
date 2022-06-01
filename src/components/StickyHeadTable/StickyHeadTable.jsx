@@ -108,7 +108,7 @@ export default function StickyHeadTable({
                     tabIndex={-1}
                     key={row.code}
                   >
-                    {cols.map((column) => {
+                    {cols.map((column, index) => {
                       const value = row[column.id];
                       return (
                         <TableCell

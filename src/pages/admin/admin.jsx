@@ -1,5 +1,4 @@
 import React from "react";
-import "./admin.scss";
 import Templatev2 from "../../components/templatev2/templatev2";
 // import { ReactComponent as addPlus } from "../../assets/svg/Add_Plus.svg";
 // import addPlus from "../../assets/svg/Add_Plus.svg";

@@ -18,7 +18,6 @@ export default function AttachUsefulArticles() {
   const [showArticleAttachmentForm, setshowArticleAttachmentForm] =
     useState(false);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
-  const [formSubmissionStatus, setFormSubmissionStatus] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -44,19 +43,6 @@ export default function AttachUsefulArticles() {
   /*eslint-enable */
 
   const handleRendering = () => {
-    if (formSubmissionStatus) {
-      return (
-        <StatusPopUp
-          success={true}
-          closeBtnOnClick={() => {
-            setFormVisiblity(true);
-            setshowArticleAttachmentForm(false);
-            setFormSubmissionStatus(false);
-          }}
-        />
-      );
-    }
-
     if (formVisiblity && !showArticleAttachmentForm) {
       return (
         <FeelingPopUp
@@ -74,6 +60,7 @@ export default function AttachUsefulArticles() {
       const existingAttachment = articleAttachments.find(
         (article) => article.article_feeling_relation === selectedFeeling.text
       );
+      console.log(existingAttachment);
       return (
         <FormPopUp
           formTitle="Article attachment"
@@ -83,7 +70,6 @@ export default function AttachUsefulArticles() {
             existingAttachment ? existingAttachment.article_url : null
           }
           submitCallback={(formInput) => {
-            // setFormSubmissionStatus(true);
             setshowArticleAttachmentForm(false);
             dispatch(
               addArticleAttachment({
@@ -107,9 +93,9 @@ export default function AttachUsefulArticles() {
         <StatusPopUp
           success={isFormSuccess ? true : false}
           closeBtnOnClick={() => {
-            setFormVisiblity(true);
+            // setFormVisiblity(true);
             setshowArticleAttachmentForm(false);
-            setFormSubmissionStatus(false);
+            dispatch(reset());
           }}
         />
       ) : null}

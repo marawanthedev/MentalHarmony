@@ -1,6 +1,7 @@
 import "./profileForm.scss";
 import React, { useEffect } from "react";
 import CustomButton from "../button/button";
+
 export default function ProfileForm({
   formTitle,
   formInputs,
@@ -17,7 +18,9 @@ export default function ProfileForm({
     }
   }, [formInputs]);
   /*eslint-enable */
-
+  useEffect(() => {
+    return () => {};
+  }, []);
   const renderFormInputs = () => {
     return formInputs.map((formInput, index) => {
       return (

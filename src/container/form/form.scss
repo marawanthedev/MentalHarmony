@@ -4,6 +4,7 @@
 .form {
   width: 100vw;
   height: auto;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   // align-items: center;
@@ -16,10 +17,6 @@
   &__right-side {
     width: 50%;
     height: 100%;
-
-    // @media (max-width: 767px) {
-    //   width: 100%;
-    // }
   }
 
   &__left-side {
@@ -124,13 +121,6 @@
     }
   }
 
-  @media (max-width: 767px) {
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // overflow: auto;
-    // height: 100%;
-  }
 }
 
 .backArrow {
