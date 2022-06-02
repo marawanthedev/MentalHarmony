@@ -1,5 +1,5 @@
 import "./testimonalCard.scss";
-import avatar from "../../assets/images/avatar.png";
+import avatar from "../../assets/images/avatar.webp";
 const testimonalCard = ({ testimonial }) => {
   return (
     <div className="testimonal-card">

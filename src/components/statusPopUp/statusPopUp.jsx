@@ -1,6 +1,6 @@
 import React from "react";
-import successImg from "../../assets/images/checked.png";
-import failedImg from "../../assets/images/cancel.png";
+import successImg from "../../assets/images/checked.webp";
+import failedImg from "../../assets/images/cancel.webp";
 import CloseBtn from "../closeBtn/closeBtn";
 import CustomButton from "../button/button";
 import "./statusPopUp.scss";

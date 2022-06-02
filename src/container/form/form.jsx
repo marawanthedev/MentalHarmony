@@ -3,8 +3,8 @@ import "./form.scss";
 import FormInputGroup from "../../components/formInput/formInput";
 import CustomButton from "../../components/button/button";
 import leftArrow from "../../assets/svg/left-arrow.svg";
-import loginFigure from "../../assets/images/loginFigure.png";
-import signupFigure from "../../assets/images/signupFigure.jpg";
+import loginFigure from "../../assets/images/loginFigure.webp";
+import signupFigure from "../../assets/images/signupFigure.webp";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -13,7 +13,6 @@ class Form extends React.Component {
     super(props);
     this.state = {
       userInfo: {},
-      toggleFormClosure: false,
       formSubmissionSuccessStatus: false,
     };
   }
@@ -66,7 +65,6 @@ class Form extends React.Component {
   };
   resetForm = () => {
     this.setState({
-      toggleFormClosure: false,
       formSubmissionSuccessStatus: false,
       userInfo: {},
       formInputs: [],

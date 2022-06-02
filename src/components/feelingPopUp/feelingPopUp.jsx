@@ -1,10 +1,10 @@
 import React from "react";
 import "./feelingPopUp.scss";
 import CustomButton from "../button/button";
-import sadIcon from "../../assets/images/loudly-crying-face.png";
-import unsureIcon from "../../assets/images/neutral-face.png";
-import goodIcon from "../../assets/images/smiling-face-with-smiling-eyes.png";
-import happyIcon from "../../assets/images/happy-face-with-enlarged-eyes.png";
+import sadIcon from "../../assets/images/loudly-crying-face.webp";
+import unsureIcon from "../../assets/images/neutral-face.webp";
+import goodIcon from "../../assets/images/smiling-face-with-smiling-eyes.webp";
+import happyIcon from "../../assets/images/happy-face-with-enlarged-eyes.webp";
 import CloseBtn from "../closeBtn/closeBtn";
 import { useState } from "react";
 

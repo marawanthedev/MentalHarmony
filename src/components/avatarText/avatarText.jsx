@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from "../../assets/images/appBarAvatar.png";
+import avatar from "../../assets/images/appBarAvatar.webp";
 import "./avatarText.scss";
 export default function AvatarText({ img, text, reverse }) {
   return (

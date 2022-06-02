@@ -2,7 +2,7 @@
   border-color: red !important;
 }
 .form {
-  width: 100vw;
+  width: 100%;
   height: auto;
   padding-bottom: 2rem;
   display: flex;
@@ -20,7 +20,7 @@
   }
 
   &__left-side {
-    height: 100vmax;
+    height: 112.5vh;
     background-position: center;
     background-size: cover;
     image-rendering: pixelated;
@@ -120,7 +120,6 @@
       width: 60%;
     }
   }
-
 }
 
 .backArrow {

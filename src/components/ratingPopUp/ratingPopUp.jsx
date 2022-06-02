@@ -2,7 +2,7 @@ import React from "react";
 import "./ratingPopUp.scss";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import ratingPopUpIcon from "../../assets/images/ratingPopUp.png";
+import ratingPopUpIcon from "../../assets/images/ratingPopUp.webp";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomButton from "../button/button";
 import CloseBtn from "../closeBtn/closeBtn";
