@@ -11,39 +11,38 @@ const Footer = () => {
               <span>m</span>ental Harmony
             </h4>
             <p className="footer-paragraph">
-              Trafalgar provides progressive, and affordable healthcare,
-              accessible on mobile and online for everyone
+            A platform to provide a healty learning envirnoment for student to unleash their full potential and be our future leaders.
             </p>
             <div className="copyrights">
               ©MentalHarmony 2022. All rights reserved
             </div>
           </div>
           <div className="footer-col">
-            <h4>Company</h4>
+            <h4>Services</h4>
             <ul>
               <li>
-                <Link to="">About</Link>
+                <Link to="">Browse Service Providers</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="">Testimonials</Link>
               </li>
               <li>
                 <Link to="">Find a doctor</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="footer-col">
             <h4>Help</h4>
             <ul>
               <li>
-                <Link to="">Help Center</Link>
+                <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="">Contact Support</Link>
+                <Link to="/signup">Signup</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="">Instructions</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to=""></Link>
               </li>

@@ -15,6 +15,7 @@ import Spinner from "../../components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
 import { toast } from "react-toastify";
 import Protected from "../../util/protected";
+import { Link } from "react-router-dom";
 
 export default function BrowseServiceProvider() {
   const userInAuth = JSON.parse(localStorage.getItem("user"));
@@ -102,6 +103,7 @@ export default function BrowseServiceProvider() {
               "Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone"
             }
             CtaButton={
+            <Link to="/"  style={{textDecoration:"none"}}>
               <CustomButton
                 backGroundColor={"#458FF6"}
                 color={"white"}
@@ -111,8 +113,8 @@ export default function BrowseServiceProvider() {
                 borderRadius={"55px"}
                 width={"17.5rem"}
                 height={"5rem"}
-                innerText={"Consult today"}
-              ></CustomButton>
+                innerText={"Home"}
+              ></CustomButton></Link>
             }
             illustrationUrl={landingUpperIllustration}
           ></FlexTwoSlotsRow>

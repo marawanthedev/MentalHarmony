@@ -221,6 +221,7 @@ export default function ViewBookingHistory() {
 
   const generateRows = () => {
     let rows = [];
+    console.log(bookings)
     if (bookings.length > 0) {
       bookings.forEach((row, index) => {
         rows[index] = {
