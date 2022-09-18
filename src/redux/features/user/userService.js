@@ -4,6 +4,7 @@ import assert from "../../../util/assertion";
 const BASE_URL = "http://localhost:5000/api/users";
 
 const getUsersByType = async (type) => {
+  console.log("in");
   const res = await http.get(`${BASE_URL}/filter?type=${type}`);
   return assert(res, res.data, "Retrieval failed", res);
 };
