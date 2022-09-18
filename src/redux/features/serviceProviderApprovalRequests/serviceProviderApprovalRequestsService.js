@@ -1,7 +1,7 @@
 import { http } from "../../../util/restAPI";
 import assert from "../../../util/assertion";
 
-const BASE_URL = "http://localhost:5000/requests";
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}/requests`;
 
 const getApprovalRequests = async (data) => {
   const res = await http.get(`${BASE_URL}?isApproved=${data.isApproved}`);

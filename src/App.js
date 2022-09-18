@@ -11,6 +11,7 @@ import Profile from "./pages/profile/profile";
 import "./sass/main.scss";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>

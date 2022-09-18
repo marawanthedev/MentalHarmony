@@ -1,6 +1,6 @@
 import { http } from "../../../util/restAPI";
 
-const BASE_URL = "http://localhost:5000/api/users/";
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/users/`;
 
 // Register User
 const register = async (userData) => {

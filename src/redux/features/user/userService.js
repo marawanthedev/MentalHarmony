@@ -1,7 +1,7 @@
 import { http } from "../../../util/restAPI";
 import assert from "../../../util/assertion";
 
-const BASE_URL = "http://localhost:5000/api/users";
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/users`;
 
 const getUsersByType = async (type) => {
   console.log("in");
