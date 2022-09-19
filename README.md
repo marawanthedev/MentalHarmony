@@ -1,5 +1,30 @@
 # Mental Harmony
 
+# Technologies
+
+- React
+- Redux-tool kit
+- Material UI
+- SASS
+- prop-types
+- Faker
+- Yup
+
+# Highlights
+
+- BEM for SASS for scalable css modules
+- Use container-component pattern for cleaner code
+- Use rem instead of px for easier css scaling and less time making layout responsive
+- Protect routes based on user role
+- Identify commonly used components and build it first
+- Identify areas of css reusability
+- Implement code reusability as much as possible and two examples would be util functions and reusing while customizing a sticky head table component to handle all pages rendering even though they have different structure
+
+# Quotes
+
+- Reuse as much and customize when needed
+- Clean and well written code infrastructure will make rest of development process 4x faster
+
 # Types of Users
 
 - Admin
