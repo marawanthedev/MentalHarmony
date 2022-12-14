@@ -12,7 +12,7 @@ type AppBarProps = {
 };
 
 export default function AppBar({ header, name }: AppBarProps) {
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   return (
     <div className="app-bar">
