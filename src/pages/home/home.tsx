@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 import { resetSuccessAlternativeMessage } from "../../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { AppDispatch } from "../../redux/store";
+
+
 export default function Home() {
   const ServiceCards = [
     {
