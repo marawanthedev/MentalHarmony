@@ -1,12 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./pages/home/home";
-// import Login from "./pages/login/login";
+import Home from "pages/home/home";
 import "./sass/main.scss";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Spinner from "./components/spinner/spinner";
+import Spinner from "components/spinner/spinner";
 
 function App() {
   const Login = lazy(() => import("pages/login/login"));

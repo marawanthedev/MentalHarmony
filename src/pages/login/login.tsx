@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Form from "../../container/form/form";
+import Form from "container/form/form";
 import { useSelector, useDispatch } from "react-redux";
-import { login, resetAuth } from "../../redux/features/auth/authSlice";
+import { login, resetAuth } from "redux/features/auth/authSlice";
 import { useEffect } from "react";
-import Spinner from "../../components/spinner/spinner";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import { AppDispatch, RootState } from "../../redux/store";
+import Spinner from "components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import { AppDispatch, RootState } from "redux/store";
 
 import "./login.scss";
 export default function Login() {

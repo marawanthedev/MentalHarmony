@@ -2,13 +2,13 @@ import React from "react";
 import "./signup.scss";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Form from "../../container/form/form";
+import Form from "container/form/form";
 import { useSelector, useDispatch } from "react-redux";
-import { register, resetAuth } from "../../redux/features/auth/authSlice";
-import Spinner from "../../components/spinner/spinner";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import { AppDispatch, RootState } from "../../redux/store";
-import ObjectCleanse from "../../util/objectCleanse";
+import { register, resetAuth } from "redux/features/auth/authSlice";
+import Spinner from "components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import { AppDispatch, RootState } from "redux/store";
+import ObjectCleanse from "util/objectCleanse";
 
 export default function Signup() {
   let history = useHistory();
