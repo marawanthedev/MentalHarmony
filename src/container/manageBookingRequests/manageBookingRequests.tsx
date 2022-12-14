@@ -114,13 +114,12 @@ export default function ManageBookingRequests() {
         fontSize="1.1rem"
         borderRadius="2.5rem"
         onClick={actionButtonTypes[requestStatus].onClick}
-        // onClick={() => {}}
       />
     );
   };
 
   const getManageRequestPopUp = () => {
-    const manageRequestPopUpOptions = {
+    const manageRequestPopUpOptions: any = {
       pending: {
         popupParagraph: "Update request status using the action button",
         closeBtnCallback: () => {
@@ -191,30 +190,24 @@ export default function ManageBookingRequests() {
       ];
 
     // const button_1=
-
     return (
       <ManageRequestPopUp
-        //todo to actually access button 1 and 2 and paragraph and header
-        button_1={{
-          text: "Ignore",
-          color: "#FB4B4B",
-          callback: () => {
-            setBlurTable(false);
-            setShowManageRequestPopUp(false);
-          },
-        }}
-        // todo be updated
-        button_2={{
-          text: "Ignore",
-          color: "#FB4B4B",
-          callback: () => {
-            setBlurTable(false);
-            setShowManageRequestPopUp(false);
-          },
-        }}
+        button_1={
+          manageRequestPopUpOptions[
+            bookingRequestStatus as keyof typeof manageRequestPopUpOptions
+          ].button_1
+        }
+        button_2={
+          manageRequestPopUpOptions[
+            bookingRequestStatus as keyof typeof manageRequestPopUpOptions
+          ].button_2
+        }
         popupHeader={manageRequestPopUpOptions["general"].popupHeader}
-        // todo to be updated
-        popupParagraph={"test"}
+        popupParagraph={
+          manageRequestPopUpOptions[
+            bookingRequestStatus as keyof typeof manageRequestPopUpOptions
+          ].popupParagraph
+        }
         closeBtnCallback={manageRequestPopUpOptions["general"].closeBtnCallback}
       />
     );

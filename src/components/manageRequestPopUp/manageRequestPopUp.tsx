@@ -13,7 +13,6 @@ type ManageRequestProps = {
   closeBtnCallback: Function;
   popupHeader: string;
   popupParagraph: string;
-  // todo not be optional
   button_1: Button;
   button_2: Button;
 };
@@ -24,14 +23,14 @@ export default function ManageRequestPopUp({
   popupParagraph,
   button_1,
   button_2,
-}:ManageRequestProps) {
+}: ManageRequestProps) {
   return (
     <div className="manage-request-popup">
       <CloseBtn onClick={closeBtnCallback} />
       <div className="manage-request-popup__content">
         <div className="manage-request-popup__header ">{popupHeader}</div>
         <div className="manage-request-popup__paragraph">{popupParagraph}</div>
-        <div className="dialog-popup__buttons-container">
+        <div className="manage-request-popup__buttons-container">
           <CustomButton
             type={"button"}
             backGroundColor={button_1?.color}
