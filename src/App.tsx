@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/home/home";
@@ -9,17 +9,17 @@ import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./components/spinner/spinner";
 
 function App() {
-  const Login = React.lazy(() => import("pages/login/login"));
-  const Signup = React.lazy(() => import("pages/signup/signup"));
-  const BrowseServiceProvider = React.lazy(
+  const Login = lazy(() => import("pages/login/login"));
+  const Signup = lazy(() => import("pages/signup/signup"));
+  const BrowseServiceProvider = lazy(
     () => import("pages/browseServiceProvider/browseServiceProvider")
   );
-  const Admin = React.lazy(() => import("./pages/admin/admin"));
-  const Student = React.lazy(() => import("pages/student/student"));
-  const ServiceProvider = React.lazy(
+  const Admin = lazy(() => import("./pages/admin/admin"));
+  const Student = lazy(() => import("pages/student/student"));
+  const ServiceProvider = lazy(
     () => import("pages/serviceProvider/serviceProvider")
   );
-  const Profile = React.lazy(() => import("pages/profile/profile"));
+  const Profile = lazy(() => import("pages/profile/profile"));
 
   return (
     <>
