@@ -71,21 +71,19 @@ export default function StickyHeadTable({
   // tableTitle,
   rows,
   cols,
-  //todo
   blur,
   actionButtonCallback,
 }: StickyHeadTableProps) {
-  //todo
   const classes: any = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (newPage: any) => {
+  const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: BaseSyntheticEvent) => {
-    const value: string = event?.target?.value;
+    const value: any = event?.target?.value;
     setRowsPerPage(value ? +value : rowsPerPage);
     setPage(0);
   };
@@ -93,7 +91,11 @@ export default function StickyHeadTable({
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table className={classes?.blur} stickyHeader aria-label="sticky table">
+        <Table
+          className={blur && classes?.blur}
+          stickyHeader
+          aria-label="sticky table"
+        >
           <TableHead>
             <TableRow className={classes?.head}>
               {cols.map((column: TableColumnsInterface) => (
@@ -111,7 +113,7 @@ export default function StickyHeadTable({
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row: any) => {
                 return (
                   <TableRow
                     className={classes.row}
@@ -120,11 +122,8 @@ export default function StickyHeadTable({
                     key={row?.code}
                   >
                     {cols.map((column: TableColumnsInterface) => {
-                      // const value = row[column.id];
-                      // const value = row[column.id];
-                      // todo get row value
-                      const value = "";
-                      console.log(row);
+                      const value = row[column.id];
+
                       return (
                         <TableCell
                           className={classes.cell}

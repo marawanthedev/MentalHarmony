@@ -79,6 +79,8 @@ export default function ViewBookingHistory() {
     isBookingProcessLoading,
   } = useSelector((state: any) => state.bookings);
 
+  console.log(bookings)
+
   useEffect(() => {
     dispatch(getUserBooking());
   }, []);
