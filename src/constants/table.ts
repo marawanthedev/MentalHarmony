@@ -15,7 +15,7 @@ export type TableRowInterface = {
   requestStatus: string;
   //   todo
   // eslint-disable-next-line @typescript-eslint/ban-types
-  action: Function;
+  action: any;
   //   todo
   code?: any;
   //   todo

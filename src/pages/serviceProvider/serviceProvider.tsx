@@ -10,7 +10,7 @@ export default function ServiceProvider() {
     {
       text: "Manage Booking Requests",
       icon: BookingIcon,
-      getTabComponentRender: () => ManageBookingRequests,
+      getTabComponentRender: ManageBookingRequests,
     },
   ];
   return (

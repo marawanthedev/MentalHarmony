@@ -72,7 +72,7 @@ export default function ManageBookingRequests() {
 
   //todo update param
   const getActionButton = (requestStatus: any, requestId: any) => {
-    const actionButtonTypes: Object = {
+    const actionButtonTypes: any = {
       completed: {
         text: "View Rating",
         onClick: () => {
@@ -105,8 +105,7 @@ export default function ManageBookingRequests() {
       <CustomButton
         type={"button"}
         backGroundColor="#2B4BF2"
-        // innerText={`${actionButtonTypes[requestStatus].text}`}
-        innerText={`test`}
+        innerText={`${actionButtonTypes[requestStatus].text}`}
         color={"white"}
         displayType={"block"}
         width="100%"
@@ -114,8 +113,8 @@ export default function ManageBookingRequests() {
         fontWeight="600"
         fontSize="1.1rem"
         borderRadius="2.5rem"
-        // onClick={actionButtonTypes[requestStatus].onClick}
-        onClick={() => {}}
+        onClick={actionButtonTypes[requestStatus].onClick}
+        // onClick={() => {}}
       />
     );
   };
@@ -225,7 +224,7 @@ export default function ManageBookingRequests() {
   const meetingURLSubmission = (meeting_link: any) => {
     setShowRequestDetails(false);
     setShowStatusPopUp(true);
-    
+
     // dispatch to api
     if (selectedBookingId && meeting_link) {
       dispatch(
@@ -260,9 +259,11 @@ export default function ManageBookingRequests() {
         name: row.student.name,
         phone_number: row.student.phone_number,
         requestStatus: row.requestStatus,
-        action: () => getActionButton(row.requestStatus, row._id),
+        action: getActionButton(row.requestStatus, row._id),
       });
     });
+
+    console.log(rows);
     return rows;
   };
 
