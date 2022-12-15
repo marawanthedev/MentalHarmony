@@ -1,19 +1,19 @@
 import React from "react";
 import "./dailyPopUp.scss";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
-import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
+import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getArticles,
   submitFeeling,
-} from "../../redux/features/dailyPopUp/dailyPopUpSlice";
+} from "redux/features/dailyPopUp/dailyPopUpSlice";
 import { useEffect } from "react";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import Spinner from "../../components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import Spinner from "components/spinner/spinner";
 import { toast } from "react-toastify";
-import { AppDispatch } from "../../redux/store";
-import { IFeeling } from "../../constants/Feeling";
+import { AppDispatch, RootState } from "redux/store";
+import { IFeeling } from "constants/Feeling";
 
 export default function DailyPopUp() {
   const [selectedFeeling, setSelectedFeeling] = useState<IFeeling>();
@@ -24,7 +24,7 @@ export default function DailyPopUp() {
   ] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { articleAttachments, isSuccess, isError, isLoading } = useSelector(
-    (state: any) => state.dailyPopUp
+    (state: RootState) => state.dailyPopUp
   );
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
@@ -39,11 +39,15 @@ export default function DailyPopUp() {
   /*eslint-enable */
 
   const formSubmission = () => {
-    const targetAttachment = articleAttachments.find(
-      (article: any) =>
-        // @ts-ignore: Object is possibly 'null'
-        article.article_feeling_relation === selectedFeeling.text
-    );
+    let targetAttachment: any;
+
+    if (articleAttachments) {
+      targetAttachment = articleAttachments.find(
+        (article: any) =>
+          // @ts-ignore: Object is possibly 'null'
+          article.article_feeling_relation === selectedFeeling.text
+      );
+    }
 
     //submit feeling to backend
     //** bugged and will be fixed later
@@ -103,7 +107,7 @@ export default function DailyPopUp() {
 
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner && <Spinner />}
       {handleRending()}
     </>
   );

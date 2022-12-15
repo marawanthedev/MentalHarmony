@@ -1,10 +1,9 @@
 import React from "react";
 import "./appBar.scss";
-import AvatarText from "../avatarText/avatarText";
-useSelector;
+import AvatarText from "components/avatarText/avatarText";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "redux/store";
 
 type AppBarProps = {
   header: string;

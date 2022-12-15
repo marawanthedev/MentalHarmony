@@ -1,23 +1,20 @@
 import React from "react";
-import AvatarText from "../../components/avatarText/avatarText";
-import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-import CustomButton from "../../components/button/button";
+import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
+import CustomButton from "components/button/button";
 import { useState, useEffect } from "react";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-import ViewMeetingDetailsPopUp from "../../components/viewMeetingDetailsPopUp/viewMeetingDetailsPopUp";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
+import ViewMeetingDetailsPopUp from "components/viewMeetingDetailsPopUp/viewMeetingDetailsPopUp";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import ViewBookingHistoryRatingPopUp from "../../components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
+import ViewBookingHistoryRatingPopUp from "components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { bookingStructure } from "../../constants/booking";
+import { bookingStructure } from "constants/booking";
 import {
   getUserBooking,
   rateBooking,
-} from "../../redux/features/booking/bookingSlice";
-import { ActionButtonStructure } from "../../constants/actionButton";
-import { ColumnType } from "./constants";
-import { bookingState } from "../../redux/features/booking/constants";
-import { AppDispatch } from "../../redux/store";
+} from "redux/features/booking/bookingSlice";
+import { ActionButtonStructure } from "constants/actionButton";
+import { AppDispatch, RootState } from "redux/store";
 
 // todo
 const columns: any[] = [
@@ -71,15 +68,15 @@ export default function ViewBookingHistory() {
   const [showViewMeetingDetails, setShowMeetingDetails] =
     useState<boolean>(false);
   const [selectedBookingId, setSelectedBookingId] = useState<number>(0);
-  
+
   const {
     bookings,
     isBookingProcessError,
     isBookingProcessSuccess,
     isBookingProcessLoading,
-  } = useSelector((state: any) => state.bookings);
+  } = useSelector((state: RootState) => state.bookings);
 
-  console.log(bookings)
+  console.log(bookings);
 
   useEffect(() => {
     dispatch(getUserBooking());
@@ -132,35 +129,39 @@ export default function ViewBookingHistory() {
   };
 
   const getBooking = () => {
-    const targetedBooking = bookings.find(
-      (booking: bookingStructure) => booking._id === selectedBookingId
-    );
-    return targetedBooking;
+    if (bookings) {
+      const targetedBooking = bookings.find(
+        (booking: bookingStructure) => booking._id === selectedBookingId
+      );
+      return targetedBooking;
+    }
+    return [];
   };
 
   const generateRows = () => {
     let rows: any = [];
-    console.log(bookings);
-    if (bookings.length > 0) {
-      bookings.forEach((row: bookingStructure, index: number) => {
-        rows[index] = {
-          ...row,
-          _id: row._id,
-          name: row.student.name,
-          faculty_name: row.student.faculty_name,
-          rate: getStars(row.rate),
-          action: getActionButton(
-            row.requestStatus as keyof ActionButtonStructure
-          ),
-        };
-      });
+    if (bookings) {
+      if (bookings.length > 0) {
+        bookings.forEach((row: bookingStructure, index: number) => {
+          rows[index] = {
+            ...row,
+            _id: row._id,
+            name: row.student.name,
+            faculty_name: row.student.faculty_name,
+            rate: getStars(row.rate),
+            action: getActionButton(
+              row.requestStatus as keyof ActionButtonStructure
+            ),
+          };
+        });
+      }
     }
 
     return rows;
   };
   return (
     <>
-      {showRatingPopUp ? (
+      {showRatingPopUp && (
         <ViewBookingHistoryRatingPopUp
           closePopUpCallback={() => {
             setShowRatingPopUp(false);
@@ -178,8 +179,8 @@ export default function ViewBookingHistory() {
             }, 1500);
           }}
         />
-      ) : null}
-      {showStatusPopup ? (
+      )}
+      {showStatusPopup && (
         <StatusPopUp
           success={true}
           closeBtnOnClick={() => {
@@ -187,9 +188,9 @@ export default function ViewBookingHistory() {
             setBlurTable(false);
           }}
         />
-      ) : null}
+      )}
 
-      {showViewMeetingDetails ? (
+      {showViewMeetingDetails && (
         <ViewMeetingDetailsPopUp
           meetingLink={getBooking().meeting_link}
           closeCallBack={() => {
@@ -197,7 +198,7 @@ export default function ViewBookingHistory() {
             setBlurTable(false);
           }}
         />
-      ) : null}
+      )}
       <StickyHeadTable
         blur={blurTable ? true : false}
         rows={generateRows()}

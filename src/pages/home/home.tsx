@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
-import CustomButton from "../../components/button/button";
-import Template from "../../components/template/template";
+import CustomButton from "components/button/button";
+import Template from "components/template/template";
 import "./home.scss";
-import landingUpperIllustration from "../../assets/images/landingupper.webp";
-import Card from "../../components/card/card";
-import magnifyingIcon from "../../assets/images/magnifying-glass 1.png";
-import appointmentIcon from "../../assets/images/appointment 1.png";
-import consultationIcon from "../../assets/images/consultation.webp";
-import servicesVector from "../../assets/images/servicesVector.webp";
-import bookAppointmentIlustration from "../../assets/images/appointmetnIllustration.webp";
-import mentalHealthIllustration from "../../assets/images/uniIllustration.webp";
-import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
-import Testimonals from "../../components/testimonals/testimonals";
-import DailyPopUp from "../../container/dailyPopUp/dailyPopUp";
+import landingUpperIllustration from "assets/images/landingupper.webp";
+import Card from "components/card/card";
+import magnifyingIcon from "assets/images/magnifying-glass 1.png";
+import appointmentIcon from "assets/images/appointment 1.png";
+import consultationIcon from "assets/images/consultation.webp";
+import servicesVector from "assets/images/servicesVector.webp";
+import bookAppointmentIlustration from "assets/images/appointmetnIllustration.webp";
+import mentalHealthIllustration from "assets/images/uniIllustration.webp";
+import FlexTwoSlotsRow from "components/flex-2-slots-row/flex2SlotsRow";
+import Testimonals from "components/testimonals/testimonals";
+import DailyPopUp from "container/dailyPopUp/dailyPopUp";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { resetSuccessAlternativeMessage } from "../../redux/features/auth/authSlice";
+import { resetSuccessAlternativeMessage } from "redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
-import { AppDispatch } from "../../redux/store";
-
+import { AppDispatch } from "redux/store";
 
 export default function Home() {
   const ServiceCards = [
@@ -186,7 +185,7 @@ export default function Home() {
             </Link>
           }
         />
-        <Testimonals></Testimonals>
+        <Testimonals />
         <DailyPopUp />
       </div>
     </Template>

@@ -1,13 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import "./formInput.scss";
-// type="text"
-// placeHolder={inputPlaceHolder}
-// customLabel={inputLabel}
-// displayType="block"
-// initialValue={initialValue ? initialValue : undefined}
-// className={`articleUrl form__right-side__innerForm__input-group`}
-// onChange={(value: string) => setFormInput(value)}
 
 type FormInputGroupProps = {
   type: string;
@@ -44,11 +37,11 @@ const FormInputGroup = ({
       {/* todo figure out using style tags with typescript */}
       {/* style={width ? style : null} */}
       <div className={`${className} ${missing}`}>
-        {displayType === "block" ? (
+        {displayType === "block" && (
           <div className={labelClassName} style={{ display: displayType }}>
             {customLabel}
           </div>
-        ) : null}
+        )}
 
         <input
           value={inputValue}
@@ -60,11 +53,11 @@ const FormInputGroup = ({
             onChange(e.target.value);
           }}
         />
-        {displayType === "inline-block" ? (
+        {displayType === "inline-block" && (
           <div className={labelClassName} style={{ display: displayType }}>
             {customLabel}
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

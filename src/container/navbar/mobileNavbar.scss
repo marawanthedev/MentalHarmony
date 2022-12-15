@@ -12,19 +12,10 @@
     top: 6rem;
     right: 6rem;
     z-index: 150;
-    // box-shadow: 0 1rem 3rem rgba($color-black, 0.3);
     text-align: center;
     cursor: pointer;
 
-    // @include respond(tab-port) {
-    //   top: 4rem;
-    //   right: 4rem;
-    // }
 
-    // @include respond(phone) {
-    //   top: 2.5rem;
-    //   right: 2.5rem;
-    // }
   }
 
   &__background {
@@ -34,24 +25,10 @@
     position: fixed;
     top: 6.5rem;
     right: 6.5rem;
-    // background-image: radial-gradient(rgb(59, 52, 52), rgb(56, 56, 47));
     background-color: transparent;
     z-index: 120;
     transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
     user-select: none;
-
-    // @include respond(tab-port) {
-    //   top: 4.5rem;
-    //   right: 4.5rem;
-    //   // thats the background of the nav behind the button
-    // }
-
-    // @include respond(phone) {
-    //   top: 3rem;
-    //   right: 3rem;
-    // }
-
-    // transform: scale(80);
   }
 
   &__nav {
@@ -82,6 +59,7 @@
   }
 
   &__link {
+
     &:link,
     &:visited {
       display: inline-block;
@@ -91,12 +69,10 @@
       color: white;
       font-weight: 400;
 
-      background-image: linear-gradient(
-        120deg,
-        transparent 0%,
-        transparent 50%,
-        white 50%
-      );
+      background-image: linear-gradient(120deg,
+          transparent 0%,
+          transparent 50%,
+          white 50%);
       background-size: 250%;
       transition: all 0.5s;
 
@@ -111,25 +87,21 @@
       background-position: 100%;
       color: black;
       transform: translateX(1rem);
-
-      // translate doesnt work on inline
-      // so it has to be inline-block
     }
   }
 
-  &__checkbox:checked ~ &__background {
+  &__checkbox:checked~&__background {
     transform: scale(120);
-    //     background-color: #583912;
-    // background-color: #363740;
+
     background-image: radial-gradient(#3b4653, #2b2e47);
   }
 
-  &__checkbox ~ &__nav {
+  &__checkbox~&__nav {
     display: none;
     animation: fadeOut 0.2s ease-in-out forwards;
   }
 
-  &__checkbox:checked ~ &__nav {
+  &__checkbox:checked~&__nav {
     width: 100%;
     display: block;
     animation: fadeIn 0.2s ease-in-out forwards;
@@ -176,16 +148,16 @@
     top: 1rem;
   }
 
-  &__checkbox:checked + &__button &__icon {
+  &__checkbox:checked+&__button &__icon {
     background-color: transparent;
   }
 
-  &__checkbox:checked + &__button &__icon::before {
+  &__checkbox:checked+&__button &__icon::before {
     top: 0;
     transform: rotate(135deg);
   }
 
-  &__checkbox:checked + &__button &__icon::after {
+  &__checkbox:checked+&__button &__icon::after {
     top: 0;
     transform: rotate(-135deg);
   }

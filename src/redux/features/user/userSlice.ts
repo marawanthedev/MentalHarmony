@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
-import smartTryCatch from "../../../util/smartTryCatch";
+import smartTryCatch from "util/smartTryCatch";
 import { userState } from "./constant";
 
 const initState: userState = {

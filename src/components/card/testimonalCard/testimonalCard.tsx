@@ -1,5 +1,5 @@
 import React from "react";
-import { Testimonial } from "../../../constants/testiomnials";
+import { Testimonial } from "constants/testiomnials";
 import "./testimonalCard.css";
 
 type ITestimonalCard = {

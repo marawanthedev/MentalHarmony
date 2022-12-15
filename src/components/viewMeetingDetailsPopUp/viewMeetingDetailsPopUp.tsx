@@ -1,7 +1,7 @@
 import React from "react";
 import "./viewMeetingDetailsPopUp.scss";
-import CustomButton from "../button/button";
-import CloseBtn from "../closeBtn/closeBtn";
+import CustomButton from "components/button/button";
+import CloseBtn from "components/closeBtn/closeBtn";
 
 type ViewMeetingDetailsPopUpProps = {
   closeCallBack: Function;

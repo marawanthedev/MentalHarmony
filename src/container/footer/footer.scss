@@ -11,13 +11,6 @@
   left: 0;
   width: 100%;
   transform: translateX(-0%);
-
-  // @media (max-width: 1030px) {
-  //   transform: translateX(-5%);
-  // }
-  // @media (min-width: 2000px) {
-  //   transform: translateX(-10%);
-  // }
 }
 
 .footer-col {
@@ -43,6 +36,7 @@ ul li a:hover {
 ul li :not(:last-child) {
   margin-bottom: 10px;
 }
+
 .copyrights,
 .footer-paragraph {
   color: white;
@@ -62,11 +56,13 @@ h4 {
   &::first-letter {
     text-transform: capitalize;
   }
+
   span {
     color: #5b9bf3;
     position: relative;
     z-index: 2;
     letter-spacing: 0.85rem;
+
     &::after {
       content: "";
       position: absolute;
@@ -135,9 +131,6 @@ ul {
     padding: 4rem 0rem;
   }
 
-  /* .footer-col {
-        width: 15%;
-    } */
   ul li a {
     font-size: 1.4rem;
   }

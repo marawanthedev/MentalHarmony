@@ -1,9 +1,10 @@
 import React from "react";
 import "./addServiceProviderTab.scss";
-import FormInputGroup from "../../components/formInput/formInput";
+import FormInputGroup from "components/formInput/formInput";
 import { useState } from "react";
-import CustomButton from "../../components/button/button";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+import CustomButton from "components/button/button";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
+
 export default function AddServiceProviderForm() {
   const [specialKey, setSpecialKeyValue] = useState();
   const [showStatusPopUp, setShowStatusPopUp] = useState<boolean>(false);
@@ -39,7 +40,7 @@ export default function AddServiceProviderForm() {
             customLabel="Special Key"
             displayType="block"
             className={`specialKey  form__right-side__innerForm__input-group`}
-            onChange={(value:any) => setSpecialKeyValue(value)}
+            onChange={(value: any) => setSpecialKeyValue(value)}
           />
 
           <CustomButton

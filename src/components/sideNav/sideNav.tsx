@@ -2,7 +2,7 @@ import React from "react";
 import "./sideNav.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { tab } from "../../constants/tab";
+import { tab } from "constants/tab";
 
 type SideNavProps = {
   tabs: tab[];
@@ -32,9 +32,7 @@ export default function SideNav({ tabs, selectionCallBack }: SideNavProps) {
             >
               <div
                 className={`side-nav__tab__icon background-image-util ${
-                  index === selectedIndex
-                    ? "side-nav__tab__icon__selected"
-                    : null
+                  index === selectedIndex && "side-nav__tab__icon__selected"
                 }`}
                 style={{ backgroundImage: `url(${tab.icon})` }}
               />

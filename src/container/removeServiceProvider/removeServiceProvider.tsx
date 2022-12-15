@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
-import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-// import AvatarText from "../../components/avatarText/avatarText";
-import CustomButton from "../../components/button/button";
-import DialogPopUp from "../../components/dialogPopUp/dialogPopUp";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
+import CustomButton from "components/button/button";
+import DialogPopUp from "components/dialogPopUp/dialogPopUp";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getUsersByType,
-  deleteUser,
-} from "../../redux/features/user/userSlice";
-import Spinner from "../../components/spinner/spinner";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import { AppDispatch } from "../../redux/store";
+import { getUsersByType, deleteUser } from "redux/features/user/userSlice";
+import Spinner from "components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import { AppDispatch } from "redux/store";
 
 const columns = [
   { id: "name", label: "Details", minWidth: 100 },
@@ -102,7 +98,7 @@ export default function RemoveServiceProvider() {
     <>
       {showSpinner ? <Spinner /> : null}
 
-      {showDialog ? (
+      {showDialog && (
         <DialogPopUp
           cancelCallBack={() => {
             setShowDialog(false);
@@ -113,8 +109,8 @@ export default function RemoveServiceProvider() {
             setShowDialog(false);
           }}
         />
-      ) : null}
-      {showConfirmPopUp ? (
+      )}
+      {showConfirmPopUp && (
         <StatusPopUp
           closeBtnOnClick={() => {
             setShowDialog(false);
@@ -123,7 +119,7 @@ export default function RemoveServiceProvider() {
           }}
           success={true}
         />
-      ) : null}
+      )}
 
       <StickyHeadTable blur={blurTable} rows={generateRows()} cols={columns} />
     </>

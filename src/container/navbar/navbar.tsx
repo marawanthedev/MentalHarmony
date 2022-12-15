@@ -3,10 +3,9 @@ import "./mobileNavbar.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../../redux/features/user/userSlice";
-import { AppDispatch } from "../../redux/store";
-import { logout, resetAuth } from "../../redux/features/auth/authSlice";
-import student from "./../../pages/student/student";
+import { reset } from "redux/features/user/userSlice";
+import { AppDispatch, RootState } from "redux/store";
+import { logout, resetAuth } from "redux/features/auth/authSlice";
 
 type INavbar = {
   isMobile?: boolean;
@@ -14,7 +13,7 @@ type INavbar = {
 const Navbar = ({ isMobile }: INavbar): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const navOptions: any = {
     student: [
       {
@@ -228,8 +227,8 @@ const Navbar = ({ isMobile }: INavbar): JSX.Element => {
   };
   return (
     <>
-      {!isMobile ? desktopNavBar() : null}
-      {isMobile ? mobileNavBar() : null}
+      {!isMobile && desktopNavBar()}
+      {isMobile && mobileNavBar()}
     </>
   );
 };

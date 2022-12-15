@@ -145,7 +145,7 @@ export default function Signup() {
 
   return (
     <div className="signup-container">
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner && <Spinner />}
       <Form
         type="signup"
         formInputs={formInputs}

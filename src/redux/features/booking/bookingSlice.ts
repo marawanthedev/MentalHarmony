@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import bookingService from "./bookingService";
-import smartTryCatch from "../../../util/smartTryCatch";
+import smartTryCatch from "util/smartTryCatch";
 import { bookingState } from "./constants";
 
 const initState: bookingState = {

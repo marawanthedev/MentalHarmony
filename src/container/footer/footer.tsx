@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-
 import "./footer.scss";
+
 const Footer = (): JSX.Element => {
   return (
     <footer className="footer">
@@ -24,12 +24,6 @@ const Footer = (): JSX.Element => {
               <li>
                 <Link to="">Browse Service Providers</Link>
               </li>
-              {/* <li>
-                <Link to="">Testimonials</Link>
-              </li>
-              <li>
-                <Link to="">Find a doctor</Link>
-              </li> */}
             </ul>
           </div>
           <div className="footer-col">
@@ -41,9 +35,6 @@ const Footer = (): JSX.Element => {
               <li>
                 <Link to="/signup">Signup</Link>
               </li>
-              {/* <li>
-                <Link to="">Instructions</Link>
-              </li> */}
               <li>
                 <Link to=""></Link>
               </li>

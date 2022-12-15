@@ -1,23 +1,20 @@
 import React from "react";
-import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-import CustomButton from "../../components/button/button";
+import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
+import CustomButton from "components/button/button";
 import { useState, useEffect } from "react";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
-import ManageRequestsRatingPopUp from "../../components/manageRequestRatingPopup/manageRequestRatingPopup";
-import FormPopUp from "../../components/formPopUp/formPopUp";
-import ManageRequestPopUp from "../../components/manageRequestPopUp/manageRequestPopUp";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
+import ManageRequestsRatingPopUp from "components/manageRequestRatingPopup/manageRequestRatingPopup";
+import FormPopUp from "components/formPopUp/formPopUp";
+import ManageRequestPopUp from "components/manageRequestPopUp/manageRequestPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserBooking,
   acceptBooking,
   attachMeetingLink,
   completeBooking,
-} from "../../redux/features/booking/bookingSlice";
-import {
-  TableColumnsInterface,
-  TableRowInterface,
-} from "../../constants/table";
-import { AppDispatch } from "../../redux/store";
+} from "redux/features/booking/bookingSlice";
+import { TableColumnsInterface, TableRowInterface } from "constants/table";
+import { AppDispatch } from "redux/store";
 
 const columns: TableColumnsInterface[] = [
   { id: "name", label: "Student Details", minWidth: 100, align: "center" },
@@ -237,15 +234,9 @@ export default function ManageBookingRequests() {
     return targetedBooking;
   };
 
-  // const getBookingRate = () => {
-  //   const targetedBooking = bookings.find(
-  //     (booking) => booking._id === bookingId
-  //   );
-  //   return targetedBooking.rate;
-  // };
-
   const generateRows = (): TableRowInterface[] => {
     const rows: TableRowInterface[] = [];
+
     // todo convert to booking type when set at redux
     bookings.forEach((row: any) => {
       rows.push({
@@ -256,7 +247,6 @@ export default function ManageBookingRequests() {
       });
     });
 
-    console.log(rows);
     return rows;
   };
 
@@ -282,8 +272,8 @@ export default function ManageBookingRequests() {
         />
       ) : null}
 
-      {showManageRequestPopUp ? getManageRequestPopUp() : null}
-      {showViewRequestDetails ? (
+      {showManageRequestPopUp && getManageRequestPopUp()}
+      {showViewRequestDetails && (
         <FormPopUp
           formTitle="Request Details"
           inputLabel="Scheduled Meeting URL"
@@ -295,7 +285,7 @@ export default function ManageBookingRequests() {
             setBlurTable(false);
           }}
         />
-      ) : null}
+      )}
       <StickyHeadTable
         blur={blurTable ? true : false}
         rows={generateRows()}

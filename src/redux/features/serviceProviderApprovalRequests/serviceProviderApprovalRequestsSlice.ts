@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import approvalRequestsService from "./serviceProviderApprovalRequestsService";
-import smartTryCatch from "../../../util/smartTryCatch";
+import smartTryCatch from "util/smartTryCatch";
 import { ServiceProviderState } from "./constant";
 
 const initState: ServiceProviderState = {

@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-import Template from "../../components/template/template";
-import FlexTwoSlotsRow from "../../components/flex-2-slots-row/flex2SlotsRow";
-import CustomButton from "../../components/button/button";
-import landingUpperIllustration from "../../assets/images/landingupper.webp";
+import Template from "components/template/template";
+import FlexTwoSlotsRow from "components/flex-2-slots-row/flex2SlotsRow";
+import CustomButton from "components/button/button";
+import landingUpperIllustration from "assets/images/landingupper.webp";
 import "./browseServiceProvider.scss";
-import Card from "../../components/card/card";
-import serviceProviderAvatar from "../../assets/images/serviceProviderAvatar.webp";
-import ServiceProviderRequestPopUp from "../../container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
+import Card from "components/card/card";
+import serviceProviderAvatar from "assets/images/serviceProviderAvatar.webp";
+import ServiceProviderRequestPopUp from "container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addBooking } from "../../redux/features/booking/bookingSlice";
-import { getUsersByType } from "../../redux/features/user/userSlice";
-import Spinner from "../../components/spinner/spinner";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
+import { addBooking } from "redux/features/booking/bookingSlice";
+import { getUsersByType } from "redux/features/user/userSlice";
+import Spinner from "components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { toast } from "react-toastify";
-import Protected from "../../util/protected";
+import Protected from "util/protected";
 import { Link } from "react-router-dom";
-import { AppDispatch, RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "redux/store";
 
 export default function BrowseServiceProvider() {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +34,7 @@ export default function BrowseServiceProvider() {
   //   isBookingProcessLoading,
   // } = useSelector((state) => state.bookings);
   //booking requests related
-  
+
   const { isBookingProcessLoading } = useSelector(
     (state: RootState) => state.bookings
   );
@@ -89,7 +89,7 @@ export default function BrowseServiceProvider() {
                 style={{
                   backgroundImage: `url(${serviceProviderAvatar})`,
                 }}
-              ></div>
+              />
               <div className="browseServices__card__upper__name">
                 {serviceProvider.name}
               </div>
@@ -144,7 +144,7 @@ export default function BrowseServiceProvider() {
           </div>
         </div>
         <div className="browse-service-provider-cards-container">
-          {blurCardsContainer ? (
+          {blurCardsContainer && (
             <ServiceProviderRequestPopUp
               selectedCard={{ ...selectedCard, avatar: serviceProviderAvatar }}
               closePopUpCallBack={() => {
@@ -157,10 +157,8 @@ export default function BrowseServiceProvider() {
                 }
               }}
             />
-          ) : null}
-          <div
-            className={`cards-container ${blurCardsContainer ? "blur" : null}`}
-          >
+          )}
+          <div className={`cards-container ${blurCardsContainer && "blur"}`}>
             {manageSpCardRendering()}
           </div>
         </div>

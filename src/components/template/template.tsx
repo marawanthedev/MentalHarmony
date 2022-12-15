@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../../container/navbar/navbar";
+import Navbar from "container/navbar/navbar";
 import "./template.scss";
-import Footer from "../../container/footer/footer";
+import Footer from "container/footer/footer";
 
 type ITemplate = {
   children: any;

@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-import StickyHeadTable from "../../components/StickyHeadTable/StickyHeadTable";
-// import AvatarText from "../../components/avatarText/avatarText";
-import CustomButton from "../../components/button/button";
+import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
+import CustomButton from "components/button/button";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getApprovalRequests,
   acceptApprovalRequest,
-} from "../../redux/features/serviceProviderApprovalRequests/serviceProviderApprovalRequestsSlice";
-import Spinner from "../../components/spinner/spinner";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import { AppDispatch } from "../../redux/store";
+} from "redux/features/serviceProviderApprovalRequests/serviceProviderApprovalRequestsSlice";
+import Spinner from "components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import { AppDispatch, RootState } from "redux/store";
 
 const columns = [
   { id: "name", label: "Details", minWidth: 100 },
@@ -38,7 +37,7 @@ const columns = [
 export default function ManageServiceProviderApprovalRequests() {
   const dispatch = useDispatch<AppDispatch>();
   const { approvalRequests, isSuccess, isLoading, isError } = useSelector(
-    (state: any) => state.serviceProviderApprovalRequest
+    (state: RootState) => state.serviceProviderApprovalRequest
   );
 
   /*eslint-disable */
@@ -93,7 +92,7 @@ export default function ManageServiceProviderApprovalRequests() {
 
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner && <Spinner />}
 
       <StickyHeadTable rows={generateRows()} cols={columns} />
     </>

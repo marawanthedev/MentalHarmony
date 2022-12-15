@@ -1,5 +1,4 @@
 import React from "react";
-// import avatar from "../../assets/images/avatar.webp";
 import "./avatarText.scss";
 
 interface AvatarTextProps {

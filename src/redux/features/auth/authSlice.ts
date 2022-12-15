@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-import smartTryCatch from "../../../util/smartTryCatch";
+import smartTryCatch from "util/smartTryCatch";
 import { authState } from "./constant";
 
 type IRegisterUser = {

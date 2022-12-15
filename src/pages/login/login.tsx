@@ -68,7 +68,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner && <Spinner />}
       <div className="login-container">
         <Form
           type="login"

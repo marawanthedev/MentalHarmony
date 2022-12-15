@@ -1,6 +1,6 @@
 import "./testimonalCard.scss";
-import avatar from "../../assets/images/avatar.webp";
-import { Testimonial } from "../../constants/testiomnials";
+import avatar from "assets/images/avatar.webp";
+import { Testimonial } from "constants/testiomnials";
 
 type ITestimonalCard = {
   testimonial: Testimonial;

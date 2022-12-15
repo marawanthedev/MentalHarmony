@@ -1,23 +1,24 @@
 import React, { useEffect } from "react";
-import FeelingPopUp from "../../components/feelingPopUp/feelingPopUp";
+import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
 import { useState } from "react";
-import FormPopUp from "../../components/formPopUp/formPopUp";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+import FormPopUp from "components/formPopUp/formPopUp";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import Spinner from "../../components/spinner/spinner";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import Spinner from "components/spinner/spinner";
 import {
   addArticleAttachment,
   getArticles,
   reset,
-} from "../../redux/features/dailyPopUp/dailyPopUpSlice";
+} from "redux/features/dailyPopUp/dailyPopUpSlice";
+import { AppDispatch } from "redux/store";
 
 export default function AttachUsefulArticles() {
   const [formVisiblity, setFormVisiblity] = useState<boolean>(true);
   const [showArticleAttachmentForm, setshowArticleAttachmentForm] =
     useState<boolean>(false);
   const [selectedFeeling, setSelectedFeeling] = useState<any>("");
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const {
     articleAttachments,
@@ -38,7 +39,7 @@ export default function AttachUsefulArticles() {
   /*eslint-disable */
   useEffect(() => {
     // todo see whats wrong with redux dispatch in ts
-    // dispatch(getArticles());
+    dispatch(getArticles());
     dispatch(reset());
   }, []);
   /*eslint-enable */
@@ -74,17 +75,14 @@ export default function AttachUsefulArticles() {
           initialValue={
             existingAttachment ? existingAttachment.article_url : null
           }
-          // todo remove the any
-          submitCallback={(formInput: any) => {
+          submitCallback={(formInput: string) => {
             setshowArticleAttachmentForm(false);
-
-            // todo fix redux dispatch
-            // dispatch(
-            //   addArticleAttachment({
-            //     article_url: formInput,
-            //     article_feeling_relation: selectedFeeling.text,
-            //   })
-            // );
+            dispatch(
+              addArticleAttachment({
+                article_url: formInput,
+                article_feeling_relation: selectedFeeling.text,
+              })
+            );
           }}
           closeBtnCallback={() => {
             setFormVisiblity(true);
@@ -97,16 +95,17 @@ export default function AttachUsefulArticles() {
   return (
     <>
       {showSpinner ? <Spinner /> : null}
-      {isFormSuccess || isFormError ? (
-        <StatusPopUp
-          success={isFormSuccess ? true : false}
-          closeBtnOnClick={() => {
-            // setFormVisiblity(true);
-            setshowArticleAttachmentForm(false);
-            dispatch(reset());
-          }}
-        />
-      ) : null}
+      {isFormSuccess ||
+        (isFormError && (
+          <StatusPopUp
+            success={isFormSuccess ? true : false}
+            closeBtnOnClick={() => {
+              // setFormVisiblity(true);
+              setshowArticleAttachmentForm(false);
+              dispatch(reset());
+            }}
+          />
+        ))}
       {handleRendering()}
     </>
   );

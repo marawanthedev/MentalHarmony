@@ -1,5 +1,5 @@
 import React from "react";
-import RatingPopUp from "../ratingPopUp/ratingPopUp";
+import RatingPopUp from "components/ratingPopUp/ratingPopUp";
 
 type ManageRequestsRatingPopUpProps = {
   // tableTitle: string;

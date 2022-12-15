@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import ProfileForm from "../../components/profileForm/profileForm";
+import ProfileForm from "components/profileForm/profileForm";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, updateUser } from "../../redux/features/user/userSlice";
+import { getUser, updateUser } from "redux/features/user/userSlice";
 import { toast } from "react-toastify";
-import Spinner from "../../components/spinner/spinner";
-import Template from "../../components/template/template";
-import useApiCallStatusNotificationHandler from "../../util/apiCallStatusHandler";
-import Protected from "../../util/protected";
-import { AppDispatch } from "../../redux/store";
-import { useHistory } from 'react-router-dom';
+import Spinner from "components/spinner/spinner";
+import Template from "components/template/template";
+import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
+import Protected from "util/protected";
+import { AppDispatch, RootState } from "redux/store";
+import { useHistory } from "react-router-dom";
 
 export default function Profile() {
   const history = useHistory();
   const dispatch = useDispatch<AppDispatch>();
   const storedUser = JSON.parse(localStorage.getItem("user") || "");
   const { user, isError, isSuccess, isLoading } = useSelector(
-    (state: any) => state.user
+    (state: RootState) => state.user
   );
   const [formInputs, setFormInputs] = useState([]);
 
@@ -38,7 +38,7 @@ export default function Profile() {
     return key;
   };
 
-  const isFormValid = (userInfo:any) => {
+  const isFormValid = (userInfo: any) => {
     let valid = true;
 
     Object.keys(userInfo).forEach((key) => {
@@ -52,7 +52,7 @@ export default function Profile() {
     });
     return valid;
   };
-  const handleFormSubmission = (userInfo:any) => {
+  const handleFormSubmission = (userInfo: any) => {
     const isValid = isFormValid(userInfo);
     // const isValid = true;
     if (isValid) {
@@ -100,8 +100,8 @@ export default function Profile() {
   return (
     <>
       <Protected>
-        {showSpinner ? <Spinner /> : null}
-        {formInputs ? (
+        {showSpinner && <Spinner />}
+        {formInputs && (
           <Template>
             <ProfileForm
               formInputs={getFormInputs()}
@@ -111,7 +111,7 @@ export default function Profile() {
               formSubmissionCallBack={handleFormSubmission}
             />
           </Template>
-        ) : null}
+        )}
       </Protected>
     </>
   );

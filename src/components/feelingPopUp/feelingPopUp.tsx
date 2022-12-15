@@ -1,13 +1,13 @@
 import React from "react";
 import "./feelingPopUp.scss";
-import CustomButton from "../button/button";
-import sadIcon from "../../assets/images/loudly-crying-face.webp";
-import unsureIcon from "../../assets/images/neutral-face.webp";
-import goodIcon from "../../assets/images/smiling-face-with-smiling-eyes.webp";
-import happyIcon from "../../assets/images/happy-face-with-enlarged-eyes.webp";
-import CloseBtn from "../closeBtn/closeBtn";
+import CustomButton from "components/button/button";
+import sadIcon from "assets/images/loudly-crying-face.webp";
+import unsureIcon from "assets/images/neutral-face.webp";
+import goodIcon from "assets/images/smiling-face-with-smiling-eyes.webp";
+import happyIcon from "assets/images/happy-face-with-enlarged-eyes.webp";
+import CloseBtn from "components/closeBtn/closeBtn";
 import { useState } from "react";
-import { IFeeling } from "../../constants/Feeling";
+import { IFeeling } from "constants/Feeling";
 
 type FeelingPopUpProp = {
   closeBtnCallBack?: Function;
@@ -46,11 +46,11 @@ export default function FeelingPopUp({
   ];
   return (
     <div className={`feeling-popup animate__animated animate__fadeIn `}>
-      {showCloseBtn !== false ? (
+      {showCloseBtn !== false && (
         <CloseBtn
           onClick={() => (closeBtnCallBack ? closeBtnCallBack() : null)}
         />
-      ) : null}
+      )}
 
       <h1 className="popup-header mt-1 mb-1">Daily popup</h1>
       <p className="popup-paragraph">
@@ -60,9 +60,8 @@ export default function FeelingPopUp({
         {feelingsList.map((feeling: any, index: number) => (
           <div
             className={`feeling-popup__feeling ${
-              index === selectedFeelingIndex
-                ? "feeling-popup__feeling__selected"
-                : null
+              index === selectedFeelingIndex &&
+              "feeling-popup__feeling__selected"
             }`}
             key={index}
             onClick={() => {

@@ -1,8 +1,8 @@
 import React from "react";
-import successImg from "../../assets/images/checked.webp";
-import failedImg from "../../assets/images/cancel.webp";
-import CloseBtn from "../closeBtn/closeBtn";
-import CustomButton from "../button/button";
+import successImg from "assets/images/checked.webp";
+import failedImg from "assets/images/cancel.webp";
+import CloseBtn from "components/closeBtn/closeBtn";
+import CustomButton from "components/button/button";
 import "./statusPopUp.scss";
 import { useHistory } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export default function StatusPopUp({
         }}
       />
 
-      <CloseBtn onClick={closeBtnOnClick}></CloseBtn>
+      <CloseBtn onClick={closeBtnOnClick} />
 
       <div className="popup-header mt-4">{success ? "success" : "failed"}</div>
       <div className="popup-paragraph mt-2">

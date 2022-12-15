@@ -7,7 +7,6 @@ type CustomButtonProps = {
   color: string;
   boxShadow?: string;
   className?: string;
-  // todo be updated
   type?: any;
   displayType: string;
   width: string;
@@ -15,7 +14,6 @@ type CustomButtonProps = {
   margin?: string;
   icon?: string;
   borderRadius?: string;
-  //todo
   onClick?: Function;
   iconPosition?: string;
   iconWidth?: string;
@@ -86,14 +84,14 @@ const CustomButton = ({
       style={style}
     >
       {innerText}
-      {icon ? (
+      {icon && (
         <img
           className="custom-button__icon"
           src={icon}
           alt="icon"
           style={styleIcon}
-        ></img>
-      ) : null}
+        />
+      )}
     </button>
   );
 };

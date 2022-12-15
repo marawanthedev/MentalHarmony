@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import dailyPopUpService from "./dailyPopUpService";
-import smartTryCatch from "../../../util/smartTryCatch";
+import smartTryCatch from "util/smartTryCatch";
 import { DailyPopUpState } from "./constant";
 
 const initState: DailyPopUpState = {
@@ -14,7 +14,13 @@ const initState: DailyPopUpState = {
 
 export const addArticleAttachment = createAsyncThunk(
   "articleAttachment",
-  async (data, thunkAPI) => {
+  async (
+    data: {
+      article_url: string;
+      article_feeling_relation: string;
+    },
+    thunkAPI
+  ) => {
     return await smartTryCatch({
       callback: dailyPopUpService.addArticleAttachment,
       callbackParams: data,
@@ -35,7 +41,7 @@ export const getArticles = createAsyncThunk(
 
 export const submitFeeling = createAsyncThunk(
   "submitFeeling",
-  async (feeling:string, thunkAPI) => {
+  async (feeling: string, thunkAPI) => {
     return await smartTryCatch({
       callback: dailyPopUpService.submitFeeling,
       callbackParams: feeling,

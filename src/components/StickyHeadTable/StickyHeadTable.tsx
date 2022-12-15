@@ -11,7 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import {
   TableColumnsInterface,
   TableRowInterface,
-} from "../../constants/table";
+} from "constants/table";
 
 const useStyles = makeStyles({
   root: {

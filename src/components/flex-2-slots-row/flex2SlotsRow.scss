@@ -10,6 +10,7 @@
   &__reverse {
     flex-direction: row-reverse;
   }
+
   &__side {
     width: 50%;
     height: 100%;
@@ -19,10 +20,9 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      // justify-content: center;
-      // align-items: flex-start;
     }
   }
+
   &__illustration {
     width: 60rem;
     height: 60rem;
@@ -31,28 +31,34 @@
       width: 50rem;
       height: 50rem;
     }
+
     @media (max-width: 1240px) {
       width: 45rem;
       height: 45rem;
     }
+
     @media (max-width: 1100px) {
       width: 40rem;
       height: 40rem;
     }
+
     @media (max-width: 1000px) {
       width: 37.5rem;
       height: 37.5rem;
     }
+
     @media (max-width: 900px) {
       width: 35rem;
       height: 35rem;
     }
+
     @media (max-width: 767px) {
       width: 50rem;
       height: 50rem;
       align-self: center;
     }
   }
+
   &__content-side {
     margin-left: 4rem;
 
@@ -62,6 +68,7 @@
       line-height: 5.6rem;
       font-weight: 700;
       margin-bottom: 6rem;
+
       &::after {
         content: "";
         position: absolute;
@@ -71,11 +78,13 @@
         bottom: -2rem;
         left: 0;
       }
+
       @media (max-width: 1200px) {
         font-size: 3rem;
         line-height: 5rem;
       }
     }
+
     &__paragraph {
       @include secondary-text(1.8rem, 3rem);
       height: 12rem;
@@ -83,17 +92,19 @@
 
       @media (max-width: 1100px) {
         height: 15rem;
-        // @include secondary-text(1.5rem, rem);
       }
+
       @media (max-width: 1000px) {
         height: 12rem;
         @include secondary-text(1.5rem, 2.5rem);
       }
     }
+
     @media (max-width: 767px) {
       margin-left: 0;
     }
   }
+
   &__reverse &__content-side {
     margin-left: 0;
   }

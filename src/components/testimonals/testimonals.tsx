@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./testimonals.css";
-import { Testimonial } from "../../constants/testiomnials";
+import { Testimonial } from "constants/testiomnials";
 // import PrevArrowIcon from "../../assets/svg/prevArrow.svg";
 // import NextArrowIcon from "../../assets/svg/nextArrow.svg";
-import TestimonalCard from "../testimonalCard/testimonalCard";
+import TestimonalCard from "components/testimonalCard/testimonalCard";
 
 // function PrevArrow(props) {
 //   const { className, style, onClick } = props;

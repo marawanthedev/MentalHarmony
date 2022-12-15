@@ -1,9 +1,9 @@
 import "./serviceProviderRequestPopUp.scss";
 import React from "react";
-import CustomButton from "../../components/button/button";
+import CustomButton from "components/button/button";
 import { useState } from "react";
-import CloseBtn from "../../components/closeBtn/closeBtn";
-import StatusPopUp from "../../components/statusPopUp/statusPopUp";
+import CloseBtn from "components/closeBtn/closeBtn";
+import StatusPopUp from "components/statusPopUp/statusPopUp";
 
 type IServiceProviderRequestPopUpProps = {
   selectedCard: any;
