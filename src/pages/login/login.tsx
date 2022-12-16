@@ -1,20 +1,40 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Form from "container/form/form";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { login, resetAuth } from "redux/features/auth/authSlice";
 import { useEffect } from "react";
 import Spinner from "components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
 import "./login.scss";
-export default function Login() {
+
+function mapState(state: RootState) {
+  return { ...selectAuthState(state) };
+}
+const mapDispatch = {
+  login,
+  resetAuth,
+};
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux {
+  // include component props
+}
+
+function Login({
+  user,
+  isLoading,
+  isError,
+  isSuccess,
+  login,
+  resetAuth,
+}: Props) {
   let history = useHistory();
-  const { user, isLoading, isError, isSuccess } = useSelector(
-    (state: RootState) => state.auth
-  );
-  const dispatch = useDispatch<AppDispatch>();
 
   const formInputs = [
     {
@@ -47,9 +67,7 @@ export default function Login() {
     },
   ];
 
-  const handleSubmit = (userInfo: any) => {
-    dispatch(login(userInfo));
-  };
+  const handleSubmit = (userInfo: any) => login(userInfo);
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
@@ -63,8 +81,8 @@ export default function Login() {
 
   useEffect(() => {
     //reseting submission status
-    dispatch(resetAuth());
-  }, [user, isError, isSuccess, isLoading, dispatch, history]);
+    resetAuth();
+  }, [user, isError, isSuccess, isLoading, history]);
 
   return (
     <div className="login-container">
@@ -81,3 +99,6 @@ export default function Login() {
     </div>
   );
 }
+
+export { Login }; // unconnected version
+export default connector(Login); // connection version
