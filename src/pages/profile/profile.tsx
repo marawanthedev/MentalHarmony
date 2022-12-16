@@ -66,10 +66,8 @@ export default function Profile() {
     }
   };
 
-  const getFormInputs = () => {
-    console.log(formInputs);
-    return formInputs;
-  };
+  const getFormInputs = () => formInputs;
+
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
     isLoading,
