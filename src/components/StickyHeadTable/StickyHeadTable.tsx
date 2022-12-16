@@ -8,10 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import {
-  TableColumnsInterface,
-  TableRowInterface,
-} from "constants/table";
+import { TableColumnsInterface, TableRowInterface } from "constants/table";
 
 const useStyles = makeStyles({
   root: {
@@ -87,12 +84,12 @@ export default function StickyHeadTable({
     setRowsPerPage(value ? +value : rowsPerPage);
     setPage(0);
   };
-
+  
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table
-          className={blur && classes?.blur}
+          className={blur ? classes?.blur : null}
           stickyHeader
           aria-label="sticky table"
         >
@@ -113,13 +110,13 @@ export default function StickyHeadTable({
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row: any) => {
+              .map((row: any, index: number) => {
                 return (
                   <TableRow
                     className={classes.row}
                     role="checkbox"
                     tabIndex={-1}
-                    key={row?.code}
+                    key={index}
                   >
                     {cols.map((column: TableColumnsInterface) => {
                       const value = row[column.id];
