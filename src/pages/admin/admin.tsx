@@ -15,22 +15,22 @@ export default function Admin() {
     {
       text: "Remove service provider",
       icon: Minus,
-      getTabComponent: () => RemoveServiceProvider,
+      getTabComponentRender: RemoveServiceProvider,
     },
     {
       text: "View University students",
       icon: eye,
-      getTabComponent: () => ViewUniStudentsTab,
+      getTabComponentRender: ViewUniStudentsTab,
     },
     {
       text: "Attach useful articles",
       icon: attach,
-      getTabComponent: () => AttachUsefulArticles,
+      getTabComponentRender: AttachUsefulArticles,
     },
     {
       text: "Manage Pending Service provider Request",
       icon: ManageApprovalRequestsIcon,
-      getTabComponent: () => ManageServiceProviderApprovalRequests,
+      getTabComponentRender: ManageServiceProviderApprovalRequests,
     },
   ];
   return (
