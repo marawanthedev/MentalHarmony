@@ -1,10 +1,10 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsersByType } from "redux/features/user/userSlice";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Spinner from "components/spinner/spinner";
-import { AppDispatch } from "redux/store";
+import { AppDispatch, RootState } from "redux/store";
 
 const columns: any = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -31,15 +31,15 @@ const columns: any = [
   },
 ];
 
-//**  sample of using avatar
-// details: <AvatarText text="Tom Cruise" />,
-
 export default function ViewUniStudentsTab() {
+
+
   const dispatch = useDispatch<AppDispatch>();
 
   const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
-    (state: any) => state.user
+    (state: RootState) => state.user
   );
+  
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
     isLoading,
@@ -47,6 +47,7 @@ export default function ViewUniStudentsTab() {
   });
 
   useEffect(() => {
+    console.log("attempting to render")
     if (isLoading !== true) {
       dispatch(getUsersByType("student"));
     }
@@ -54,8 +55,8 @@ export default function ViewUniStudentsTab() {
 
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
-      <StickyHeadTable rows={filteredUsers} cols={columns}  />
+      {showSpinner && <Spinner />}
+      {filteredUsers && <StickyHeadTable rows={filteredUsers} cols={columns} />}
     </>
   );
 }
