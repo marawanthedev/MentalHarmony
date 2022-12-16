@@ -16,7 +16,7 @@ export default function ServiceProvider() {
   return (
     <>
       <Protected userType="serviceprovider">
-        <Templatev2 tabs={tabs}></Templatev2>
+        <Templatev2 tabs={tabs} />
       </Protected>
     </>
   );
