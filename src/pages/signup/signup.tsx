@@ -3,20 +3,40 @@ import "./signup.scss";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Form from "container/form/form";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect, ConnectedProps } from "react-redux";
 import { register, resetAuth } from "redux/features/auth/authSlice";
 import Spinner from "components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { AppDispatch, RootState } from "redux/store";
 import ObjectCleanse from "util/objectCleanse";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
-export default function Signup() {
+function mapState(state: RootState) {
+  return { ...selectAuthState(state) };
+}
+const mapDispatch = {
+  register,
+  resetAuth,
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux {
+  // include component props
+}
+
+function Signup({
+  register,
+  resetAuth,
+  user,
+  isLoading,
+  isError,
+  isSuccess,
+}: Props) {
   let history = useHistory();
-  const dispatch = useDispatch<AppDispatch>();
-  // similar to props and stating the part of store to look at
-  const { user, isLoading, isError, isSuccess } = useSelector(
-    (state: RootState) => state.auth
-  );
+
   const [userType, setUserType] = useState("student");
   let checkBoxValue = false;
 
@@ -82,7 +102,6 @@ export default function Signup() {
       customLabel: "Is service provider",
       className: "isServiceProvider form__right-side__innerForm__input-group",
     },
-    // ...alternatingInputs[userType],
   ];
 
   const formButtons = [
@@ -122,7 +141,8 @@ export default function Signup() {
       type: userType,
     };
 
-    dispatch(register(ObjectCleanse(user)));
+    // dispatch(register(ObjectCleanse(user)));
+    register(ObjectCleanse(user));
   };
 
   useEffect(() => {}, [userType]);
@@ -139,9 +159,10 @@ export default function Signup() {
   useEffect(() => {
     //reset-ing submission status
     setTimeout(() => {
-      dispatch(resetAuth());
+      // dispatch(resetAuth());
+      resetAuth();
     }, 2000);
-  }, [user, isError, isSuccess, isLoading, dispatch, history]);
+  }, [user, isError, isSuccess, isLoading, history]);
 
   return (
     <div className="signup-container">
@@ -158,3 +179,7 @@ export default function Signup() {
     </div>
   );
 }
+
+export { Signup }; //unconnected version
+
+export default connector(Signup); //conncted version
