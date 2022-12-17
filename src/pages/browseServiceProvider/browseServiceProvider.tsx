@@ -8,7 +8,7 @@ import Card from "components/card/card";
 import serviceProviderAvatar from "assets/images/serviceProviderAvatar.webp";
 import ServiceProviderRequestPopUp from "container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { ConnectedProps, connect } from "react-redux";
 import { addBooking } from "redux/features/booking/bookingSlice";
 import { getUsersByType } from "redux/features/user/userSlice";
 import Spinner from "components/spinner/spinner";
@@ -16,28 +16,34 @@ import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { toast } from "react-toastify";
 import Protected from "util/protected";
 import { Link } from "react-router-dom";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
+import { selectUserState } from "redux/features/user/userSelector";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
-export default function BrowseServiceProvider() {
-  const dispatch = useDispatch<AppDispatch>();
+function mapState(state: RootState) {
+  return { ...selectUserState(state), userInAuth: selectAuthState(state).user };
+}
+const mapDispatch = {
+  addBooking,
+  getUsersByType,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function BrowseServiceProvider({
+  filteredUsers,
+  isSuccess,
+  isLoading,
+  isError,
+  userInAuth,
+  addBooking,
+  getUsersByType,
+}: PropsFromRedux) {
   //cards rendering related
-  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
-    (state: RootState) => state.user
-  );
 
   // getting current user in auth state var
-
-  const { user: userInAuth } = useSelector((state: RootState) => state.auth);
-  // const {
-  //   isBookingProcessSuccess,
-  //   isBookingProcessError,
-  //   isBookingProcessLoading,
-  // } = useSelector((state) => state.bookings);
-  //booking requests related
-
-  const { isBookingProcessLoading } = useSelector(
-    (state: RootState) => state.bookings
-  );
 
   const [selectedCard, setSelectedCard] = useState<{ _id?: number }>({});
   const [blurCardsContainer, setBlurCardsContainer] = useState<boolean>(false);
@@ -48,7 +54,7 @@ export default function BrowseServiceProvider() {
   /*eslint-disable */
   useEffect(() => {
     if (isLoading !== true) {
-      dispatch(getUsersByType("serviceprovider"));
+      getUsersByType("serviceprovider");
     }
   }, []);
   /*eslint-enable */
@@ -60,7 +66,7 @@ export default function BrowseServiceProvider() {
   //   isError,
   // });
 
-  useEffect(() => {}, [filteredUsers, isError, isSuccess, isLoading, dispatch]);
+  useEffect(() => {}, [filteredUsers, isError, isSuccess, isLoading]);
 
   const manageSpCardRendering = () => {
     if (filteredUsers && filteredUsers.length > 0) {
@@ -72,7 +78,6 @@ export default function BrowseServiceProvider() {
             paragraph={serviceProvider.description}
             customClass={"browseServices__card"}
             onClick={() => {
-              console.log(userInAuth);
               if (userInAuth && userInAuth.type === "student") {
                 setBlurCardsContainer(true);
                 setSelectedCard(serviceProvider);
@@ -102,7 +107,7 @@ export default function BrowseServiceProvider() {
 
   return (
     <Template>
-      <Protected userType="student">
+      <Protected>
         {/* todo */}
         {/* {showSpinner || isBookingProcessLoading ? <Spinner /> : null} */}
         <div className="custom-container">
@@ -152,9 +157,8 @@ export default function BrowseServiceProvider() {
                 setBlurCardsContainer(false);
               }}
               submitCallBack={() => {
-                if (selectedCard?._id) {
-                  dispatch(addBooking({ serviceProvider: selectedCard?._id }));
-                }
+                if (selectedCard?._id)
+                  addBooking({ serviceProvider: selectedCard?._id });
               }}
             />
           )}
@@ -166,3 +170,6 @@ export default function BrowseServiceProvider() {
     </Template>
   );
 }
+
+export { BrowseServiceProvider }; // un-connected version
+export default connector(BrowseServiceProvider); // connected version

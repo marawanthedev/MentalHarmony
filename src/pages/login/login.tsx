@@ -101,4 +101,4 @@ function Login({
 }
 
 export { Login }; // unconnected version
-export default connector(Login); // connection version
+export default connector(Login); // connection

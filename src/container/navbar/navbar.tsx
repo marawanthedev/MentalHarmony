@@ -2,18 +2,31 @@ import "./navbar.scss";
 import "./mobileNavbar.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { reset } from "redux/features/user/userSlice";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
 import { logout, resetAuth } from "redux/features/auth/authSlice";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
-type INavbar = {
-  isMobile?: boolean;
+function mapState(state: RootState) {
+  return { ...selectAuthState(state) };
+}
+const mapDispatch = {
+  logout,
+  resetAuth,
 };
-const Navbar = ({ isMobile }: INavbar): JSX.Element => {
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends PropsFromRedux {
+  isMobile?: boolean;
+}
+
+const Navbar = ({ isMobile, user, logout, resetAuth }: Props): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector((state: RootState) => state.auth);
+
   const navOptions: any = {
     student: [
       {
@@ -99,9 +112,9 @@ const Navbar = ({ isMobile }: INavbar): JSX.Element => {
         requiresAuth: true,
         hideIfAuthed: false,
         onClickCallBack: () => {
-          dispatch(logout());
-          dispatch(resetAuth());
-          dispatch(reset());
+          logout();
+          resetAuth();
+          reset();
         },
       },
     ],
@@ -235,4 +248,5 @@ const Navbar = ({ isMobile }: INavbar): JSX.Element => {
 
 // nested destructuring
 
-export default Navbar;
+export { Navbar }; // un-connected version
+export default connector(Navbar); // connected version

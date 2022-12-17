@@ -4,11 +4,12 @@ import CustomButton from "components/button/button";
 import DialogPopUp from "components/dialogPopUp/dialogPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType, deleteUser } from "redux/features/user/userSlice";
 import Spinner from "components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import { AppDispatch } from "redux/store";
+import { RootState } from "redux/store";
+import { selectUserState } from "redux/features/user/userSelector";
 
 const columns = [
   { id: "name", label: "Details", minWidth: 100 },
@@ -42,17 +43,33 @@ const columns = [
   },
 ];
 
-export default function RemoveServiceProvider() {
+function mapState(state: RootState) {
+  return { ...selectUserState(state) };
+}
+const mapDispatch = {
+  getUsersByType,
+  deleteUser,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function RemoveServiceProvider({
+  filteredUsers,
+  isSuccess,
+  isLoading,
+  isError,
+  getUsersByType,
+  deleteUser,
+}: PropsFromRedux) {
   const [showDialog, setShowDialog] = useState(false);
   const [blurTable, setBlurTable] = useState(false);
   const [showConfirmPopUp, setShowConfirmPopUp] = useState(false);
-  const dispatch = useDispatch<AppDispatch>();
-  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
-    (state: any) => state.user
-  );
+
   useEffect(() => {
     if (!isLoading) {
-      dispatch(getUsersByType("serviceprovider"));
+      getUsersByType("serviceprovider");
     }
   }, []);
 
@@ -68,7 +85,7 @@ export default function RemoveServiceProvider() {
   const generateRows = () => {
     let rows: any = [];
 
-    filteredUsers.forEach((row: any, index: number) => {
+    filteredUsers?.forEach((row: any, index: number) => {
       rows[index] = {
         ...row,
         action: (
@@ -84,7 +101,7 @@ export default function RemoveServiceProvider() {
             fontSize="1.1rem"
             borderRadius="2.5rem"
             onClick={() => {
-              dispatch(deleteUser(row._id));
+              deleteUser(row._id);
               setTimeout(() => window.location.reload(), 1200);
             }}
           />
@@ -125,3 +142,6 @@ export default function RemoveServiceProvider() {
     </>
   );
 }
+
+export { RemoveServiceProvider }; // un-connected version
+export default connector(RemoveServiceProvider); // connected version

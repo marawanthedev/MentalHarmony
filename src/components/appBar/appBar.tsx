@@ -2,17 +2,15 @@ import React from "react";
 import "./appBar.scss";
 import AvatarText from "components/avatarText/avatarText";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "redux/store";
 
-type AppBarProps = {
+interface Props {
+  // include component props
   header: string;
   name: string;
-};
+  user: any;
+}
 
-export default function AppBar({ header, name }: AppBarProps) {
-  const { user } = useSelector((state: RootState) => state.auth);
-
+function AppBar({ header, name, user }: Props) {
   return (
     <div className="app-bar">
       <div className="app-bar__header">{header}</div>
@@ -25,3 +23,5 @@ export default function AppBar({ header, name }: AppBarProps) {
     </div>
   );
 }
+
+export default AppBar;

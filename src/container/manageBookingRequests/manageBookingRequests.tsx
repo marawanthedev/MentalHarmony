@@ -6,7 +6,7 @@ import StatusPopUp from "components/statusPopUp/statusPopUp";
 import ManageRequestsRatingPopUp from "components/manageRequestRatingPopup/manageRequestRatingPopup";
 import FormPopUp from "components/formPopUp/formPopUp";
 import ManageRequestPopUp from "components/manageRequestPopUp/manageRequestPopUp";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import {
   getUserBooking,
   acceptBooking,
@@ -14,7 +14,8 @@ import {
   completeBooking,
 } from "redux/features/booking/bookingSlice";
 import { TableColumnsInterface, TableRowInterface } from "constants/table";
-import { AppDispatch } from "redux/store";
+import { RootState } from "redux/store";
+import { selectBookingState } from "redux/features/booking/bookingSelector";
 
 const columns: TableColumnsInterface[] = [
   { id: "name", label: "Student Details", minWidth: 100, align: "center" },
@@ -45,8 +46,28 @@ const columns: TableColumnsInterface[] = [
   },
 ];
 
-export default function ManageBookingRequests() {
-  const dispatch = useDispatch<AppDispatch>();
+function mapState(state: RootState) {
+  return { ...selectBookingState(state) };
+}
+
+const mapDispatch = {
+  getUserBooking,
+  acceptBooking,
+  attachMeetingLink,
+  completeBooking,
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function ManageBookingRequests({
+  bookings,
+  getUserBooking,
+  acceptBooking,
+  attachMeetingLink,
+  completeBooking,
+}: PropsFromRedux) {
   const [showRatingPopUp, setShowRatingPopUp] = useState(false);
   const [showStatusPopup, setShowStatusPopUp] = useState(false);
   const [showViewRequestDetails, setShowRequestDetails] = useState(false);
@@ -55,16 +76,8 @@ export default function ManageBookingRequests() {
   const [selectedBookingId, setSelectedBookingId] = useState<number>();
   const [bookingRequestStatus, setBookingRequestStatus] = useState<string>("");
 
-  const {
-    bookings,
-    isBookingProcessError,
-    isBookingProcessSuccess,
-    isBookingProcessLoading,
-    // todo update state type
-  } = useSelector((state: any) => state.bookings);
-
   useEffect((): void => {
-    dispatch(getUserBooking());
+    getUserBooking();
   }, []);
 
   //todo update param
@@ -139,7 +152,7 @@ export default function ManageBookingRequests() {
             setShowManageRequestPopUp(false);
             //dispatch to api
             if (selectedBookingId) {
-              dispatch(acceptBooking(selectedBookingId));
+              acceptBooking(selectedBookingId);
             }
             setTimeout(() => window.location.reload(), 1500);
           },
@@ -166,7 +179,7 @@ export default function ManageBookingRequests() {
             setShowManageRequestPopUp(false);
 
             if (selectedBookingId) {
-              dispatch(completeBooking(selectedBookingId));
+              completeBooking(selectedBookingId);
             }
             //could be improved later on
             setTimeout(() => window.location.reload(), 1500);
@@ -217,9 +230,7 @@ export default function ManageBookingRequests() {
 
     // dispatch to api
     if (selectedBookingId && meeting_link) {
-      dispatch(
-        attachMeetingLink({ bookingId: selectedBookingId, meeting_link })
-      );
+      attachMeetingLink({ bookingId: selectedBookingId, meeting_link });
     }
 
     //could be improved later on
@@ -228,7 +239,7 @@ export default function ManageBookingRequests() {
 
   const getBooking = () => {
     // todo update type
-    const targetedBooking = bookings.find(
+    const targetedBooking = bookings?.find(
       (booking: any) => booking._id === selectedBookingId
     );
     return targetedBooking;
@@ -238,7 +249,7 @@ export default function ManageBookingRequests() {
     const rows: TableRowInterface[] = [];
 
     // todo convert to booking type when set at redux
-    bookings.forEach((row: any) => {
+    bookings?.forEach((row: any) => {
       rows.push({
         name: row.student.name,
         phone_number: row.student.phone_number,
@@ -294,3 +305,6 @@ export default function ManageBookingRequests() {
     </>
   );
 }
+
+export { ManageBookingRequests }; // un-connected version
+export default connector(ManageBookingRequests); // connected version

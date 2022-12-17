@@ -3,19 +3,24 @@ import "./templatev2.scss";
 import SideNav from "components/sideNav/sideNav";
 import AppBar from "components/appBar/appBar";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { tab } from "constants/tab";
 import { RootState } from "redux/store";
-import ViewUniStudentsTab from "container/viewUniStudentsTab/viewUniStudentsTab";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
-type Templatev2Props = {
+function mapState(state: RootState) {
+  return { ...selectAuthState(state) };
+}
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface Props extends Partial<PropsFromRedux> {
   tabs: Array<tab>;
-};
-
-export default function Templatev2({ tabs }: Templatev2Props): JSX.Element {
+}
+function Templatev2({ tabs, user, isLoading }: Props): JSX.Element {
   const [selectedTab, setSelectedTab] = useState<tab>(tabs[0]);
-
-  const { user } = useSelector((state: RootState) => state.auth);
 
   return (
     <div className="template-v2">
@@ -27,7 +32,9 @@ export default function Templatev2({ tabs }: Templatev2Props): JSX.Element {
       </div>
 
       <div className="template-v2__vertical">
-        {selectedTab && <AppBar header={selectedTab?.text} name={user.name} />}
+        {selectedTab && user && (
+          <AppBar header={selectedTab?.text} name={user?.name} user={user} />
+        )}
 
         {/* <div className="template-v2__main">{handleRendering()}</div> */}
 
@@ -38,3 +45,6 @@ export default function Templatev2({ tabs }: Templatev2Props): JSX.Element {
     </div>
   );
 }
+
+export { Templatev2 }; // un-connected version
+export default connector(Templatev2); // connected version

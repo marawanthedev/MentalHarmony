@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "components/button/button";
-import { useSelector, useDispatch } from "react-redux";
+import { ConnectedProps, connect } from "react-redux";
 import {
   getApprovalRequests,
   acceptApprovalRequest,
 } from "redux/features/serviceProviderApprovalRequests/serviceProviderApprovalRequestsSlice";
 import Spinner from "components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
+import { selectServiceProviderState } from "./../../redux/features/serviceProviderApprovalRequests/serviceProviderApprovalSelector";
 
 const columns = [
   { id: "name", label: "Details", minWidth: 100 },
@@ -34,16 +35,31 @@ const columns = [
     format: (value: number) => value.toFixed(2),
   },
 ];
-export default function ManageServiceProviderApprovalRequests() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { approvalRequests, isSuccess, isLoading, isError } = useSelector(
-    (state: RootState) => state.serviceProviderApprovalRequest
-  );
 
+function mapState(state: RootState) {
+  return { ...selectServiceProviderState(state) };
+}
+const mapDispatch = {
+  getApprovalRequests,
+  acceptApprovalRequest,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function ManageServiceProviderApprovalRequests({
+  approvalRequests,
+  isSuccess,
+  isLoading,
+  isError,
+  getApprovalRequests,
+  acceptApprovalRequest,
+}: PropsFromRedux) {
   /*eslint-disable */
   useEffect(() => {
     if (!isLoading) {
-      dispatch(getApprovalRequests({ isApproved: false }));
+      getApprovalRequests({ isApproved: false });
     }
   }, []);
   /*eslint-enable */
@@ -62,9 +78,9 @@ export default function ManageServiceProviderApprovalRequests() {
     if (approvalRequests) {
       approvalRequests.forEach((row: any, index: number) => {
         rows[index] = {
-          location: row.requester ? row.requester.location : null,
-          name: row.requester ? row.requester.name : null,
-          phone_number: row.requester ? row.requester.phone_number : null,
+          location: row.requester?.location,
+          name: row.requester?.name,
+          phone_number: row.requester?.phone_number,
           action: (
             <CustomButton
               type={"button"}
@@ -78,7 +94,7 @@ export default function ManageServiceProviderApprovalRequests() {
               fontSize="1.1rem"
               borderRadius="2.5rem"
               onClick={() => {
-                dispatch(acceptApprovalRequest(row._id));
+                acceptApprovalRequest(row._id);
                 setTimeout(() => window.location.reload(), 1200);
               }}
             />
@@ -98,3 +114,6 @@ export default function ManageServiceProviderApprovalRequests() {
     </>
   );
 }
+
+export { ManageServiceProviderApprovalRequests }; // un-connected version
+export default connector(ManageServiceProviderApprovalRequests); // connected version

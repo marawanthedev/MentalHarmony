@@ -3,11 +3,11 @@ import "./signup.scss";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Form from "container/form/form";
-import { useSelector, useDispatch, connect, ConnectedProps } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { register, resetAuth } from "redux/features/auth/authSlice";
 import Spinner from "components/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
 import ObjectCleanse from "util/objectCleanse";
 import { selectAuthState } from "redux/features/auth/authSelector";
 
@@ -23,9 +23,7 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface Props extends PropsFromRedux {
-  // include component props
-}
+interface Props extends PropsFromRedux {}
 
 function Signup({
   register,

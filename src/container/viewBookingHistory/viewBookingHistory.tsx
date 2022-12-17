@@ -7,14 +7,15 @@ import ViewMeetingDetailsPopUp from "components/viewMeetingDetailsPopUp/viewMeet
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ViewBookingHistoryRatingPopUp from "components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { bookingStructure } from "constants/booking";
 import {
   getUserBooking,
   rateBooking,
 } from "redux/features/booking/bookingSlice";
 import { ActionButtonStructure } from "constants/actionButton";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
+import { selectBookingState } from "redux/features/booking/bookingSelector";
 
 // todo
 const columns: any[] = [
@@ -60,8 +61,26 @@ const getStars = (value: number) => {
   );
 };
 
-export default function ViewBookingHistory() {
-  const dispatch = useDispatch<AppDispatch>();
+function mapState(state: RootState) {
+  return { ...selectBookingState(state) };
+}
+const mapDispatch = {
+  getUserBooking,
+  rateBooking,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function ViewBookingHistory({
+  bookings,
+  isBookingProcessError,
+  isBookingProcessSuccess,
+  isBookingProcessLoading,
+  getUserBooking,
+  rateBooking,
+}: PropsFromRedux) {
   const [showRatingPopUp, setShowRatingPopUp] = useState<boolean>(false);
   const [showStatusPopup, setShowStatusPopUp] = useState<boolean>(false);
   const [blurTable, setBlurTable] = useState<boolean>(false);
@@ -69,15 +88,8 @@ export default function ViewBookingHistory() {
     useState<boolean>(false);
   const [selectedBookingId, setSelectedBookingId] = useState<number>(0);
 
-  const {
-    bookings,
-    isBookingProcessError,
-    isBookingProcessSuccess,
-    isBookingProcessLoading,
-  } = useSelector((state: RootState) => state.bookings);
-
   useEffect(() => {
-    dispatch(getUserBooking());
+    getUserBooking();
   }, []);
 
   useEffect(() => {}, [
@@ -169,9 +181,8 @@ export default function ViewBookingHistory() {
           submitCallBack={(value: number) => {
             setShowRatingPopUp(false);
             setShowStatusPopUp(true);
-            dispatch(
-              rateBooking({ bookingId: selectedBookingId, rate: value })
-            );
+            rateBooking({ bookingId: selectedBookingId, rate: value });
+
             setTimeout(() => {
               window.location.reload();
             }, 1500);
@@ -208,3 +219,6 @@ export default function ViewBookingHistory() {
     </>
   );
 }
+
+export { ViewBookingHistory }; // un-connected version
+export default connector(ViewBookingHistory); // connected version

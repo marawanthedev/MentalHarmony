@@ -13,13 +13,28 @@ import mentalHealthIllustration from "assets/images/uniIllustration.webp";
 import FlexTwoSlotsRow from "components/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "components/testimonals/testimonals";
 import DailyPopUp from "container/dailyPopUp/dailyPopUp";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { toast } from "react-toastify";
 import { resetSuccessAlternativeMessage } from "redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
-import { AppDispatch } from "redux/store";
+import { RootState } from "redux/store";
+import { selectAuthState } from "redux/features/auth/authSelector";
 
-export default function Home() {
+function mapState(state: RootState) {
+  return { ...selectAuthState(state) };
+}
+const mapDispatch = {
+  resetSuccessAlternativeMessage,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function Home({
+  successAlternativeMessage,
+  resetSuccessAlternativeMessage,
+}: PropsFromRedux) {
   const ServiceCards = [
     {
       cardIcon: magnifyingIcon,
@@ -37,16 +52,14 @@ export default function Home() {
       paragraph: "Have your therapy assistance provided by service providers.",
     },
   ];
-  const dispatch = useDispatch<AppDispatch>();
-  const { successAlternativeMessage } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
     if (successAlternativeMessage) {
       toast.info(successAlternativeMessage);
 
-      setTimeout(() => dispatch(resetSuccessAlternativeMessage()), 3000);
+      setTimeout(() => resetSuccessAlternativeMessage(), 3000);
     }
-  }, [successAlternativeMessage, dispatch]);
+  }, [successAlternativeMessage]);
 
   return (
     <Template>
@@ -191,3 +204,6 @@ export default function Home() {
     </Template>
   );
 }
+
+export { Home }; // un-connected version
+export default connector(Home); // connected version

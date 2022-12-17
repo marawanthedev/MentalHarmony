@@ -1,29 +1,47 @@
 import React, { useState } from "react";
 import ProfileForm from "components/profileForm/profileForm";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { getUser, updateUser } from "redux/features/user/userSlice";
 import { toast } from "react-toastify";
 import Spinner from "components/spinner/spinner";
 import Template from "components/template/template";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Protected from "util/protected";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
 import { useHistory } from "react-router-dom";
+import { selectUserState } from "./../../redux/features/user/userSelector";
 
-export default function Profile() {
+function mapState(state: RootState) {
+  return { ...selectUserState(state) };
+}
+
+const mapDispatch = {
+  getUser,
+  updateUser,
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const connector = connect(mapState, mapDispatch);
+
+function Profile({
+  getUser,
+  updateUser,
+  user,
+  isError,
+  isSuccess,
+  isLoading,
+}: PropsFromRedux) {
   const history = useHistory();
-  const dispatch = useDispatch<AppDispatch>();
   const storedUser = JSON.parse(localStorage.getItem("user") || "");
-  const { user, isError, isSuccess, isLoading } = useSelector(
-    (state: RootState) => state.user
-  );
+
   const [formInputs, setFormInputs] = useState([]);
 
   /*eslint-disable */
   useEffect(() => {
     if (storedUser) {
-      dispatch(getUser());
+      getUser();
     }
   }, []);
   /*eslint-enable */
@@ -54,9 +72,9 @@ export default function Profile() {
   };
   const handleFormSubmission = (userInfo: any) => {
     const isValid = isFormValid(userInfo);
-    // const isValid = true;
+
     if (isValid) {
-      dispatch(updateUser({ ...userInfo }));
+      updateUser({ ...userInfo });
       toast.success("success");
       setTimeout(() => {
         history.push("/");
@@ -93,7 +111,7 @@ export default function Profile() {
         setFormInputs(toBeFormedInputs);
       }
     }
-  }, [user, isError, isSuccess, isLoading, dispatch]);
+  }, [user, isError, isSuccess, isLoading]);
 
   return (
     <>
@@ -114,3 +132,6 @@ export default function Profile() {
     </>
   );
 }
+
+export { Profile }; // un-connected version
+export default connector(Profile); // connected version

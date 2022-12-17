@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType } from "redux/features/user/userSlice";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Spinner from "components/spinner/spinner";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
+import { selectUserState } from "./../../redux/features/user/userSelector";
 
 const columns: any = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -31,15 +32,25 @@ const columns: any = [
   },
 ];
 
-export default function ViewUniStudentsTab() {
+function mapState(state: RootState) {
+  return { ...selectUserState(state) };
+}
 
+const mapDispatch = {
+  getUsersByType,
+};
 
-  const dispatch = useDispatch<AppDispatch>();
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-  const { filteredUsers, isSuccess, isLoading, isError } = useSelector(
-    (state: RootState) => state.user
-  );
-  
+const connector = connect(mapState, mapDispatch);
+
+function ViewUniStudentsTab({
+  filteredUsers,
+  isSuccess,
+  isLoading,
+  isError,
+  getUsersByType,
+}: PropsFromRedux) {
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
     isLoading,
@@ -47,9 +58,8 @@ export default function ViewUniStudentsTab() {
   });
 
   useEffect(() => {
-    console.log("attempting to render")
     if (isLoading !== true) {
-      dispatch(getUsersByType("student"));
+      getUsersByType("student");
     }
   }, []);
 
@@ -60,3 +70,6 @@ export default function ViewUniStudentsTab() {
     </>
   );
 }
+
+export { ViewUniStudentsTab }; // un-connected version
+export default connector(ViewUniStudentsTab); // connected version

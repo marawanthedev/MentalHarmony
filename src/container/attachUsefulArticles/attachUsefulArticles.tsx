@@ -3,7 +3,7 @@ import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
 import { useState } from "react";
 import FormPopUp from "components/formPopUp/formPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, ConnectedProps, useDispatch } from "react-redux";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Spinner from "components/spinner/spinner";
 import {
@@ -11,24 +11,38 @@ import {
   getArticles,
   reset,
 } from "redux/features/dailyPopUp/dailyPopUpSlice";
-import { AppDispatch } from "redux/store";
+import { RootState } from "redux/store";
+import { selectDailyPopupState } from "redux/features/dailyPopUp/dailyPopUpSelector";
 
-export default function AttachUsefulArticles() {
+function mapState(state: RootState) {
+  return { ...selectDailyPopupState(state) };
+}
+
+const mapDispatch = {
+  addArticleAttachment,
+  getArticles,
+  reset,
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function AttachUsefulArticles({
+  articleAttachments,
+  isSuccess,
+  isError,
+  isLoading,
+  isFormSuccess,
+  isFormError,
+  addArticleAttachment,
+  getArticles,
+  reset,
+}: PropsFromRedux) {
   const [formVisiblity, setFormVisiblity] = useState<boolean>(true);
   const [showArticleAttachmentForm, setshowArticleAttachmentForm] =
     useState<boolean>(false);
   const [selectedFeeling, setSelectedFeeling] = useState<any>("");
-  const dispatch = useDispatch<AppDispatch>();
-
-  const {
-    articleAttachments,
-    isSuccess,
-    isError,
-    isLoading,
-    isFormSuccess,
-    isFormError,
-    // todo see what type of use selector state is
-  } = useSelector((state: any) => state.dailyPopUp);
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
@@ -39,8 +53,8 @@ export default function AttachUsefulArticles() {
   /*eslint-disable */
   useEffect(() => {
     // todo see whats wrong with redux dispatch in ts
-    dispatch(getArticles());
-    dispatch(reset());
+    getArticles();
+    reset();
   }, []);
   /*eslint-enable */
 
@@ -61,7 +75,7 @@ export default function AttachUsefulArticles() {
       );
     }
     if (!formVisiblity && showArticleAttachmentForm) {
-      const existingAttachment = articleAttachments.find(
+      const existingAttachment = articleAttachments?.find(
         // todo remove the any
         (article: any) =>
           article.article_feeling_relation === selectedFeeling.text
@@ -77,12 +91,10 @@ export default function AttachUsefulArticles() {
           }
           submitCallback={(formInput: string) => {
             setshowArticleAttachmentForm(false);
-            dispatch(
-              addArticleAttachment({
-                article_url: formInput,
-                article_feeling_relation: selectedFeeling.text,
-              })
-            );
+            addArticleAttachment({
+              article_url: formInput,
+              article_feeling_relation: selectedFeeling.text,
+            });
           }}
           closeBtnCallback={() => {
             setFormVisiblity(true);
@@ -94,7 +106,7 @@ export default function AttachUsefulArticles() {
   };
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
+      {showSpinner && <Spinner />}
       {isFormSuccess ||
         (isFormError && (
           <StatusPopUp
@@ -102,7 +114,7 @@ export default function AttachUsefulArticles() {
             closeBtnOnClick={() => {
               // setFormVisiblity(true);
               setshowArticleAttachmentForm(false);
-              dispatch(reset());
+              reset();
             }}
           />
         ))}
@@ -110,3 +122,6 @@ export default function AttachUsefulArticles() {
     </>
   );
 }
+
+export { AttachUsefulArticles }; // un-connected version
+export default connector(AttachUsefulArticles); // connected version

@@ -3,7 +3,7 @@ import "./dailyPopUp.scss";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import {
   getArticles,
   submitFeeling,
@@ -12,20 +12,36 @@ import { useEffect } from "react";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Spinner from "components/spinner/spinner";
 import { toast } from "react-toastify";
-import { AppDispatch, RootState } from "redux/store";
+import { RootState } from "redux/store";
 import { IFeeling } from "constants/Feeling";
+import { selectDailyPopupState } from "redux/features/dailyPopUp/dailyPopUpSelector";
 
-export default function DailyPopUp() {
+function mapState(state: RootState) {
+  return { ...selectDailyPopupState(state) };
+}
+const mapDispatch = {
+  getArticles,
+  submitFeeling,
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function DailyPopUp({
+  articleAttachments,
+  isSuccess,
+  isError,
+  isLoading,
+  getArticles,
+  submitFeeling,
+}: PropsFromRedux) {
   const [selectedFeeling, setSelectedFeeling] = useState<IFeeling>();
   const [formVisibility, setFormVisibility] = useState(true);
   const [
     showRequestSubmissionStatusVisibility,
     setShowSubmissionStatusVisibility,
   ] = useState(false);
-  const dispatch = useDispatch<AppDispatch>();
-  const { articleAttachments, isSuccess, isError, isLoading } = useSelector(
-    (state: RootState) => state.dailyPopUp
-  );
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
@@ -34,7 +50,7 @@ export default function DailyPopUp() {
   });
   /*eslint-disable */
   useEffect(() => {
-    dispatch(getArticles());
+    getArticles();
   }, []);
   /*eslint-enable */
 
@@ -53,7 +69,7 @@ export default function DailyPopUp() {
     //** bugged and will be fixed later
     // todo check later
     if (selectedFeeling) {
-      dispatch(submitFeeling(selectedFeeling.text));
+      submitFeeling(selectedFeeling.text);
     }
 
     setFormVisibility(false);
@@ -112,3 +128,7 @@ export default function DailyPopUp() {
     </>
   );
 }
+
+export { DailyPopUp }; // un-connected version
+
+export default connector(DailyPopUp); // connected version
