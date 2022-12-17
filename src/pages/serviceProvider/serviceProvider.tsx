@@ -1,5 +1,5 @@
 import React from "react";
-import Templatev2 from "components/templatev2/templatev2";
+import Templatev2 from "interface/templatev2/templatev2";
 import BookingIcon from "assets/images/booking.webp";
 import ManageBookingRequests from "container/manageBookingRequests/manageBookingRequests";
 import Protected from "util/protected";

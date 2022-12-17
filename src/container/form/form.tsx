@@ -1,7 +1,7 @@
 import React from "react";
 import "./form.scss";
-import FormInputGroup from "components/formInput/formInput";
-import CustomButton from "components/button/button";
+import FormInputGroup from "interface/formInput/formInput";
+import CustomButton from "interface/button/button";
 import leftArrow from "assets/svg/left-arrow.svg";
 import loginFigure from "assets/images/loginFigure.webp";
 import signupFigure from "assets/images/signupFigure.webp";

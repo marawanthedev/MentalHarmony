@@ -1,6 +1,6 @@
 import React from "react";
 import "./appBar.scss";
-import AvatarText from "components/avatarText/avatarText";
+import AvatarText from "interface/avatarText/avatarText";
 import { Link } from "react-router-dom";
 
 interface Props {

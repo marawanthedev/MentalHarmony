@@ -1,5 +1,5 @@
 import React from "react";
-import Templatev2 from "components/templatev2/templatev2";
+import Templatev2 from "interface/templatev2/templatev2";
 import Minus from "assets/svg/Remove_Minus.svg";
 import eye from "assets/images/visibility.webp";
 import attach from "assets/svg/File_Add.svg";

@@ -1,5 +1,16 @@
 # Mental Harmony
 
+# Folder strucutre
+
+- assets -> images,svg and etc..
+- components -> components that are used within containers and are not commonly used across the application -> a bit specific components
+- contiainer -> containers that are handling logic within a page and delegating data to its components
+- interface -> components that are commonly used such as navbar,side-navbar and footer.
+- pages -> page files such as home, dashboard and etc...
+- redux -> anything related to redux state mangement
+- sass -> scss styling 
+- util -> utility functions that are commonly used across the application
+
 # Technologies
 
 - React

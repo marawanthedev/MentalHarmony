@@ -1,6 +1,6 @@
 import React from "react";
 import "./viewMeetingDetailsPopUp.scss";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import CloseBtn from "components/closeBtn/closeBtn";
 
 type ViewMeetingDetailsPopUpProps = {

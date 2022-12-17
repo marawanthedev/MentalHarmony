@@ -1,6 +1,6 @@
 import "./profileForm.scss";
 import React, { useEffect } from "react";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 
 type IProfileForm = {
   formTitle: string;

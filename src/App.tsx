@@ -5,7 +5,7 @@ import Home from "pages/home/home";
 import "./sass/main.scss";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 
 function App() {
   const Login = lazy(() => import("pages/login/login"));

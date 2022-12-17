@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import { ConnectedProps, connect } from "react-redux";
 import {
   getApprovalRequests,
   acceptApprovalRequest,
 } from "redux/features/serviceProviderApprovalRequests/serviceProviderApprovalRequestsSlice";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import { selectServiceProviderState } from "./../../redux/features/serviceProviderApprovalRequests/serviceProviderApprovalSelector";

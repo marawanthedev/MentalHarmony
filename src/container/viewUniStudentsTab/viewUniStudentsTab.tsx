@@ -3,7 +3,7 @@ import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType } from "redux/features/user/userSlice";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import { RootState } from "redux/store";
 import { selectUserState } from "./../../redux/features/user/userSelector";
 

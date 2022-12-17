@@ -1,6 +1,6 @@
 import React from "react";
 import "./feelingPopUp.scss";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import sadIcon from "assets/images/loudly-crying-face.webp";
 import unsureIcon from "assets/images/neutral-face.webp";
 import goodIcon from "assets/images/smiling-face-with-smiling-eyes.webp";

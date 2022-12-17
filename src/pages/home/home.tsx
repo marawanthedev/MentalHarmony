@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import CustomButton from "components/button/button";
-import Template from "components/template/template";
+import CustomButton from "interface/button/button";
+import Template from "interface/template/template";
 import "./home.scss";
 import landingUpperIllustration from "assets/images/landingupper.webp";
 import Card from "components/card/card";
@@ -10,7 +10,7 @@ import consultationIcon from "assets/images/consultation.webp";
 import servicesVector from "assets/images/servicesVector.webp";
 import bookAppointmentIlustration from "assets/images/appointmetnIllustration.webp";
 import mentalHealthIllustration from "assets/images/uniIllustration.webp";
-import FlexTwoSlotsRow from "components/flex-2-slots-row/flex2SlotsRow";
+import FlexTwoSlotsRow from "interface/flex-2-slots-row/flex2SlotsRow";
 import Testimonals from "components/testimonals/testimonals";
 import DailyPopUp from "container/dailyPopUp/dailyPopUp";
 import { connect, ConnectedProps } from "react-redux";

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import DialogPopUp from "components/dialogPopUp/dialogPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType, deleteUser } from "redux/features/user/userSlice";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import { selectUserState } from "redux/features/user/userSelector";

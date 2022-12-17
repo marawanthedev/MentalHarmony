@@ -1,8 +1,8 @@
 import React from "react";
 import "./addServiceProviderTab.scss";
-import FormInputGroup from "components/formInput/formInput";
+import FormInputGroup from "interface/formInput/formInput";
 import { useState } from "react";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 
 export default function AddServiceProviderForm() {

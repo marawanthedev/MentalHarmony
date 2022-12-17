@@ -1,7 +1,7 @@
 import React from "react";
 import "./templatev2.scss";
-import SideNav from "components/sideNav/sideNav";
-import AppBar from "components/appBar/appBar";
+import SideNav from "interface/sideNav/sideNav";
+import AppBar from "interface/appBar/appBar";
 import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { tab } from "constants/tab";

@@ -1,0 +1,92 @@
+.side-nav {
+  width: 100%;
+  height: 100%;
+  background-color: #363740;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  &__header {
+    font-family: "Mulish";
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    letter-spacing: 0.4;
+    opacity: 0.7;
+    margin: 5rem 4.5rem;
+    border: none;
+    @media (max-width: 1023px) {
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+  }
+  &__tabs-container {
+    width: 100%;
+    height: auto;
+    padding: 2rem 0;
+    @media (max-width: 1023px) {
+      display: flex;
+      padding: 0 0;
+    }
+  }
+  &__tab {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #a4a6b3;
+    width: 100%;
+    height: 6rem;
+    padding: 1rem 0;
+    font-family: "Mulish";
+    cursor: pointer;
+    &__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      opacity: 0.65;
+      margin: 0 2rem;
+      &__selected {
+        opacity: 1;
+      }
+
+      @media (max-width: 1023px) {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    &__text {
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.6rem;
+      width: 18rem;
+
+      @media (max-width: 1023px) {
+        width: 75%;
+        font-size: 1.4rem;
+      }
+    }
+
+    &__selected {
+      color: #dde2ff;
+      position: relative;
+      border-left: 3px solid #dde2ff;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #9fa2b4;
+        opacity: 0.2;
+      }
+    }
+    @media (max-width: 1023px) {
+      width: 25%;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    width: 100vw;
+    height: auto;
+  }
+}

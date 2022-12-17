@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Form from "container/form/form";
 import { connect, ConnectedProps } from "react-redux";
 import { register, resetAuth } from "redux/features/auth/authSlice";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import ObjectCleanse from "util/objectCleanse";

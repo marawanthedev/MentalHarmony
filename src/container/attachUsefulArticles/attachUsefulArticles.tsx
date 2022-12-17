@@ -5,7 +5,7 @@ import FormPopUp from "components/formPopUp/formPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import {
   addArticleAttachment,
   getArticles,

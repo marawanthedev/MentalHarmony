@@ -2,7 +2,7 @@ import React from "react";
 import successImg from "assets/images/checked.webp";
 import failedImg from "assets/images/cancel.webp";
 import CloseBtn from "components/closeBtn/closeBtn";
-import CustomButton from "components/button/button";
+import CustomButton from "interface/button/button";
 import "./statusPopUp.scss";
 import { useHistory } from "react-router-dom";
 

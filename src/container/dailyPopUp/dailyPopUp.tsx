@@ -10,7 +10,7 @@ import {
 } from "redux/features/dailyPopUp/dailyPopUpSlice";
 import { useEffect } from "react";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import Spinner from "components/spinner/spinner";
+import Spinner from "interface/spinner/spinner";
 import { toast } from "react-toastify";
 import { RootState } from "redux/store";
 import { IFeeling } from "constants/Feeling";
