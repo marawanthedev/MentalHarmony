@@ -5,9 +5,7 @@ const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/users/`;
 // todo fix prop typing
 // Register User
 const register = async (userData: any) => {
-  console.log(userData);
   const res = await http.post(`${BASE_URL}auth/register`, userData);
-  console.log(res);
 
   if (res.data) {
     if (
