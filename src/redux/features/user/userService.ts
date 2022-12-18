@@ -1,11 +1,17 @@
 import { http } from "util/restAPI";
 import assert from "util/assertion";
+import { request } from "./../../../util/axios";
+import { AxiosMethods } from "constants/Axios";
 
 const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/users`;
 
 // todo figure out prop types
 const getUsersByType = async (type: any) => {
-  const res = await http.get(`${BASE_URL}/filter?type=${type}`);
+  const res = await request({
+    endpoint: `/api/users/filte2r?type=${type}`,
+    method: AxiosMethods.GET,
+  });
+
   return assert(res, res.data, "Retrieval failed", res);
 };
 
