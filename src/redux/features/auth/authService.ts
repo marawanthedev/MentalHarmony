@@ -1,6 +1,6 @@
 import { http } from "util/restAPI";
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/users/`;
+const BASE_URL = `/api/users/`;
 
 // todo fix prop typing
 // Register User
