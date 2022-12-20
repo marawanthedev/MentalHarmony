@@ -92,6 +92,7 @@ function ViewBookingHistory({
     getUserBooking();
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   useEffect(() => {}, [
     bookings,
     isBookingProcessError,
