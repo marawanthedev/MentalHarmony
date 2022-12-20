@@ -60,8 +60,7 @@ function DailyPopUp({
     if (articleAttachments) {
       targetAttachment = articleAttachments.find(
         (article: any) =>
-          // @ts-ignore: Object is possibly 'null'
-          article.article_feeling_relation === selectedFeeling.text
+          article.article_feeling_relation === selectedFeeling?.text
       );
     }
 

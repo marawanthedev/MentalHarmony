@@ -83,7 +83,7 @@ function RemoveServiceProvider({
   }, [filteredUsers, isSuccess, isError, isLoading]);
 
   const generateRows = () => {
-    let rows: any = [];
+    const rows: any = [];
 
     filteredUsers?.forEach((row: any, index: number) => {
       rows[index] = {

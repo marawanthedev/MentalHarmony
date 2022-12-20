@@ -108,9 +108,11 @@ class Form extends React.Component<IFormProps, IFormState> {
       isEmailValid = false;
 
     formInputs.forEach((formInput: any) => {
-      let elementIdentifer = formInput.className.split(" ")[0];
+      const elementIdentifer = formInput.className.split(" ")[0];
       //targeting the actual input field not its group
-      let targetElement = document.querySelectorAll(`.${elementIdentifer}`)[2];
+      const targetElement = document.querySelectorAll(
+        `.${elementIdentifer}`
+      )[2];
       targetElement.classList.remove("error-alert");
 
       if (elementIdentifer === "email") {
@@ -169,7 +171,7 @@ class Form extends React.Component<IFormProps, IFormState> {
     // dynamically adding state attributes instead of typing it statically
     // state attrib tues will be customized to each form type
 
-    var formInputIdentfier = formInput.className.split(" ")[0];
+    const formInputIdentfier = formInput.className.split(" ")[0];
     if (formInput.type === "checkbox") {
       if (userInfo[formInputIdentfier] === undefined) {
         userInfo[formInputIdentfier] = false;
@@ -185,7 +187,6 @@ class Form extends React.Component<IFormProps, IFormState> {
         }}
       >
         {
-          // @ts-ignore
           <FormInputGroup
             key={index}
             type={formInput.type}
@@ -272,6 +273,7 @@ class Form extends React.Component<IFormProps, IFormState> {
               {formButtons.map((formButton: any, index: number) => {
                 return (
                   <div
+                    key={index}
                     className=" animate__animated animate__zoomIn"
                     style={{ animationDelay: `${formButtons.length * 1.1}s` }}
                   >

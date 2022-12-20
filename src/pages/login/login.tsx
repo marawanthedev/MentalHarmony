@@ -22,10 +22,6 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface Props extends PropsFromRedux {
-  // include component props
-}
-
 function Login({
   user,
   isLoading,
@@ -33,8 +29,8 @@ function Login({
   isSuccess,
   login,
   resetAuth,
-}: Props) {
-  let history = useHistory();
+}: PropsFromRedux) {
+  const history = useHistory();
 
   const formInputs = [
     {

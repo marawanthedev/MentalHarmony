@@ -1,3 +1,4 @@
+import React from "react";
 import "./testimonalCard.scss";
 import avatar from "assets/images/avatar.webp";
 import { Testimonial } from "constants/testiomnials";

@@ -73,7 +73,7 @@ function ManageServiceProviderApprovalRequests({
     // ApiCallStatusNotificationHandler({ isSuccess, isLoading, isError });
   }, [approvalRequests, isSuccess, isError, isLoading]);
   const generateRows = () => {
-    let rows: any = [];
+    const rows: any = [];
 
     if (approvalRequests) {
       approvalRequests.forEach((row: any, index: number) => {

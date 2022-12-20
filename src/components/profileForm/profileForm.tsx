@@ -23,9 +23,6 @@ export default function ProfileForm({
     }
   }, [formInputs]);
   /*eslint-enable */
-  useEffect(() => {
-    return () => {};
-  }, []);
   const renderFormInputs = () => {
     return formInputs.map((formInput, index) => {
       return (

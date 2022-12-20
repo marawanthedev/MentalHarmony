@@ -23,8 +23,6 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface Props extends PropsFromRedux {}
-
 function Signup({
   register,
   resetAuth,
@@ -32,8 +30,8 @@ function Signup({
   isLoading,
   isError,
   isSuccess,
-}: Props) {
-  let history = useHistory();
+}: PropsFromRedux) {
+  const history = useHistory();
 
   const [userType, setUserType] = useState("student");
   let checkBoxValue = false;
@@ -142,8 +140,6 @@ function Signup({
     // dispatch(register(ObjectCleanse(user)));
     register(ObjectCleanse(user));
   };
-
-  useEffect(() => {}, [userType]);
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,

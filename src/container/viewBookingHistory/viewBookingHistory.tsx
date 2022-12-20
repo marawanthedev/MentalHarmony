@@ -149,7 +149,7 @@ function ViewBookingHistory({
   };
 
   const generateRows = () => {
-    let rows: any = [];
+    const rows: any = [];
     if (bookings) {
       if (bookings.length > 0) {
         bookings.forEach((row: bookingStructure, index: number) => {

@@ -29,7 +29,7 @@ const FormInputGroup = ({
   const [inputValue, setInputValue] = useState(
     initialValue ? initialValue : undefined
   );
-  let style = {
+  const style = {
     width: width,
   };
   return (
