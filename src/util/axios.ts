@@ -26,12 +26,6 @@ const redirectToHomePageAfterTwoSeconds = () => {
 
 client.interceptors.request.use(
   (request: any) => {
-    const userLocalStorageItem = localStorage.getItem("user");
-    const user = userLocalStorageItem ? JSON.parse(userLocalStorageItem) : null;
-
-    // token setting
-    client.defaults.headers.common.Authorization = user;
-
     return request;
   },
   (error: AxiosError) => {
@@ -50,14 +44,14 @@ client.interceptors.response.use(
         "You are Un-Authorized to access this Data, will be redirect to home page"
       );
       // unauthroized
-      redirectToHomePageAfterTwoSeconds();
+      // redirectToHomePageAfterTwoSeconds();
     }
 
     if (error.response?.status === 404) {
       toast.error("Data was not found, will be redirect to home page");
 
       // not found
-      //   redirectToHomePageAfterTwoSeconds();
+      // redirectToHomePageAfterTwoSeconds();
     }
 
     return Promise.reject(error);
@@ -65,7 +59,18 @@ client.interceptors.response.use(
 );
 
 export const request = ({ ...options }: BaseRequestInfoProp) => {
-  const requestInfo: BaseRequestInfo = { ...options, url: options.endpoint };
+  const userLocalStorageItem = localStorage.getItem("user");
+  const user = userLocalStorageItem ? JSON.parse(userLocalStorageItem) : null;
+
+  // token setting
+  client.defaults.headers.common.Authorization = `Bearer ${user.token}`;
+
+  const requestInfo: BaseRequestInfo = {
+    ...options,
+    url: `${options.endpoint}`,
+  };
+
+  console.log(requestInfo.url);
 
   return client(requestInfo);
 };
