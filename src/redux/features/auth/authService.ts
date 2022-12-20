@@ -1,11 +1,16 @@
-import { http } from "util/restAPI";
+import { AxiosMethods } from "constants/Axios";
+import { request } from "util/axios";
 
-const BASE_URL = `/api/users/`;
+const BASE_URL = `/api/users`;
 
 // todo fix prop typing
 // Register User
 const register = async (userData: any) => {
-  const res = await http.post(`${BASE_URL}auth/register`, userData);
+  const res = await request({
+    endpoint: `${BASE_URL}/auth/register`,
+    method: AxiosMethods.POST,
+    data: userData,
+  });
 
   if (res.data) {
     if (
@@ -20,7 +25,12 @@ const register = async (userData: any) => {
 };
 
 const login = async (userData: any) => {
-  const res = await http.post(`${BASE_URL}auth/login`, userData);
+  // const res = await http.post(`${BASE_URL}auth/login`, userData);
+  const res = await request({
+    endpoint: `${BASE_URL}/auth/login`,
+    method: AxiosMethods.POST,
+    data: userData,
+  });
 
   if (res.data) {
     localStorage.setItem("user", JSON.stringify(res.data));

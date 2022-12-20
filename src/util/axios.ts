@@ -63,14 +63,13 @@ export const request = ({ ...options }: BaseRequestInfoProp) => {
   const user = userLocalStorageItem ? JSON.parse(userLocalStorageItem) : null;
 
   // token setting
-  client.defaults.headers.common.Authorization = `Bearer ${user.token}`;
+  client.defaults.headers.common.Authorization = `Bearer ${user?.token}`;
 
+  console.log(options);
   const requestInfo: BaseRequestInfo = {
     ...options,
     url: `${options.endpoint}`,
   };
-
-  console.log(requestInfo.url);
 
   return client(requestInfo);
 };
