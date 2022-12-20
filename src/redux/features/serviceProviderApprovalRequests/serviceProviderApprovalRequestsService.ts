@@ -1,4 +1,3 @@
-import { http } from "util/restAPI";
 import assert from "util/assertion";
 import { request } from "util/axios";
 import { AxiosMethods } from "constants/Axios";
