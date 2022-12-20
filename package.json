@@ -10,6 +10,7 @@
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "pretty": "prettier --write \"./**/*.{js,jsx,tsx,css,md,json}\" --config ./.prettierrc",
     "eject": "react-scripts eject"
   },
   "dependencies": {

@@ -66,6 +66,7 @@ function BrowseServiceProvider({
   //   isError,
   // });
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   useEffect(() => {}, [filteredUsers, isError, isSuccess, isLoading]);
 
   const manageSpCardRendering = () => {

@@ -84,7 +84,7 @@ export default function StickyHeadTable({
     setRowsPerPage(value ? +value : rowsPerPage);
     setPage(0);
   };
-  
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
