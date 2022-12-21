@@ -23,10 +23,10 @@ export const acceptApprovalRequest = createAsyncThunk(
 
 export const getApprovalRequests = createAsyncThunk(
   "getApprovalRequests",
-  async (data:{isApproved:boolean}, thunkAPI) => {
+  async (isApproved:boolean, thunkAPI) => {
     return await smartTryCatch({
       callback: approvalRequestsService.getApprovalRequests,
-      callbackParams: data,
+      callbackParams: isApproved,
       rejectionObject: thunkAPI,
     });
   }

@@ -6,8 +6,7 @@
 export default function assert(
   assertionFactor: any,
   dataToBeReturned: any,
-  errorMessage: string,
-  resObject?: any
+  errorMessage: string
 ) {
   if (assertionFactor && assertionFactor !== null) {
     return dataToBeReturned;

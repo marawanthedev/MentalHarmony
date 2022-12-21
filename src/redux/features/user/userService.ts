@@ -5,7 +5,7 @@ import { AxiosMethods } from "constants/Axios";
 const BASE_URL = `/api/users`;
 
 // todo figure out prop types
-const getUsersByType = async (type: any) => {
+const getUsersByType: Function = async (type: string) => {
   const res = await request({
     endpoint: `${BASE_URL}/filter?type=${type}`,
     method: AxiosMethods.GET,
@@ -14,7 +14,7 @@ const getUsersByType = async (type: any) => {
   return assert(res, res.data, "Retrieval failed", res);
 };
 
-const getUser = async () => {
+const getUser: Function = async () => {
   const res = await request({
     endpoint: `${BASE_URL}/getUser`,
     method: AxiosMethods.GET,
@@ -22,15 +22,16 @@ const getUser = async () => {
   return assert(res, res.data, "Retrieval failed", res);
 };
 
-const updateUser = async (data: any) => {
+const updateUser: Function = async (data: any) => {
   const res = await request({
     endpoint: `${BASE_URL}/update`,
     method: AxiosMethods.PUT,
+    data,
   });
   return assert(res, res.data, "User update has failed", res);
 };
 
-const deleteUser = async (id: any) => {
+const deleteUser: Function = async (id: string) => {
   const res = await request({
     endpoint: `${BASE_URL}/deleteUser?id=${id}`,
     method: AxiosMethods.DELETE,

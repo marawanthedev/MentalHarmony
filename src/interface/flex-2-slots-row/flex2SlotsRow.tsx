@@ -1,3 +1,4 @@
+import { ReactNode } from "constants/reactNode";
 import React from "react";
 import "./flex2SlotsRow.scss";
 
@@ -5,7 +6,7 @@ type IFlexTwoSlotsRow = {
   header: string;
   paragraph: string;
   illustrationUrl: File;
-  CtaButton: any;
+  CtaButton: ReactNode;
   isReversed?: boolean;
   customClass: string;
 };

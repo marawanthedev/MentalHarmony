@@ -1,6 +1,7 @@
-export default function ObjectCleanse(obj: any) {
-  Object.keys(obj).forEach((key) => {
-    if (obj[key] === undefined) delete obj[key];
+export default function ObjectCleanse<T extends object>(obj: T) {
+  (Object.keys(obj) as Array<keyof T>).forEach((field) => {
+    if (obj[field as keyof typeof obj] === undefined)
+      delete obj[field as keyof typeof obj];
   });
 
   return obj;

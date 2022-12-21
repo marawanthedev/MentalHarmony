@@ -1,3 +1,4 @@
+import { ReactNode } from "constants/reactNode";
 import React from "react";
 import "./card.scss";
 
@@ -6,7 +7,7 @@ type ICard = {
   paragraph: string;
   onClick?: any;
   customClass?: string;
-  children: any;
+  children: ReactNode;
 };
 
 export default function Card(props: ICard) {

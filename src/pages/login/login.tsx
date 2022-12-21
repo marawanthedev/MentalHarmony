@@ -10,6 +10,7 @@ import { RootState } from "redux/store";
 import { selectAuthState } from "redux/features/auth/authSelector";
 
 import "./login.scss";
+import { ILoginUser } from "constants/ILoginUser";
 
 function mapState(state: RootState) {
   return { ...selectAuthState(state) };
@@ -63,7 +64,7 @@ function Login({
     },
   ];
 
-  const handleSubmit = (userInfo: any) => login(userInfo);
+  const handleSubmit = (userInfo: ILoginUser) => login(userInfo);
 
   const { showSpinner } = useApiCallStatusNotificationHandler({
     isSuccess,
@@ -89,7 +90,7 @@ function Login({
           formInputs={formInputs}
           formButtons={formButtons}
           goBackCallBack={() => history.goBack()}
-          SubmitFormCallback={(userInfo: any) => handleSubmit(userInfo)}
+          SubmitFormCallback={(userInfo: ILoginUser) => handleSubmit(userInfo)}
         />
       </div>
     </div>

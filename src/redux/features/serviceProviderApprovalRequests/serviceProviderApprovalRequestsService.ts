@@ -6,16 +6,16 @@ const BASE_URL = `/requests`;
 
 // todo fix any prop type
 
-const getApprovalRequests = async (data: any) => {
+const getApprovalRequests:Function = async (isApproved:boolean) => {
   const res = await request({
-    endpoint: `${BASE_URL}/isApproved=${data.isApproved}`,
+    endpoint: `${BASE_URL}/isApproved=${isApproved}`,
     method: AxiosMethods.GET,
   });
 
   return assert(res, res.data, "Retrieval failed", res);
 };
 
-const acceptApprovalRequest = async (id: any) => {
+const acceptApprovalRequest:Function = async (id: string) => {
   const res = await request({
     endpoint: `${BASE_URL}/accept?id=${id}`,
     method: AxiosMethods.POST,

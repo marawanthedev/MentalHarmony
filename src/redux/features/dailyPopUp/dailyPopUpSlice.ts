@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import dailyPopUpService from "./dailyPopUpService";
 import smartTryCatch from "util/smartTryCatch";
 import { DailyPopUpState } from "./constant";
+import { IArticleAttachment } from "constants/IArticleAttachment";
 
 const initState: DailyPopUpState = {
   articleAttachments: [],
@@ -15,10 +16,7 @@ const initState: DailyPopUpState = {
 export const addArticleAttachment = createAsyncThunk(
   "articleAttachment",
   async (
-    data: {
-      article_url: string;
-      article_feeling_relation: string;
-    },
+    data: IArticleAttachment,
     thunkAPI
   ) => {
     return await smartTryCatch({

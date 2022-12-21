@@ -21,7 +21,6 @@ const FormInputGroup = ({
   customLabel,
   onChange,
   missing,
-  width,
   initialValue,
 }: FormInputGroupProps) => {
   const labelClassName = `${className}__label`;
@@ -29,9 +28,7 @@ const FormInputGroup = ({
   const [inputValue, setInputValue] = useState(
     initialValue ? initialValue : undefined
   );
-  const style = {
-    width: width,
-  };
+
   return (
     <div>
       {/* todo figure out using style tags with typescript */}

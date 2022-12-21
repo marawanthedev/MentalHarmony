@@ -57,7 +57,7 @@ export default function FeelingPopUp({
         Hi there, we would appreciate you telling us how are you feeling today?
       </p>
       <div className="feeling-popup__feelings-row">
-        {feelingsList.map((feeling: any, index: number) => (
+        {feelingsList.map((feeling: IFeeling, index: number) => (
           <div
             className={`feeling-popup__feeling ${
               index === selectedFeelingIndex &&

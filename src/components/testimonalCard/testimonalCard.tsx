@@ -1,13 +1,12 @@
 import React from "react";
 import "./testimonalCard.scss";
 import avatar from "assets/images/avatar.webp";
-import { Testimonial } from "constants/testiomnials";
+// import { Testimonial } from "constants/testiomnials";
 
-type ITestimonalCard = {
-  testimonial: Testimonial;
-};
+// type ITestimonalCard = {};
 
-const TestimonalCard = ({ testimonial }: ITestimonalCard) => {
+const TestimonalCard = () => {
+  // todo  to use actual testinomnial
   return (
     <div className="testimonal-card">
       <div className="testimonal-card__header">

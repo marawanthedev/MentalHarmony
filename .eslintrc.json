@@ -20,6 +20,7 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
     // todo be error
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {

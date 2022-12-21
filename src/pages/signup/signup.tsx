@@ -10,6 +10,7 @@ import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import ObjectCleanse from "util/objectCleanse";
 import { selectAuthState } from "redux/features/auth/authSelector";
+import { IRegisterUser } from "constants/IRegisterUser";
 
 function mapState(state: RootState) {
   return { ...selectAuthState(state) };
@@ -125,10 +126,10 @@ function Signup({
     }
   };
 
-  const handleSubmit = async (userInfo: any) => {
+  const handleSubmit = async (userInfo: IRegisterUser) => {
     //dispatching register redux action
 
-    const user = {
+    const user: IRegisterUser = {
       name: userInfo.name,
       password: userInfo.password,
       faculty_name: userInfo.faculty_name,
@@ -168,7 +169,7 @@ function Signup({
         checkBoxValue={checkBoxValue}
         goBackCallBack={() => history.goBack()}
         handleCheckBoxClick={handleCheckBoxClick}
-        SubmitFormCallback={(userInfo: any) => handleSubmit(userInfo)}
+        SubmitFormCallback={(userInfo: IRegisterUser) => handleSubmit(userInfo)}
       />
     </div>
   );

@@ -120,7 +120,6 @@ function ViewBookingHistory({
 
     //todo might be worth checking later
     if (Object.keys(actionButtonTypes).includes(requestStatus)) {
-      const targetActionType = actionButtonTypes[requestStatus];
       return (
         <CustomButton
           type={"button"}

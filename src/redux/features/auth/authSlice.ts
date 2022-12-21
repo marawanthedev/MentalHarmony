@@ -2,21 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 import smartTryCatch from "util/smartTryCatch";
 import { authState } from "./constant";
-
-type IRegisterUser = {
-  name: string;
-  password: string;
-  faculty_name: string;
-  email: string;
-  speciality: string;
-  type: string;
-};
+import { IRegisterUser } from "constants/IRegisterUser";
+import { ILoginUser } from "constants/ILoginUser";
 
 // get user from local storage if it exists
 
 const userLocalStorageItem = localStorage.getItem("user");
 
-const user = userLocalStorageItem ? JSON.parse(userLocalStorageItem) : undefined;
+const user = userLocalStorageItem ? JSON.parse(userLocalStorageItem) : null;
 
 const initState: authState = {
   user: user,
@@ -43,8 +36,7 @@ export const register = createAsyncThunk(
 // async thunk takes route, then async function with params passed by func user
 export const login = createAsyncThunk(
   "auth/login",
-  // todo typing needs to be proper
-  async (user: any, thunkAPI) => {
+  async (user: ILoginUser, thunkAPI) => {
     return await smartTryCatch({
       callback: authService.login,
       callbackParams: user,
@@ -99,7 +91,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.user = null;

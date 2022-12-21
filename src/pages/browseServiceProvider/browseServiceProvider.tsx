@@ -11,8 +11,6 @@ import { useState } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { addBooking } from "redux/features/booking/bookingSlice";
 import { getUsersByType } from "redux/features/user/userSlice";
-import Spinner from "interface/spinner/spinner";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { toast } from "react-toastify";
 import Protected from "util/protected";
 import { Link } from "react-router-dom";

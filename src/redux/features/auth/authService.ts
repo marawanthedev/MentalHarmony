@@ -1,11 +1,13 @@
 import { AxiosMethods } from "constants/Axios";
+import { ILoginUser } from "constants/ILoginUser";
+import { IRegisterUser } from "constants/IRegisterUser";
 import { request } from "util/axios";
 
 const BASE_URL = `/api/users`;
 
 // todo fix prop typing
 // Register User
-const register = async (userData: any) => {
+const register:Function = async (userData: IRegisterUser) => {
   const res = await request({
     endpoint: `${BASE_URL}/auth/register`,
     method: AxiosMethods.POST,
@@ -24,7 +26,7 @@ const register = async (userData: any) => {
   }
 };
 
-const login = async (userData: any) => {
+const login:Function = async (userData: ILoginUser) => {
   // const res = await http.post(`${BASE_URL}auth/login`, userData);
   const res = await request({
     endpoint: `${BASE_URL}/auth/login`,

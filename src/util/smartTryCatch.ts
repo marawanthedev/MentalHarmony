@@ -1,14 +1,15 @@
 //* smartTryCatch guide, (callback,callbackParams,rejectionObject)
 
 type smartTryCatchProp = {
-  callback: any;
+  callback: Function;
   callbackParams?: any;
   rejectionObject: any;
 };
-export default async function smartTryCatch(
-  // todo be updated
-  { callback, callbackParams, rejectionObject }: smartTryCatchProp
-) {
+export default async function smartTryCatch({
+  callback,
+  callbackParams,
+  rejectionObject,
+}: smartTryCatchProp) {
   try {
     return await callback(callbackParams ? callbackParams : null);
   } catch (error: any) {

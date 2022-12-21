@@ -2,10 +2,14 @@ import React from "react";
 import Navbar from "interface/navbar/navbar";
 import "./template.scss";
 import Footer from "interface/footer/footer";
+import { ReactNode } from "constants/reactNode";
+
+
 
 type ITemplate = {
-  children: any;
+  children: ReactNode;
 };
+
 export default function Template(props: ITemplate): JSX.Element {
   return (
     <div className="template">

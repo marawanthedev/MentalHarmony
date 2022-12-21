@@ -194,10 +194,10 @@ function ManageBookingRequests({
         },
       },
     };
-    const currentManageRequestPopUpOptions =
-      manageRequestPopUpOptions[
-        bookingRequestStatus as keyof typeof manageRequestPopUpOptions
-      ];
+    // const currentManageRequestPopUpOptions =
+    //   manageRequestPopUpOptions[
+    //     bookingRequestStatus as keyof typeof manageRequestPopUpOptions
+    //   ];
 
     // const button_1=
     return (

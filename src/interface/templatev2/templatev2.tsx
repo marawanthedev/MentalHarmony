@@ -19,7 +19,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 interface Props extends Partial<PropsFromRedux> {
   tabs: Array<tab>;
 }
-function Templatev2({ tabs, user, isLoading }: Props): JSX.Element {
+function Templatev2({ tabs, user }: Props): JSX.Element {
   const [selectedTab, setSelectedTab] = useState<tab>(tabs[0]);
 
   return (

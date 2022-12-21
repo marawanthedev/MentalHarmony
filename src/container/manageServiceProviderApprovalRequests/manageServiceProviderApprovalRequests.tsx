@@ -12,7 +12,7 @@ import { RootState } from "redux/store";
 import { selectServiceProviderState } from "./../../redux/features/serviceProviderApprovalRequests/serviceProviderApprovalSelector";
 
 const columns = [
-  { id: "name", label: "Details", minWidth: 100 },
+  { id: "name", label: "Details", minWidth: 100, },
   {
     id: "phone_number",
     label: " Mobile number",
@@ -59,7 +59,7 @@ function ManageServiceProviderApprovalRequests({
   /*eslint-disable */
   useEffect(() => {
     if (!isLoading) {
-      getApprovalRequests({ isApproved: false });
+      getApprovalRequests(false);
     }
   }, []);
   /*eslint-enable */

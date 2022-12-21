@@ -72,15 +72,18 @@ export default function StickyHeadTable({
   actionButtonCallback,
 }: StickyHeadTableProps) {
   const classes: any = useStyles();
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: any, newPage: any) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: BaseSyntheticEvent) => {
-    const value: any = event?.target?.value;
+    const value: number = event?.target?.value;
     setRowsPerPage(value ? +value : rowsPerPage);
     setPage(0);
   };

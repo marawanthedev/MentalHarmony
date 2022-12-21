@@ -44,14 +44,14 @@ client.interceptors.response.use(
         "You are Un-Authorized to access this Data, will be redirect to home page"
       );
       // unauthroized
-      // redirectToHomePageAfterTwoSeconds();
+      redirectToHomePageAfterTwoSeconds();
     }
 
     if (error.response?.status === 404) {
       toast.error("Data was not found, will be redirect to home page");
 
       // not found
-      // redirectToHomePageAfterTwoSeconds();
+      redirectToHomePageAfterTwoSeconds();
     }
 
     return Promise.reject(error);
