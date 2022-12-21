@@ -3,7 +3,7 @@ import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
 import { useState } from "react";
 import FormPopUp from "components/formPopUp/formPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
-import { connect, ConnectedProps} from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Spinner from "interface/spinner/spinner";
 import {
