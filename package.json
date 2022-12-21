@@ -16,6 +16,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,json}": [
+      "npm run build",
       "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
       "prettier --write \"./**/*.{js,jsx,tsx,css,md,json}\" --config ./.prettierrc"
     ]
