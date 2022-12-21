@@ -11,7 +11,7 @@ const addBooking: Function = async (data: { serviceProvider: string }) => {
     method: AxiosMethods.POST,
     data,
   });
-  return assert(res, res.data, "Add booking failed", res);
+  return assert(res, res.data, "Add booking failed");
 };
 
 const getUserBooking: Function = async () => {
@@ -19,7 +19,7 @@ const getUserBooking: Function = async () => {
     endpoint: `${BASE_URL}/currentUser`,
     method: AxiosMethods.GET,
   });
-  return assert(res, res.data, "Retrieval failed", res);
+  return assert(res, res.data, "Retrieval failed");
 };
 
 const acceptBooking: Function = async (bookingId: string) => {
@@ -28,7 +28,7 @@ const acceptBooking: Function = async (bookingId: string) => {
     method: AxiosMethods.POST,
     data: { bookingId },
   });
-  return assert(res, res.data, "Booking acceptance failed", res);
+  return assert(res, res.data, "Booking acceptance failed");
 };
 
 const attachMeetingLink: Function = async ({
@@ -43,7 +43,7 @@ const attachMeetingLink: Function = async ({
     method: AxiosMethods.POST,
     data: { bookingId, meeting_link },
   });
-  return assert(res, res.data, "attaching link failed", res);
+  return assert(res, res.data, "attaching link failed");
 };
 
 const completeBooking: Function = async (bookingId: string) => {
@@ -52,7 +52,7 @@ const completeBooking: Function = async (bookingId: string) => {
     method: AxiosMethods.POST,
     data: { bookingId },
   });
-  return assert(res, res.data, "Booking completion failed", res);
+  return assert(res, res.data, "Booking completion failed");
 };
 const rateBooking: Function = async ({
   bookingId,
@@ -66,7 +66,7 @@ const rateBooking: Function = async ({
     method: AxiosMethods.POST,
     data: { bookingId, rate },
   });
-  return assert(res, res.data, "Booking Rating failed", res);
+  return assert(res, res.data, "Booking Rating failed");
 };
 
 const bookingService = {

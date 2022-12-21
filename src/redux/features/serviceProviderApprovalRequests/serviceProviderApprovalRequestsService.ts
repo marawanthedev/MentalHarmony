@@ -12,7 +12,7 @@ const getApprovalRequests:Function = async (isApproved:boolean) => {
     method: AxiosMethods.GET,
   });
 
-  return assert(res, res.data, "Retrieval failed", res);
+  return assert(res, res.data, "Retrieval failed");
 };
 
 const acceptApprovalRequest:Function = async (id: string) => {
@@ -21,7 +21,7 @@ const acceptApprovalRequest:Function = async (id: string) => {
     method: AxiosMethods.POST,
   });
 
-  return assert(res, res.data, "Retrieval failed", res);
+  return assert(res, res.data, "Retrieval failed");
 };
 
 const approvalRequestsService = {

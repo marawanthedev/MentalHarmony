@@ -11,7 +11,7 @@ const getUsersByType: Function = async (type: string) => {
     method: AxiosMethods.GET,
   });
 
-  return assert(res, res.data, "Retrieval failed", res);
+  return assert(res, res.data, "Retrieval failed");
 };
 
 const getUser: Function = async () => {
@@ -19,7 +19,7 @@ const getUser: Function = async () => {
     endpoint: `${BASE_URL}/getUser`,
     method: AxiosMethods.GET,
   });
-  return assert(res, res.data, "Retrieval failed", res);
+  return assert(res, res.data, "Retrieval failed");
 };
 
 const updateUser: Function = async (data: any) => {
@@ -28,7 +28,7 @@ const updateUser: Function = async (data: any) => {
     method: AxiosMethods.PUT,
     data,
   });
-  return assert(res, res.data, "User update has failed", res);
+  return assert(res, res.data, "User update has failed");
 };
 
 const deleteUser: Function = async (id: string) => {
@@ -36,7 +36,7 @@ const deleteUser: Function = async (id: string) => {
     endpoint: `${BASE_URL}/deleteUser?id=${id}`,
     method: AxiosMethods.DELETE,
   });
-  return assert(res, res.data, "Removal failed", res);
+  return assert(res, res.data, "Removal failed");
 };
 
 const userService = {
