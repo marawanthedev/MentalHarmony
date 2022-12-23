@@ -16,7 +16,7 @@ export const acceptApprovalRequest = createAsyncThunk(
     return await smartTryCatch({
       callback: approvalRequestsService.acceptApprovalRequest,
       callbackParams: id,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -27,7 +27,7 @@ export const getApprovalRequests = createAsyncThunk(
     return await smartTryCatch({
       callback: approvalRequestsService.getApprovalRequests,
       callbackParams: isApproved,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );

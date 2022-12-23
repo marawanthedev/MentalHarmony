@@ -22,7 +22,7 @@ export const addArticleAttachment = createAsyncThunk(
     return await smartTryCatch({
       callback: dailyPopUpService.addArticleAttachment,
       callbackParams: data,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -32,7 +32,7 @@ export const getArticles = createAsyncThunk(
   async (data, thunkAPI) => {
     return await smartTryCatch({
       callback: dailyPopUpService.getArticles,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -43,7 +43,7 @@ export const submitFeeling = createAsyncThunk(
     return await smartTryCatch({
       callback: dailyPopUpService.submitFeeling,
       callbackParams: feeling,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );

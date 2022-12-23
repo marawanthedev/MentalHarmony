@@ -27,7 +27,7 @@ export const register = createAsyncThunk(
     return await smartTryCatch({
       callback: authService.register,
       callbackParams: user,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -40,7 +40,7 @@ export const login = createAsyncThunk(
     return await smartTryCatch({
       callback: authService.login,
       callbackParams: user,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );

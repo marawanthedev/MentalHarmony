@@ -21,7 +21,7 @@ export const addBooking = createAsyncThunk(
     return await smartTryCatch({
       callback: bookingService.addBooking,
       callbackParams: data,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -30,7 +30,7 @@ export const getUserBooking = createAsyncThunk(
   async (data, thunkAPI) => {
     return await smartTryCatch({
       callback: bookingService.getUserBooking,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -41,7 +41,7 @@ export const acceptBooking = createAsyncThunk(
     return await smartTryCatch({
       callback: bookingService.acceptBooking,
       callbackParams: id,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -52,7 +52,7 @@ export const completeBooking = createAsyncThunk(
     return await smartTryCatch({
       callback: bookingService.completeBooking,
       callbackParams: id,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -65,7 +65,7 @@ export const attachMeetingLink = createAsyncThunk(
     return await smartTryCatch({
       callback: bookingService.attachMeetingLink,
       callbackParams: data,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -76,7 +76,7 @@ export const rateBooking = createAsyncThunk(
     return await smartTryCatch({
       callback: bookingService.rateBooking,
       callbackParams: data,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );

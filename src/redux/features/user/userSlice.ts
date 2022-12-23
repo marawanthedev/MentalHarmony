@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, } from "@reduxjs/toolkit";
 import userService from "./userService";
 import smartTryCatch from "util/smartTryCatch";
 import { userState } from "./constant";
@@ -17,7 +17,7 @@ export const getUsersByType = createAsyncThunk(
     return await smartTryCatch({
       callback: userService.getUsersByType,
       callbackParams: type,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -25,7 +25,7 @@ export const getUsersByType = createAsyncThunk(
 export const getUser = createAsyncThunk("getUser:id", async (thunkAPI) => {
   return await smartTryCatch({
     callback: userService.getUser,
-    rejectionObject: thunkAPI,
+    thunkObject: thunkAPI,
   });
 });
 
@@ -36,7 +36,7 @@ export const updateUser = createAsyncThunk(
     return await smartTryCatch({
       callback: userService.updateUser,
       callbackParams: data,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
@@ -46,7 +46,7 @@ export const deleteUser = createAsyncThunk(
     return await smartTryCatch({
       callback: userService.deleteUser,
       callbackParams: id,
-      rejectionObject: thunkAPI,
+      thunkObject: thunkAPI,
     });
   }
 );
