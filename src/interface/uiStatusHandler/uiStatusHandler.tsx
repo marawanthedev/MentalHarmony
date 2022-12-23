@@ -14,19 +14,19 @@ const connector = connect(mapProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const successNotification = (message = "Success") => {
-  return toast.success(message, {
+  toast.success(message, {
     toastId: "success-notification",
   });
 };
 const errorNotification = (message = "Failure!") => {
-  return toast.error(message, { toastId: "error-notification" });
+  toast.error(message, { toastId: "error-notification" });
 };
 
 function UiStatusHandler({ isError, isLoading, isSuccess }: PropsFromRedux) {
   const handleRendering = () => {
     if (isLoading) return <Spinner />;
-    if (isSuccess) return successNotification();
-    if (isError) return errorNotification();
+    if (isSuccess) successNotification();
+    if (isError) errorNotification();
   };
 
   return <>{handleRendering()}</>;
