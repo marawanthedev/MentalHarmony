@@ -4,8 +4,6 @@ import { useState } from "react";
 import FormPopUp from "components/formPopUp/formPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { connect, ConnectedProps } from "react-redux";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import Spinner from "interface/spinner/spinner";
 import {
   addArticleAttachment,
   getArticles,
@@ -30,9 +28,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function AttachUsefulArticles({
   articleAttachments,
-  isSuccess,
-  isError,
-  isLoading,
   isFormSuccess,
   isFormError,
   addArticleAttachment,
@@ -44,15 +39,8 @@ function AttachUsefulArticles({
     useState<boolean>(false);
   const [selectedFeeling, setSelectedFeeling] = useState<any>("");
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-  });
-
   /*eslint-disable */
   useEffect(() => {
-    // todo see whats wrong with redux dispatch in ts
     getArticles();
     reset();
   }, []);
@@ -107,7 +95,6 @@ function AttachUsefulArticles({
   };
   return (
     <>
-      {showSpinner && <Spinner />}
       {isFormSuccess ||
         (isFormError && (
           <StatusPopUp

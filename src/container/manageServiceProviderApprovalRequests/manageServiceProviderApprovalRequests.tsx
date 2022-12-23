@@ -6,13 +6,11 @@ import {
   getApprovalRequests,
   acceptApprovalRequest,
 } from "redux/features/serviceProviderApprovalRequests/serviceProviderApprovalRequestsSlice";
-import Spinner from "interface/spinner/spinner";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import { selectServiceProviderState } from "./../../redux/features/serviceProviderApprovalRequests/serviceProviderApprovalSelector";
 
 const columns = [
-  { id: "name", label: "Details", minWidth: 100, },
+  { id: "name", label: "Details", minWidth: 100 },
   {
     id: "phone_number",
     label: " Mobile number",
@@ -64,11 +62,6 @@ function ManageServiceProviderApprovalRequests({
   }, []);
   /*eslint-enable */
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-  });
   useEffect(() => {
     // ApiCallStatusNotificationHandler({ isSuccess, isLoading, isError });
   }, [approvalRequests, isSuccess, isError, isLoading]);
@@ -108,8 +101,6 @@ function ManageServiceProviderApprovalRequests({
 
   return (
     <>
-      {showSpinner && <Spinner />}
-
       <StickyHeadTable rows={generateRows()} cols={columns} />
     </>
   );

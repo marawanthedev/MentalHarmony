@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { getUser, updateUser } from "redux/features/user/userSlice";
 import { toast } from "react-toastify";
-import Spinner from "interface/spinner/spinner";
 import Template from "interface/template/template";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import Protected from "util/protected";
 import { RootState } from "redux/store";
 import { useHistory } from "react-router-dom";
@@ -86,12 +84,6 @@ function Profile({
 
   const getFormInputs = () => formInputs;
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-  });
-
   useEffect(() => {
     if (isSuccess) {
       if (user) {
@@ -116,7 +108,6 @@ function Profile({
   return (
     <>
       <Protected>
-        {showSpinner && <Spinner />}
         {formInputs && (
           <Template>
             <ProfileForm

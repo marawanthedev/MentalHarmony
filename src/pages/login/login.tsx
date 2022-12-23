@@ -4,8 +4,6 @@ import Form from "container/form/form";
 import { connect, ConnectedProps } from "react-redux";
 import { login, resetAuth } from "redux/features/auth/authSlice";
 import { useEffect } from "react";
-import Spinner from "interface/spinner/spinner";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import { selectAuthState } from "redux/features/auth/authSelector";
 
@@ -66,15 +64,7 @@ function Login({
 
   const handleSubmit = (userInfo: ILoginUser) => login(userInfo);
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-    successCallBack: () =>
-      setTimeout(() => {
-        history.push("/");
-      }, 3500),
-  });
+  // todo add success callback
 
   useEffect(() => {
     //reseting submission status
@@ -83,7 +73,6 @@ function Login({
 
   return (
     <div className="login-container">
-      {showSpinner && <Spinner />}
       <div className="login-container">
         <Form
           type="login"

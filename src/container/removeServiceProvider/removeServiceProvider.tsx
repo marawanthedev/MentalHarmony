@@ -6,8 +6,6 @@ import StatusPopUp from "components/statusPopUp/statusPopUp";
 import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType, deleteUser } from "redux/features/user/userSlice";
-import Spinner from "interface/spinner/spinner";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import { selectUserState } from "redux/features/user/userSelector";
 
@@ -73,11 +71,6 @@ function RemoveServiceProvider({
     }
   }, []);
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-  });
   useEffect(() => {
     // ApiCallStatusNotificationHandler({ isSuccess, isLoading, isError });
   }, [filteredUsers, isSuccess, isError, isLoading]);
@@ -113,8 +106,6 @@ function RemoveServiceProvider({
 
   return (
     <>
-      {showSpinner ? <Spinner /> : null}
-
       {showDialog && (
         <DialogPopUp
           cancelCallBack={() => {

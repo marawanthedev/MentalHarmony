@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import Form from "container/form/form";
 import { connect, ConnectedProps } from "react-redux";
 import { register, resetAuth } from "redux/features/auth/authSlice";
-import Spinner from "interface/spinner/spinner";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
 import { RootState } from "redux/store";
 import ObjectCleanse from "util/objectCleanse";
 import { selectAuthState } from "redux/features/auth/authSelector";
@@ -141,16 +139,7 @@ function Signup({
     // dispatch(register(ObjectCleanse(user)));
     register(ObjectCleanse(user));
   };
-
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-    successCallBack: () =>
-      setTimeout(() => {
-        history.push("/");
-      }, 3500),
-  });
+  //  redirect to home page on success
   useEffect(() => {
     //reset-ing submission status
     setTimeout(() => {
@@ -161,7 +150,6 @@ function Signup({
 
   return (
     <div className="signup-container">
-      {showSpinner && <Spinner />}
       <Form
         type="signup"
         formInputs={formInputs}

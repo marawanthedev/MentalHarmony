@@ -9,8 +9,6 @@ import {
   submitFeeling,
 } from "redux/features/dailyPopUp/dailyPopUpSlice";
 import { useEffect } from "react";
-import useApiCallStatusNotificationHandler from "util/apiCallStatusHandler";
-import Spinner from "interface/spinner/spinner";
 import { toast } from "react-toastify";
 import { RootState } from "redux/store";
 import { IFeeling } from "constants/Feeling";
@@ -30,9 +28,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function DailyPopUp({
   articleAttachments,
-  isSuccess,
-  isError,
-  isLoading,
   getArticles,
   submitFeeling,
 }: PropsFromRedux) {
@@ -43,11 +38,6 @@ function DailyPopUp({
     setShowSubmissionStatusVisibility,
   ] = useState(false);
 
-  const { showSpinner } = useApiCallStatusNotificationHandler({
-    isSuccess,
-    isLoading,
-    isError,
-  });
   /*eslint-disable */
   useEffect(() => {
     getArticles();
@@ -120,12 +110,7 @@ function DailyPopUp({
     }
   };
 
-  return (
-    <>
-      {showSpinner && <Spinner />}
-      {handleRending()}
-    </>
-  );
+  return <>{handleRending()}</>;
 }
 
 export { DailyPopUp }; // un-connected version

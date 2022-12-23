@@ -6,6 +6,7 @@ import "./sass/main.scss";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "interface/spinner/spinner";
+import UiStatusHandler from "./interface/uiStatusHandler/uiStatusHandler";
 
 function App() {
   const Login = lazy(() => import("pages/login/login"));
@@ -24,6 +25,7 @@ function App() {
     <>
       <Router>
         <div className="App">
+          <UiStatusHandler />
           <Suspense fallback={<Spinner />}>
             <Switch>
               <Route exact path="/" component={Home} />
