@@ -3,7 +3,7 @@ import CustomButton from "interface/button/button";
 import Template from "interface/template/template";
 import "./home.scss";
 import landingUpperIllustration from "assets/images/landingupper.webp";
-import Card from "components/card/card";
+import Card from "components/Card/Card";
 import magnifyingIcon from "assets/images/magnifying-glass 1.png";
 import appointmentIcon from "assets/images/appointment 1.png";
 import consultationIcon from "assets/images/consultation.webp";

@@ -80,7 +80,13 @@ export default class Testimonals extends Component {
         <Slider {...settings}>
           {testimonialData.map((testimonial: Testimonial, index: number) => (
             // todo pass testimonials
-            <TestimonalCard key={index} />
+            <TestimonalCard
+              key={index}
+              testimonial={{
+                author: "Marwan Mostafa",
+                text: "The experience was great",
+              }}
+            />
           ))}
         </Slider>
       </div>

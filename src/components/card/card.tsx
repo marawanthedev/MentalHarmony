@@ -1,6 +1,6 @@
 import { ReactNode } from "constants/reactNode";
 import React from "react";
-import "./card.scss";
+import "./Card.scss";
 
 type ICard = {
   header: string;
@@ -13,12 +13,27 @@ type ICard = {
 export default function Card(props: ICard) {
   const { header, paragraph, customClass, onClick } = props;
   return (
-    <div onClick={onClick} className={`card ${customClass ?? customClass}`}>
-      <div className="card__top-section">{props.children}</div>
+    <div
+      onClick={onClick}
+      title="card"
+      role="main"
+      className={`card ${customClass ?? customClass}`}
+    >
+      <div
+        className="card__top-section"
+        title={"children"}
+        role="contentinfo"
+      >
+        {props.children}
+      </div>
 
-      <div className="card__header">{header}</div>
+      <div className="card__header" title="header" role={"contentinfo"}>
+        {header}
+      </div>
 
-      <div className="card__paragraph">{paragraph}</div>
+      <div className="card__paragraph" title="paragraph" role="contentinfo">
+        {paragraph}
+      </div>
     </div>
   );
 }

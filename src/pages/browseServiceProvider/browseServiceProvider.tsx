@@ -4,7 +4,7 @@ import FlexTwoSlotsRow from "interface/flex-2-slots-row/flex2SlotsRow";
 import CustomButton from "interface/button/button";
 import landingUpperIllustration from "assets/images/landingupper.webp";
 import "./browseServiceProvider.scss";
-import Card from "components/card/card";
+import Card from "components/Card/Card";
 import serviceProviderAvatar from "assets/images/serviceProviderAvatar.webp";
 import ServiceProviderRequestPopUp from "container/serviceProviderRequestPopUp/serviceProviderRequestPopUp";
 import { useState } from "react";
