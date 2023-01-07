@@ -6,13 +6,21 @@ type ITestimonalCard = {
   testimonial: Testimonial;
 };
 
-const testimonalCard = ({ testimonial }: ITestimonalCard) => {
+const TestimonalCard = ({ testimonial }: ITestimonalCard) => {
   return (
     <div className="testimonal-card">
-      <div className="testimonal-card__author">-{testimonial.author}</div>
-      <div className="testimonal-card__text">{testimonial.text}</div>
+      <div
+        className="testimonal-card__author"
+        title="author"
+        role="contentinfo"
+      >
+        -{testimonial.author}
+      </div>
+      <div className="testimonal-card__text" title="text" role="contentinfo">
+        {testimonial.text}
+      </div>
     </div>
   );
 };
 
-export default testimonalCard;
+export default TestimonalCard;
