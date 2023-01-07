@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import FeelingPopUp from "components/feelingPopUp/feelingPopUp";
+import FeelingPopUp from "components/FeelingPopUp/FeelingPopUp";
 import { useState } from "react";
 import FormPopUp from "components/formPopUp/formPopUp";
 import StatusPopUp from "components/statusPopUp/statusPopUp";

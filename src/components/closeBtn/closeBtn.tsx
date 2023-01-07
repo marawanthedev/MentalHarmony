@@ -1,6 +1,6 @@
 import React from "react";
 import closeBtn from "assets/images/closeBtn.webp";
-import "./closeBtn.scss";
+import "./CloseBtn.scss";
 
 type closeBtnProps = {
   onClick: Function;

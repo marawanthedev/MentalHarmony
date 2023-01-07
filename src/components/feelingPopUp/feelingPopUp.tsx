@@ -1,10 +1,7 @@
 import React from "react";
-import "./feelingPopUp.scss";
+import "./FeelingPopUp.scss";
 import CustomButton from "interface/button/button";
-import sadIcon from "assets/images/loudly-crying-face.webp";
-import unsureIcon from "assets/images/neutral-face.webp";
-import goodIcon from "assets/images/smiling-face-with-smiling-eyes.webp";
-import happyIcon from "assets/images/happy-face-with-enlarged-eyes.webp";
+import { feelingsList } from "./constants";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 import { useState } from "react";
 import { IFeeling } from "constants/Feeling";
@@ -26,29 +23,12 @@ export default function FeelingPopUp({
   const [selectedFeelingIndex, setSelectedFeelingIndex] = useState<number>();
   useState(false);
 
-  const feelingsList: IFeeling[] = [
-    {
-      icon: sadIcon,
-      text: "Sad",
-    },
-    {
-      icon: unsureIcon,
-      text: "Unsure",
-    },
-    {
-      icon: goodIcon,
-      text: "Good",
-    },
-    {
-      icon: happyIcon,
-      text: "Happy",
-    },
-  ];
   return (
     <div className={`feeling-popup animate__animated animate__fadeIn `}>
       {showCloseBtn !== false && (
         <CloseBtn
           onClick={() => (closeBtnCallBack ? closeBtnCallBack() : null)}
+          title="feeling-pop-close-btn"
         />
       )}
 
@@ -68,12 +48,15 @@ export default function FeelingPopUp({
               setSelectedFeelingIndex(index);
               feelingSelectionCallBack(feelingsList[index]);
             }}
+            title="feeling-selection"
           >
             <div
               className="feeling-popup__feeling__icon background-image-util"
               style={{ backgroundImage: `url(${feeling.icon})` }}
             />
-            <div className="feeling-popup__feeling__text">{feeling.text}</div>
+            <div className="feeling-popup__feeling__text" title="feeling-text">
+              {feeling.text}
+            </div>
           </div>
         ))}
       </div>
@@ -88,6 +71,7 @@ export default function FeelingPopUp({
         margin="2.5rem 0"
         fontWeight="600"
         onClick={submitCallBack}
+        title="feeling-popup-submit"
       />
     </div>
   );

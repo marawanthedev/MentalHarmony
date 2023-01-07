@@ -1,5 +1,5 @@
 import React from "react";
-import "./dialogPopUp.scss";
+import "./DialogPopUp.scss";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 
