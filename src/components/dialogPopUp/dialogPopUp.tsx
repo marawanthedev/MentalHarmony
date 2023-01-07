@@ -14,7 +14,7 @@ export default function DialogPopUp({
 }: IDialogPopUp) {
   return (
     <div className="dialog-popup">
-      <CloseBtn onClick={cancelCallBack} />
+      <CloseBtn onClick={cancelCallBack} title={"dialog-close-btn"} />
       <div className="dialog-popup__header">Calm Down</div>
       <div className="dialog-popup__paragraph">
         You are in serious action now. Be careful before you delete this field.
@@ -35,6 +35,7 @@ export default function DialogPopUp({
           fontSize="1.2rem"
           borderRadius="3px"
           onClick={cancelCallBack}
+          title="cancel-btn"
         />
         <CustomButton
           type={"button"}
@@ -50,6 +51,7 @@ export default function DialogPopUp({
           fontSize="1.2rem"
           borderRadius="3px"
           onClick={confirmCallBack}
+          title="confirm-btn"
         />
       </div>
     </div>

@@ -25,6 +25,7 @@ type CustomButtonProps = {
   fontWeight?: string;
   fontSize?: string;
   alignSelf?: string;
+  [rest: string]: any;
 };
 
 const CustomButton = ({
@@ -50,6 +51,7 @@ const CustomButton = ({
   fontWeight,
   fontSize,
   alignSelf,
+  ...rest
 }: CustomButtonProps) => {
   const style = {
     backgroundColor: backGroundColor,
@@ -82,6 +84,7 @@ const CustomButton = ({
       onClick={() => onClick && onClick()}
       className={`custom-button ${animationClassName}`}
       style={style}
+      {...rest}
     >
       {innerText}
       {icon && (
