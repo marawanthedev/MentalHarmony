@@ -2,7 +2,7 @@ import React from "react";
 import "./formPopUp.scss";
 import FormInput from "interface/formInput/formInput";
 import CustomButton from "interface/button/button";
-import CloseBtn from "components/closeBtn/closeBtn";
+import CloseBtn from "components/CloseBtn/CloseBtn";
 import { useState } from "react";
 
 type FormPopUpProps = {

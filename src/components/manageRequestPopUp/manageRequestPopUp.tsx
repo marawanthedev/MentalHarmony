@@ -1,6 +1,6 @@
 import React from "react";
 import CustomButton from "interface/button/button";
-import CloseBtn from "components/closeBtn/closeBtn";
+import CloseBtn from "components/CloseBtn/CloseBtn";
 import "./manageRequestPopUp.scss";
 
 interface Button {

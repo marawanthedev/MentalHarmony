@@ -5,7 +5,7 @@ import sadIcon from "assets/images/loudly-crying-face.webp";
 import unsureIcon from "assets/images/neutral-face.webp";
 import goodIcon from "assets/images/smiling-face-with-smiling-eyes.webp";
 import happyIcon from "assets/images/happy-face-with-enlarged-eyes.webp";
-import CloseBtn from "components/closeBtn/closeBtn";
+import CloseBtn from "components/CloseBtn/CloseBtn";
 import { useState } from "react";
 import { IFeeling } from "constants/Feeling";
 

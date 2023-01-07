@@ -2,7 +2,7 @@ import "./serviceProviderRequestPopUp.scss";
 import React from "react";
 import CustomButton from "interface/button/button";
 import { useState } from "react";
-import CloseBtn from "components/closeBtn/closeBtn";
+import CloseBtn from "components/CloseBtn/CloseBtn";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 
 type IServiceProviderRequestPopUpProps = {

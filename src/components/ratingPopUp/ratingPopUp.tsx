@@ -5,7 +5,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ratingPopUpIcon from "assets/images/ratingPopUp.webp";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomButton from "interface/button/button";
-import CloseBtn from "components/closeBtn/closeBtn";
+import CloseBtn from "components/CloseBtn/CloseBtn";
 
 const useStyles = makeStyles({
   star: {

@@ -10,6 +10,7 @@ export default function CloseBtn({ onClick }: closeBtnProps) {
     <div
       className="close__btn background-image-util"
       style={{ backgroundImage: `url(${closeBtn && closeBtn})` }}
+      role="button"
       onClick={() => onClick()}
     />
   );
