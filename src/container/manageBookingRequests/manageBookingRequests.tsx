@@ -4,7 +4,7 @@ import CustomButton from "interface/button/button";
 import { useState, useEffect } from "react";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
 import ManageRequestsRatingPopUp from "components/manageRequestRatingPopup/manageRequestRatingPopup";
-import FormPopUp from "components/formPopUp/formPopUp";
+import FormPopUp from "components/FormPopUp/FormPopUp";
 import ManageRequestPopUp from "components/manageRequestPopUp/manageRequestPopUp";
 import { connect, ConnectedProps } from "react-redux";
 import {

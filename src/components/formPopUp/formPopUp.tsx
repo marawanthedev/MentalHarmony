@@ -1,5 +1,5 @@
 import React from "react";
-import "./formPopUp.scss";
+import "./FormPopUp.scss";
 import FormInput from "interface/formInput/formInput";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
@@ -29,7 +29,9 @@ export default function FormPopUp({
     <div className="article-attachment-popup">
       <CloseBtn onClick={closeBtnCallback} />
 
-      <div className="popup-header">{formTitle}</div>
+      <div className="popup-header" title="title">
+        {formTitle}
+      </div>
       <span className="article-attachment-popup__form-input">
         <FormInput
           type="text"
@@ -39,6 +41,7 @@ export default function FormPopUp({
           initialValue={initialValue ? initialValue : ""}
           className={`articleUrl form__right-side__innerForm__input-group`}
           onChange={(value: string) => setFormInput(value)}
+          title="form-popup-input"
         />
       </span>
       <span className="align-center">

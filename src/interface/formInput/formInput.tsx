@@ -12,6 +12,7 @@ type FormInputGroupProps = {
   missing?: string;
   width?: string;
   initialValue?: string;
+  [rest: string]: any;
 };
 const FormInputGroup = ({
   type,
@@ -22,6 +23,7 @@ const FormInputGroup = ({
   onChange,
   missing,
   initialValue,
+  ...rest
 }: FormInputGroupProps) => {
   const labelClassName = `${className}__label`;
   const inputClassName = `${className}__input-field`;
@@ -49,6 +51,7 @@ const FormInputGroup = ({
             setInputValue(e.target.value);
             onChange(e.target.value);
           }}
+          {...rest}
         />
         {displayType === "inline-block" && (
           <div className={labelClassName} style={{ display: displayType }}>
