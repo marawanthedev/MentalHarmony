@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "interface/button/button";
 import DialogPopUp from "components/DialogPopUp/DialogPopUp";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { getUsersByType, deleteUser } from "redux/features/user/userSlice";

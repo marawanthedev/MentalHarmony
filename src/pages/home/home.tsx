@@ -63,7 +63,7 @@ function Home({
 
   return (
     <Template>
-      <div className="custom-container">
+      <div className="custom-container" title="home-page">
         <FlexTwoSlotsRow
           customClass="mb-10"
           header={"Virtual Mental healthcare for you"}

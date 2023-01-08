@@ -3,7 +3,7 @@ import "./addServiceProviderTab.scss";
 import FormInputGroup from "interface/formInput/formInput";
 import { useState } from "react";
 import CustomButton from "interface/button/button";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 
 export default function AddServiceProviderForm() {
   const [specialKey, setSpecialKeyValue] = useState();

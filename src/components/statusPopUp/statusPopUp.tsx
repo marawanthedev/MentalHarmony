@@ -3,22 +3,24 @@ import successImg from "assets/images/checked.webp";
 import failedImg from "assets/images/cancel.webp";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 import CustomButton from "interface/button/button";
-import "./statusPopUp.scss";
+import "./StatusPopUp.scss";
 import { useHistory } from "react-router-dom";
+import { BaseInterface } from "constants/baseInterface";
 
-type StatusPopUpProps = {
+interface StatusPopUpProps extends BaseInterface {
   closeBtnOnClick: Function;
   success: boolean;
-};
+}
 
 export default function StatusPopUp({
   closeBtnOnClick,
   success,
+  title,
 }: StatusPopUpProps) {
   const history = useHistory();
 
   return (
-    <div className={`popup__status `}>
+    <div className={`popup__status `} title={title}>
       <div
         className="popup__status__icon background-image-util"
         style={{
@@ -26,9 +28,11 @@ export default function StatusPopUp({
         }}
       />
 
-      <CloseBtn onClick={closeBtnOnClick} />
+      <CloseBtn onClick={closeBtnOnClick} title={`${title}-close-btn`} />
 
-      <div className="popup-header mt-4">{success ? "success" : "failed"}</div>
+      <div className="popup-header mt-4" title={`${title}-status`}>
+        {success ? "success" : "failed"}
+      </div>
       <div className="popup-paragraph mt-2">
         {success ? "Process was successful!" : "Process has failed"}
       </div>
@@ -42,6 +46,7 @@ export default function StatusPopUp({
         height="4rem"
         margin="2.5rem 0"
         fontWeight="600"
+        title={`${title}-home-btn`}
         onClick={() => history.push("/")}
       />
     </div>

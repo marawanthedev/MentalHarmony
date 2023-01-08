@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import FeelingPopUp from "components/FeelingPopUp/FeelingPopUp";
 import { useState } from "react";
 import FormPopUp from "components/FormPopUp/FormPopUp";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 import { connect, ConnectedProps } from "react-redux";
 import {
   addArticleAttachment,

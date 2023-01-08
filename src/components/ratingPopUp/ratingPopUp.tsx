@@ -1,11 +1,12 @@
 import React from "react";
-import "./ratingPopUp.scss";
+import "./RatingPopUp.scss";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ratingPopUpIcon from "assets/images/ratingPopUp.webp";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
+import { BaseInterface } from "constants/baseInterface";
 
 const useStyles = makeStyles({
   star: {
@@ -14,14 +15,14 @@ const useStyles = makeStyles({
   },
 });
 
-type RatingPopUpProps = {
+interface RatingPopUpProps extends BaseInterface {
   closePopUpCallback: Function;
   submitCallBack: Function;
   title: string;
   readOnly?: boolean;
   readOnlyValue?: number;
   role?: string;
-};
+}
 
 export default function RatingPopUp({
   closePopUpCallback,

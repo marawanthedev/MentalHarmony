@@ -1,6 +1,6 @@
 import React from "react";
 import "./dailyPopUp.scss";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 import { useState } from "react";
 import FeelingPopUp from "components/FeelingPopUp/FeelingPopUp";
 import { connect, ConnectedProps } from "react-redux";

@@ -3,7 +3,7 @@ import React from "react";
 import CustomButton from "interface/button/button";
 import { useState } from "react";
 import CloseBtn from "components/CloseBtn/CloseBtn";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 
 type IServiceProviderRequestPopUpProps = {
   selectedCard: any;

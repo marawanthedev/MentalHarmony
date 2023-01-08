@@ -1,5 +1,5 @@
 import React from "react";
-import RatingPopUp from "components/ratingPopUp/ratingPopUp";
+import RatingPopUp from "components/RatingPopUp/RatingPopUp";
 
 type RatingPopUpProps = {
   closePopUpCallback: Function;

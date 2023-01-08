@@ -2,7 +2,7 @@ import React from "react";
 import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "interface/button/button";
 import { useState, useEffect } from "react";
-import StatusPopUp from "components/statusPopUp/statusPopUp";
+import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 import ManageRequestsRatingPopUp from "components/ManageRequestRatingPopup/ManageRequestRatingPopup";
 import FormPopUp from "components/FormPopUp/FormPopUp";
 import ManageRequestPopUp from "components/ManageRequestPopUp/ManageRequestPopUp";
