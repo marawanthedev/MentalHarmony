@@ -3,7 +3,7 @@ import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "interface/button/button";
 import { useState, useEffect } from "react";
 import StatusPopUp from "components/statusPopUp/statusPopUp";
-import ManageRequestsRatingPopUp from "components/manageRequestRatingPopup/manageRequestRatingPopup";
+import ManageRequestsRatingPopUp from "components/ManageRequestRatingPopup/ManageRequestRatingPopup";
 import FormPopUp from "components/FormPopUp/FormPopUp";
 import ManageRequestPopUp from "components/ManageRequestPopUp/ManageRequestPopUp";
 import { connect, ConnectedProps } from "react-redux";

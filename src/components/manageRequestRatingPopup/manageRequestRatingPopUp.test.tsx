@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render, fireEvent } from "@testing-library/react";
-import ManageRequestsRatingPopUp from "./manageRequestRatingPopup";
+import ManageRequestsRatingPopUp from "./ManageRequestRatingPopup";
 
 describe("Manage request popup works properly", () => {
   const closeCallBack = jest.fn();

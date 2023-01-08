@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProfileForm from "components/profileForm/profileForm";
+import ProfileForm from "components/ProfileForm/ProfileForm";
 import { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { getUser, updateUser } from "redux/features/user/userSlice";
@@ -9,6 +9,7 @@ import Protected from "util/protected";
 import { RootState } from "redux/store";
 import { useHistory } from "react-router-dom";
 import { selectUserState } from "./../../redux/features/user/userSelector";
+import { FormInput } from "./../../constants/FormInput";
 
 function mapState(state: RootState) {
   return { ...selectUserState(state) };
@@ -34,7 +35,7 @@ function Profile({
   const history = useHistory();
   const storedUser = JSON.parse(localStorage.getItem("user") || "");
 
-  const [formInputs, setFormInputs] = useState([]);
+  const [formInputs, setFormInputs] = useState<FormInput[]>([]);
 
   /*eslint-disable */
   useEffect(() => {

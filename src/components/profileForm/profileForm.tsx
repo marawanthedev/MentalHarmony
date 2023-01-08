@@ -1,16 +1,19 @@
-import "./profileForm.scss";
+import "./ProfileForm.scss";
 import React, { useEffect } from "react";
 import CustomButton from "interface/button/button";
+import { BaseInterface } from "constants/baseInterface";
+import { FormInput } from "./../../constants/FormInput";
 
-type IProfileForm = {
+interface IProfileForm extends BaseInterface {
   formTitle: string;
-  formInputs: any[];
+  formInputs: FormInput[];
   formSubmissionCallBack: Function;
-};
+}
 export default function ProfileForm({
   formTitle,
   formInputs,
   formSubmissionCallBack,
+  title,
 }: IProfileForm) {
   const profileInfo: any = {};
 
@@ -26,16 +29,21 @@ export default function ProfileForm({
   const renderFormInputs = () => {
     return formInputs.map((formInput, index) => {
       return (
-        <div className="form-group" key={index}>
+        <div
+          className="form-group"
+          key={index}
+          title={`${title ? title : "profile-form"}-label`}
+        >
           <label htmlFor={`${formInput.id}`}>{formInput.label}</label>
           <input
             id={formInput.id}
             type={formInput.type}
             name={formInput.name}
             required={true}
-            placeholder={formInput.value ? formInput.value : null}
-            defaultValue={formInput.value ? formInput.value : null}
+            placeholder={formInput.value && formInput.value}
+            defaultValue={formInput.value && formInput.value}
             onChange={(e) => (profileInfo[formInput.id] = e.target.value)}
+            title={`${title ? title : "profile-form"}-input`}
           />
         </div>
       );
@@ -43,11 +51,11 @@ export default function ProfileForm({
   };
 
   return (
-    <div className="profile-form">
+    <div className="profile-form" title={title}>
       <div className="form">
         <div className="form-toggle"></div>
         <div className="form-panel one">
-          <div className="form-header">
+          <div className="form-header" title={`${title}-header`}>
             <h1>{formTitle}</h1>
           </div>
           <div className="form-content">
@@ -65,6 +73,7 @@ export default function ProfileForm({
                 fontSize="1.2rem"
                 borderRadius="3px"
                 alignSelf="center"
+                title={`${title}-submit-btn`}
                 onClick={() => formSubmissionCallBack(profileInfo)}
               />
             </form>
