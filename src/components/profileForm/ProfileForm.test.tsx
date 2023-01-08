@@ -67,7 +67,7 @@ describe("Profile form works properly", () => {
     profileFormInputLabels.forEach((label, index: number) => {
       expect(label).toBeInTheDocument();
 
-      expect(label).toHaveTextContent(formInputs[index].label);
+      expect(label).toHaveTextContent(formInputs[index].label || "");
     });
   });
 
