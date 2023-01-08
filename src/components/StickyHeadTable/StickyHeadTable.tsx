@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { TableColumnsInterface, TableRowInterface } from "constants/table";
+import { BaseInterface } from "constants/baseInterface";
 
 const useStyles = makeStyles({
   root: {
@@ -56,13 +57,13 @@ const useStyles = makeStyles({
   },
 });
 
-type StickyHeadTableProps = {
+interface StickyHeadTableProps extends BaseInterface {
   // tableTitle: string;
   rows: Array<TableRowInterface>;
   cols: Array<TableColumnsInterface>;
   blur?: boolean;
   actionButtonCallback?: Function;
-};
+}
 
 export default function StickyHeadTable({
   // tableTitle,
@@ -70,6 +71,7 @@ export default function StickyHeadTable({
   cols,
   blur,
   actionButtonCallback,
+  title,
 }: StickyHeadTableProps) {
   const classes: any = useStyles();
   const [page, setPage] = React.useState<number>(0);
@@ -89,12 +91,13 @@ export default function StickyHeadTable({
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} title={title}>
       <TableContainer className={classes.container}>
         <Table
           className={blur ? classes?.blur : null}
           stickyHeader
           aria-label="sticky table"
+          title={`${title}-sticky-table`}
         >
           <TableHead>
             <TableRow className={classes?.head}>
@@ -104,6 +107,7 @@ export default function StickyHeadTable({
                   align={column?.align}
                   style={{ minWidth: column?.minWidth }}
                   className={classes.headerText}
+                  title={`${title}-col`}
                 >
                   {column?.label}
                 </TableCell>
@@ -120,6 +124,7 @@ export default function StickyHeadTable({
                     role="checkbox"
                     tabIndex={-1}
                     key={index}
+                    title={`${title}-row`}
                   >
                     {cols.map((column: TableColumnsInterface) => {
                       const value = row[column.id];
@@ -134,6 +139,7 @@ export default function StickyHeadTable({
                               ? actionButtonCallback(row?._id)
                               : null
                           }
+                          title={`${title}-cell`}
                         >
                           {column?.format && typeof value === "number"
                             ? column?.format(value)
