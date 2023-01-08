@@ -3,7 +3,7 @@ import StickyHeadTable from "components/StickyHeadTable/StickyHeadTable";
 import CustomButton from "interface/button/button";
 import { useState, useEffect } from "react";
 import StatusPopUp from "components/StatusPopUp/StatusPopUp";
-import ViewMeetingDetailsPopUp from "components/viewMeetingDetailsPopUp/viewMeetingDetailsPopUp";
+import ViewMeetingDetailsPopUp from "components/ViewMeetingDetailsPopUp/ViewMeetingDetailsPopUp";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ViewBookingHistoryRatingPopUp from "components/ViewBookingHistoryRatingPopUp/ViewBookingHistoryRatingPopUp";
