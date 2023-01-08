@@ -3,7 +3,6 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import Card from "./Card";
 
 describe("Card component functions properly", () => {
-
   test("Card component renders properly according to props", () => {
     const onClick = jest.fn();
     const header = "card-header";
@@ -13,7 +12,7 @@ describe("Card component functions properly", () => {
 
     const cardProps = { onClick, header, paragraph, customClass, children };
 
-    render(<Card {...cardProps} />);
+    render(<Card {...cardProps} role="main" />);
 
     const cardEl = screen.getByRole("main");
     const cardHeaderEl = screen.getByTitle("header");
@@ -36,5 +35,4 @@ describe("Card component functions properly", () => {
     fireEvent.click(cardEl);
     expect(onClick).toHaveBeenCalledTimes(1);
   });
-  
 });

@@ -2,6 +2,7 @@ import React from "react";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 import "./ManageRequestPopUp.scss";
+import { BaseInterface } from "constants/baseInterface";
 
 export interface IButton {
   text: string;
@@ -9,13 +10,13 @@ export interface IButton {
   callback: Function;
 }
 
-type ManageRequestProps = {
+interface ManageRequestProps extends BaseInterface {
   closeBtnCallback: Function;
   popupHeader: string;
   popupParagraph: string;
   button_1: IButton;
   button_2: IButton;
-};
+}
 
 export default function ManageRequestPopUp({
   closeBtnCallback,
@@ -23,9 +24,10 @@ export default function ManageRequestPopUp({
   popupParagraph,
   button_1,
   button_2,
+  ...rest
 }: ManageRequestProps) {
   return (
-    <div className="manage-request-popup">
+    <div className="manage-request-popup" {...rest}>
       <CloseBtn
         onClick={closeBtnCallback}
         title={"manage-request-popup-close-btn"}
@@ -70,7 +72,6 @@ export default function ManageRequestPopUp({
             borderRadius="8px"
             onClick={button_2.callback}
             title="manage-request-button-2"
-
           />
         </div>
       </div>

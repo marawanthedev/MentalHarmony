@@ -5,7 +5,7 @@ import CloseBtn from "./CloseBtn";
 test("Button is rendering and executing callbacks properly", () => {
   const onClick = jest.fn();
 
-  render(<CloseBtn onClick={onClick} />);
+  render(<CloseBtn onClick={onClick} role="button" />);
 
   const closeBtn = screen.getByRole("button");
 

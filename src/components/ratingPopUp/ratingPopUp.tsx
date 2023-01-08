@@ -20,6 +20,7 @@ type RatingPopUpProps = {
   title: string;
   readOnly?: boolean;
   readOnlyValue?: number;
+  role?: string;
 };
 
 export default function RatingPopUp({
@@ -28,12 +29,14 @@ export default function RatingPopUp({
   title,
   readOnly,
   readOnlyValue,
+  role,
 }: RatingPopUpProps) {
   const classes = useStyles();
   const [value, setValue] = React.useState<number>(2);
+
   return (
-    <div className="rating-popup ">
-      <CloseBtn onClick={closePopUpCallback} />
+    <div className="rating-popup " title={title} role={role}>
+      <CloseBtn onClick={closePopUpCallback} title={`${title}-close-btn`} />
       <div
         style={{ backgroundImage: `url(${ratingPopUpIcon})` }}
         className="rating-popup__icon background-image-util"
@@ -49,6 +52,7 @@ export default function RatingPopUp({
         emptyIcon={
           <StarBorderIcon fontSize="inherit" className={classes.star} />
         }
+        title={`${title}-rating-value`}
         readOnly={readOnly ? true : false}
       />
 
@@ -65,6 +69,7 @@ export default function RatingPopUp({
           fontSize="1.4rem"
           borderRadius="8px"
           margin="3.5rem 0"
+          title={`${title}-submit-btn`}
           onClick={() => {
             if (submitCallBack) {
               // send rating value

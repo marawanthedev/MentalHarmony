@@ -1,7 +1,8 @@
 import React from "react";
 import "./button.scss";
+import { BaseInterface } from "constants/baseInterface";
 
-type CustomButtonProps = {
+interface CustomButtonProps extends BaseInterface {
   backGroundColor: string;
   innerText: string;
   color: string;
@@ -25,8 +26,7 @@ type CustomButtonProps = {
   fontWeight?: string;
   fontSize?: string;
   alignSelf?: string;
-  [rest: string]: any;
-};
+}
 
 const CustomButton = ({
   backGroundColor,

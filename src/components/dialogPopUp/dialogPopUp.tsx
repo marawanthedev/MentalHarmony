@@ -2,18 +2,20 @@ import React from "react";
 import "./DialogPopUp.scss";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
+import { BaseInterface } from "constants/baseInterface";
 
-type IDialogPopUp = {
+interface IDialogPopUp extends BaseInterface {
   cancelCallBack: Function;
   confirmCallBack: Function;
-};
+}
 
 export default function DialogPopUp({
   cancelCallBack,
   confirmCallBack,
+  ...rest
 }: IDialogPopUp) {
   return (
-    <div className="dialog-popup">
+    <div className="dialog-popup" {...rest}>
       <CloseBtn onClick={cancelCallBack} title={"dialog-close-btn"} />
       <div className="dialog-popup__header">Calm Down</div>
       <div className="dialog-popup__paragraph">

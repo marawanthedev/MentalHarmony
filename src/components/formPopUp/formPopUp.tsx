@@ -4,15 +4,17 @@ import FormInput from "interface/formInput/formInput";
 import CustomButton from "interface/button/button";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 import { useState } from "react";
+import { BaseInterface } from "constants/baseInterface";
 
-type FormPopUpProps = {
+interface FormPopUpProps extends BaseInterface {
   submitCallback: Function;
   closeBtnCallback: Function;
   formTitle: string;
   inputPlaceHolder: string;
   inputLabel: string;
   initialValue: string;
-};
+}
+
 export default function FormPopUp({
   submitCallback,
   closeBtnCallback,
@@ -20,13 +22,14 @@ export default function FormPopUp({
   inputPlaceHolder,
   inputLabel,
   initialValue,
+  ...rest
 }: FormPopUpProps) {
   const [formInput, setFormInput] = useState<string>("");
 
   document.querySelector("input")?.classList.remove("error-alert");
 
   return (
-    <div className="article-attachment-popup">
+    <div className="article-attachment-popup" {...rest}>
       <CloseBtn onClick={closeBtnCallback} />
 
       <div className="popup-header" title="title">

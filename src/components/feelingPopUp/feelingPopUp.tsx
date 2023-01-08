@@ -5,26 +5,31 @@ import { feelingsList } from "./constants";
 import CloseBtn from "components/CloseBtn/CloseBtn";
 import { useState } from "react";
 import { IFeeling } from "constants/Feeling";
+import { BaseInterface } from "constants/baseInterface";
 
-type FeelingPopUpProp = {
+interface FeelingPopUpProp extends BaseInterface {
   closeBtnCallBack?: Function;
   feelingSelectionCallBack: Function;
   submitCallBack: Function;
   showCloseBtn?: boolean;
   submitBtnText: string;
-};
+}
 export default function FeelingPopUp({
   closeBtnCallBack,
   feelingSelectionCallBack,
   submitCallBack,
   showCloseBtn,
   submitBtnText,
+  ...rest
 }: FeelingPopUpProp) {
   const [selectedFeelingIndex, setSelectedFeelingIndex] = useState<number>();
   useState(false);
 
   return (
-    <div className={`feeling-popup animate__animated animate__fadeIn `}>
+    <div
+      className={`feeling-popup animate__animated animate__fadeIn `}
+      {...rest}
+    >
       {showCloseBtn !== false && (
         <CloseBtn
           onClick={() => (closeBtnCallBack ? closeBtnCallBack() : null)}
