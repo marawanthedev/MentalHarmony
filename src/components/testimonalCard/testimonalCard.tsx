@@ -1,8 +1,9 @@
 import React from "react";
 import { Testimonial } from "constants/testiomnials";
-import "./testimonalCard.css";
+import "./TestimonalCard.css";
+import { BaseInterface } from 'constants/baseInterface';
 
-type ITestimonalCard = {
+interface  ITestimonalCard extends BaseInterface {
   testimonial: Testimonial;
 };
 

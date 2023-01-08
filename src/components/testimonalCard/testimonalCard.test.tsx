@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
-import TestimonalCard from "./testimonalCard";
+import TestimonalCard from "./TestimonalCard";
 import { Testimonial } from "constants/testiomnials";
 
 describe("Testiomnial card is functioning properly", () => {

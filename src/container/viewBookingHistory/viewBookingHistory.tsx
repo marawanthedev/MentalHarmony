@@ -6,7 +6,7 @@ import StatusPopUp from "components/StatusPopUp/StatusPopUp";
 import ViewMeetingDetailsPopUp from "components/viewMeetingDetailsPopUp/viewMeetingDetailsPopUp";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import ViewBookingHistoryRatingPopUp from "components/viewBookingHistoryRatingPopUp/viewBookingHistoryRatingPopUp";
+import ViewBookingHistoryRatingPopUp from "components/ViewBookingHistoryRatingPopUp/ViewBookingHistoryRatingPopUp";
 import { connect, ConnectedProps } from "react-redux";
 import { bookingStructure } from "constants/booking";
 import {

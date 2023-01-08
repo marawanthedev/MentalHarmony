@@ -11,7 +11,7 @@ import servicesVector from "assets/images/servicesVector.webp";
 import bookAppointmentIlustration from "assets/images/appointmetnIllustration.webp";
 import mentalHealthIllustration from "assets/images/uniIllustration.webp";
 import FlexTwoSlotsRow from "interface/flex-2-slots-row/flex2SlotsRow";
-import Testimonals from "components/testimonals/testimonals";
+import Testimonals from "components/Testimonals/Testimonals";
 import DailyPopUp from "container/dailyPopUp/dailyPopUp";
 import { connect, ConnectedProps } from "react-redux";
 import { toast } from "react-toastify";

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 interface RatingPopUpProps extends BaseInterface {
   closePopUpCallback: Function;
-  submitCallBack: Function;
+  submitCallBack?: Function;
   title: string;
   readOnly?: boolean;
   readOnlyValue?: number;
